@@ -24,174 +24,584 @@
 
         body {
             margin: 0;
-            background: #050d26;
+            background: #0a1429;
             color: #f8fafc;
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            padding-bottom: 85px;
+            padding-bottom: 82px;
         }
 
-        /* HEADER */
+        /* =========================
+           HEADER
+        ========================= */
 
         .header {
-            background: #0d1738;
-            border-bottom: 1px solid #202b4d;
-            padding: 17px 18px;
+            height: 68px;
+            background: #101d34;
+            border-bottom: 1px solid #263550;
 
+            display: flex;
+            align-items: center;
+
+            position: sticky;
+            top: 0;
+            z-index: 200;
+
+            padding: 0 20px;
+        }
+
+        .menu-btn {
+            width: 40px;
+            height: 40px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            background: transparent;
+            border: none;
+
+            color: #d7e0ef;
+
+            font-size: 28px;
+            line-height: 1;
+
+            cursor: pointer;
+
+            border-radius: 10px;
+        }
+
+        .menu-btn:active {
+            background: #1c2a43;
+        }
+
+        .logo {
+            margin-left: 10px;
+
+            font-size: 22px;
+            font-weight: 800;
+
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: #10b981;
+        }
+
+        .header-spacer {
+            margin-left: auto;
+        }
+
+        .logout {
+            background: #1b2940;
+            color: #dbe5f2;
+
+            border: 1px solid #30405a;
+
+            border-radius: 9px;
+
+            padding: 8px 12px;
+
+            font-family: inherit;
+            font-size: 12px;
+            font-weight: 600;
+
+            cursor: pointer;
+        }
+
+        /* =========================
+           SIDE MENU
+        ========================= */
+
+        .menu-overlay {
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0, 0, 0, 0.55);
+
+            z-index: 500;
+
+            display: none;
+        }
+
+        .menu-overlay.show {
+            display: block;
+        }
+
+        .side-menu {
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 280px;
+            max-width: 82%;
+
+            height: 100vh;
+
+            background: #101d34;
+
+            border-right: 1px solid #2a3953;
+
+            z-index: 600;
+
+            transform: translateX(-100%);
+
+            transition: transform 0.25s ease;
+
+            padding: 22px 16px;
+        }
+
+        .side-menu.show {
+            transform: translateX(0);
+        }
+
+        .menu-header {
             display: flex;
             align-items: center;
             justify-content: space-between;
 
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 4px 5px 22px;
+
+            border-bottom: 1px solid #263550;
+
+            margin-bottom: 14px;
         }
 
-        .logo {
-            font-size: 23px;
+        .menu-title {
+            font-size: 20px;
             font-weight: 800;
-            color: #f8fafc;
         }
 
-        .logout {
+        .menu-title span {
+            color: #10b981;
+        }
+
+        .close-menu {
             background: transparent;
-            color: #f8fafc;
-            border: 1px solid #202b4d;
-            border-radius: 10px;
-            padding: 9px 14px;
-            font-family: inherit;
-            font-weight: 600;
+            border: none;
+
+            color: #94a3b8;
+
+            font-size: 25px;
+
             cursor: pointer;
         }
 
-        .logout:hover {
-            border-color: #2563eb;
+        .menu-item {
+            width: 100%;
+
+            display: flex;
+            align-items: center;
+
+            gap: 13px;
+
+            text-decoration: none;
+
+            color: #d8e1ef;
+
+            padding: 14px 13px;
+
+            border-radius: 10px;
+
+            margin-bottom: 5px;
+
+            font-size: 14px;
+            font-weight: 600;
         }
 
-        /* MAIN */
+        .menu-item:hover {
+            background: #1b2a43;
+            color: #ffffff;
+        }
+
+        .menu-icon {
+            width: 25px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        /* =========================
+           MAIN
+        ========================= */
 
         .container {
             width: 100%;
-            max-width: 600px;
+            max-width: 680px;
+
             margin: auto;
-            padding: 22px 16px 25px;
+
+            padding: 20px 16px 25px;
         }
 
-        /* WELCOME */
+        /* =========================
+           WELCOME
+        ========================= */
 
         .welcome {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
 
         .welcome h2 {
-            font-size: 23px;
+            font-size: 21px;
             font-weight: 700;
-            margin-bottom: 6px;
+
+            margin-bottom: 5px;
         }
 
         .welcome p {
-            color: #94a3b8;
-            font-size: 14px;
-        }
+            color: #7f8da4;
 
-        /* BALANCE */
-
-        .balance-card {
-            background: #0d1738;
-            border: 1px solid #202b4d;
-            border-radius: 18px;
-            padding: 25px;
-            margin-bottom: 16px;
-        }
-
-        .balance-label {
-            color: #94a3b8;
             font-size: 13px;
-            margin-bottom: 8px;
         }
 
-        .balance {
-            font-size: 32px;
-            font-weight: 800;
-            margin-bottom: 20px;
+        /* =========================
+           EARNINGS HEADER
+        ========================= */
+
+        .section-label {
+            color: #74839b;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            letter-spacing: 0.5px;
+
+            margin: 0 0 9px 2px;
         }
 
-        .primary-btn {
-            background: #2563eb;
-            color: white;
-            border: none;
-            border-radius: 12px;
-            padding: 14px 24px;
-            font-family: inherit;
-            font-weight: 600;
-            cursor: pointer;
+        /* =========================
+           EARNINGS CARD
+        ========================= */
+
+        .earnings-card {
+            background: #1c293e;
+
+            border: 1px solid #30405a;
+
+            border-radius: 17px;
+
+            overflow: hidden;
+
+            margin-bottom: 17px;
         }
 
-        .primary-btn:hover {
-            opacity: 0.9;
-        }
-
-        /* STATS */
-
-        .stats {
+        .earnings-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 16px;
+            grid-template-columns: 1fr 1fr;
         }
 
-        .card {
-            background: #0d1738;
-            border: 1px solid #202b4d;
-            border-radius: 18px;
-            padding: 20px;
+        .earning-box {
+            padding: 20px 18px;
+
+            min-height: 125px;
         }
 
-        .stat-label {
-            display: block;
-            color: #94a3b8;
-            font-size: 13px;
+        .earning-box + .earning-box {
+            border-left: 1px solid #30405a;
+        }
+
+        .earning-label {
+            color: #7d8ba2;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
             margin-bottom: 9px;
         }
 
-        .stat-value {
-            font-size: 20px;
+        .earning-amount {
+            font-size: 25px;
+            font-weight: 800;
+
+            margin-bottom: 13px;
+        }
+
+        .earning-amount.green {
+            color: #13a66f;
+        }
+
+        .earning-amount.white {
+            color: #f8fafc;
+        }
+
+        .pending-pill {
+            display: inline-block;
+
+            background: rgba(245, 158, 11, 0.12);
+
+            color: #f5c43d;
+
+            border-radius: 20px;
+
+            padding: 5px 9px;
+
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .withdraw-btn {
+            background: #10b981;
+
+            color: #ffffff;
+
+            border: none;
+
+            border-radius: 9px;
+
+            padding: 8px 14px;
+
+            font-family: inherit;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .withdraw-btn:active {
+            transform: scale(0.98);
+        }
+
+        /* =========================
+           ACTION BUTTONS
+        ========================= */
+
+        .actions {
+            display: grid;
+
+            grid-template-columns: 1fr 1fr;
+
+            gap: 13px;
+
+            margin-bottom: 20px;
+        }
+
+        .action-btn {
+            min-height: 58px;
+
+            border: none;
+
+            border-radius: 15px;
+
+            font-family: inherit;
+
+            font-size: 15px;
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+        .action-green {
+            background: #10b981;
+            color: #ffffff;
+        }
+
+        .action-dark {
+            background: #34445a;
+            color: #f4f7fb;
+        }
+
+        /* =========================
+           PROCESSING ACTIVITY
+        ========================= */
+
+        .activity-title {
+            display: flex;
+            align-items: center;
+
+            gap: 6px;
+
+            color: #74839b;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            margin-bottom: 7px;
+        }
+
+        .activity-card {
+            background: #1c293e;
+
+            border: 1px solid #30405a;
+
+            border-left: 4px solid #10b981;
+
+            border-radius: 17px;
+
+            overflow: hidden;
+
+            margin-bottom: 20px;
+        }
+
+        .activity-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .activity-item {
+            padding: 18px 17px;
+
+            min-height: 90px;
+        }
+
+        .activity-item:nth-child(2),
+        .activity-item:nth-child(4) {
+            border-left: 1px solid #30405a;
+        }
+
+        .activity-item:nth-child(3),
+        .activity-item:nth-child(4) {
+            border-top: 1px solid #30405a;
+        }
+
+        .activity-label {
+            color: #718098;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+
+            margin-bottom: 8px;
+        }
+
+        .activity-value {
+            color: #f5f7fb;
+
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .activity-value.green {
+            color: #10a66f;
+        }
+
+        /* =========================
+           EARNINGS SNAPSHOT
+        ========================= */
+
+        .snapshot {
+            background: #1c293e;
+
+            border: 1px solid #30405a;
+
+            border-radius: 17px;
+
+            padding: 19px;
+
+            margin-bottom: 20px;
+        }
+
+        .snapshot-head {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 19px;
+        }
+
+        .snapshot-title {
+            color: #7c8ba2;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+        }
+
+        .snapshot-subtitle {
+            color: #a5afbd;
+
+            font-size: 12px;
+        }
+
+        .progress-row {
+            margin-bottom: 15px;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+
+            margin-bottom: 7px;
+
+            font-size: 12px;
+        }
+
+        .progress-name {
+            color: #9ba8ba;
+        }
+
+        .progress-number {
+            color: #e8edf5;
             font-weight: 700;
         }
 
-        /* COLORS */
+        .progress-track {
+            height: 7px;
 
-        .success {
-            color: #4ade80;
+            background: #111e32;
+
+            border-radius: 20px;
+
+            overflow: hidden;
         }
 
-        .warning {
-            color: #facc15;
+        .progress-fill {
+            height: 100%;
+
+            width: 65%;
+
+            background: #10b981;
+
+            border-radius: 20px;
         }
 
-        /* SECTIONS */
+        .progress-fill.blue {
+            width: 42%;
+            background: #3b82f6;
+        }
+
+        /* =========================
+           REFERRAL
+        ========================= */
 
         .section {
-            background: #0d1738;
-            border: 1px solid #202b4d;
-            border-radius: 18px;
-            padding: 20px;
-            margin-bottom: 16px;
+            background: #1c293e;
+
+            border: 1px solid #30405a;
+
+            border-radius: 17px;
+
+            padding: 19px;
+
+            margin-bottom: 17px;
         }
 
         .section h3 {
-            font-size: 17px;
-            margin-bottom: 14px;
+            font-size: 15px;
+
+            margin-bottom: 13px;
+
             font-weight: 700;
         }
 
-        /* REFERRAL */
-
         .referral-box {
-            background: #050d26;
-            border: 1px dashed #2563eb;
-            border-radius: 12px;
-            padding: 13px;
+            background: #111e32;
+
+            border: 1px dashed #10b981;
+
+            border-radius: 11px;
+
+            padding: 12px;
 
             display: flex;
             align-items: center;
@@ -201,140 +611,304 @@
         }
 
         .referral-code {
-            color: #60a5fa;
+            color: #4ade80;
+
             font-weight: 700;
+
             word-break: break-all;
-            font-size: 14px;
+
+            font-size: 13px;
         }
 
         .copy-btn {
-            background: #2563eb;
+            background: #10b981;
+
             color: white;
+
             border: none;
-            border-radius: 9px;
-            padding: 9px 13px;
+
+            border-radius: 8px;
+
+            padding: 8px 12px;
+
             font-family: inherit;
-            font-weight: 600;
+
+            font-size: 12px;
+            font-weight: 700;
+
             cursor: pointer;
+
             flex-shrink: 0;
         }
 
         .share-btn {
             width: 100%;
-            margin-top: 12px;
-            padding: 13px;
 
-            background: #2563eb;
-            color: white;
+            margin-top: 11px;
 
-            border: none;
-            border-radius: 12px;
+            padding: 12px;
+
+            background: #263851;
+
+            color: #ffffff;
+
+            border: 1px solid #3a4b65;
+
+            border-radius: 10px;
 
             font-family: inherit;
-            font-weight: 600;
+
+            font-weight: 700;
+
             cursor: pointer;
         }
 
-        /* QUICK LINKS */
+        /* =========================
+           RECENT ACTIVITY
+        ========================= */
+
+        .recent-head {
+            display: flex;
+
+            justify-content: space-between;
+            align-items: center;
+
+            margin-bottom: 8px;
+        }
+
+        .recent-title {
+            color: #77859c;
+
+            font-size: 12px;
+            font-weight: 700;
+
+            text-transform: uppercase;
+        }
+
+        .view-link {
+            color: #b9c2cf;
+
+            font-size: 12px;
+            font-weight: 600;
+
+            text-decoration: none;
+        }
+
+        .recent-card {
+            background: #1c293e;
+
+            border: 1px solid #30405a;
+
+            border-radius: 17px;
+
+            overflow: hidden;
+
+            margin-bottom: 17px;
+        }
+
+        .recent-row {
+            display: grid;
+
+            grid-template-columns: 1.5fr 1fr 0.9fr;
+
+            align-items: center;
+
+            padding: 13px 14px;
+
+            border-bottom: 1px solid #30405a;
+        }
+
+        .recent-row:last-child {
+            border-bottom: none;
+        }
+
+        .recent-heading {
+            color: #8794a8;
+
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .reference {
+            color: #f3f6fa;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .reference small {
+            display: block;
+
+            color: #8390a4;
+
+            font-size: 10px;
+            font-weight: 500;
+
+            margin-top: 3px;
+        }
+
+        .volume {
+            color: #f5f7fb;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .state {
+            color: #8491a4;
+
+            font-size: 11px;
+
+            text-align: right;
+        }
+
+        .state::before {
+            content: "";
+
+            width: 8px;
+            height: 8px;
+
+            display: inline-block;
+
+            border-radius: 50%;
+
+            background: #10b981;
+
+            margin-right: 5px;
+        }
+
+        /* =========================
+           QUICK LINKS
+        ========================= */
 
         .quick-links {
             display: grid;
+
             grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+
+            gap: 9px;
         }
 
         .quick-link {
             text-decoration: none;
+
             text-align: center;
 
-            background: #050d26;
-            border: 1px solid #202b4d;
+            background: #111e32;
 
-            color: #f8fafc;
+            border: 1px solid #30405a;
 
-            padding: 14px 5px;
-            border-radius: 12px;
+            color: #e7edf6;
 
-            font-size: 12px;
+            padding: 13px 4px;
+
+            border-radius: 11px;
+
+            font-size: 11px;
             font-weight: 600;
         }
 
         .quick-link:hover {
-            border-color: #2563eb;
-            color: #60a5fa;
+            border-color: #10b981;
         }
 
-        /* STATUS */
+        .quick-icon {
+            display: block;
+
+            font-size: 18px;
+
+            margin-bottom: 4px;
+        }
+
+        /* =========================
+           STATUS
+        ========================= */
 
         .loading {
-            color: #94a3b8;
-            font-size: 14px;
+            color: #8d9aae;
+            font-size: 13px;
         }
 
         .error {
             color: #f87171;
-            font-size: 14px;
+
+            font-size: 13px;
+
             margin-top: 10px;
         }
 
-        /* BOTTOM NAV */
+        /* =========================
+           BOTTOM NAV
+        ========================= */
 
         .bottom-nav {
-            background: #0d1738;
-            border-top: 1px solid #202b4d;
+            background: #101d34;
+
+            border-top: 1px solid #293850;
 
             position: fixed;
+
             bottom: 0;
             left: 0;
 
             width: 100%;
 
             display: grid;
+
             grid-template-columns: repeat(4, 1fr);
 
-            padding: 10px 5px;
+            padding: 8px 5px;
 
-            z-index: 100;
+            z-index: 300;
         }
 
         .bottom-nav a {
             text-decoration: none;
-            color: #94a3b8;
+
+            color: #8492a8;
 
             text-align: center;
 
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
 
-            padding: 6px 2px;
+            padding: 5px 2px;
         }
 
         .bottom-nav a span {
             display: block;
+
             font-size: 19px;
+
             margin-bottom: 3px;
         }
 
         .bottom-nav a.active {
-            color: #60a5fa;
+            color: #10b981;
         }
 
-        /* MOBILE */
+        /* =========================
+           MOBILE
+        ========================= */
 
         @media (max-width: 380px) {
 
-            .balance {
-                font-size: 28px;
+            .earning-amount {
+                font-size: 21px;
             }
 
-            .card,
-            .section,
-            .balance-card {
-                padding: 17px;
+            .container {
+                padding-left: 12px;
+                padding-right: 12px;
             }
 
-            .quick-links {
-                grid-template-columns: 1fr;
+            .recent-row {
+                padding: 12px 10px;
+            }
+
+            .reference,
+            .volume {
+                font-size: 12px;
             }
 
         }
@@ -342,22 +916,147 @@
     </style>
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     SIDE MENU
+========================= -->
+
+<div
+    id="menuOverlay"
+    class="menu-overlay"
+    onclick="closeMenu()"
+></div>
+
+
+<div
+    id="sideMenu"
+    class="side-menu"
+>
+
+    <div class="menu-header">
+
+        <div class="menu-title">
+            Chery<span>Earn</span>
+        </div>
+
+        <button
+            class="close-menu"
+            onclick="closeMenu()"
+        >
+            ×
+        </button>
+
+    </div>
+
+
+    <a
+        href="dashboard.html"
+        class="menu-item"
+    >
+        <span class="menu-icon">⌂</span>
+        Dashboard
+    </a>
+
+
+    <a
+        href="referrals.html"
+        class="menu-item"
+    >
+        <span class="menu-icon">👥</span>
+        My Referrals
+    </a>
+
+
+    <a
+        href="earnings.html"
+        class="menu-item"
+    >
+        <span class="menu-icon">💰</span>
+        Earnings
+    </a>
+
+
+    <a
+        href="withdraw.html"
+        class="menu-item"
+    >
+        <span class="menu-icon">💸</span>
+        Withdraw
+    </a>
+
+
+    <a
+        href="invest.html"
+        class="menu-item"
+    >
+        <span class="menu-icon">📈</span>
+        Invest
+    </a>
+
+
+    <a
+        href="profile.html"
+        class="menu-item"
+    >
+        <span class="menu-icon">👤</span>
+        Profile
+    </a>
+
+
+    <a
+        href="#"
+        class="menu-item"
+        onclick="logout()"
+    >
+        <span class="menu-icon">↪</span>
+        Logout
+    </a>
+
+</div>
+
+
+<!-- =========================
+     HEADER
+========================= -->
 
 <header class="header">
 
+    <button
+        class="menu-btn"
+        onclick="openMenu()"
+        aria-label="Open menu"
+    >
+        ⋮
+    </button>
+
+
     <div class="logo">
-        CheryEarn
+        Chery<span>Earn</span>
     </div>
 
-    <button class="logout" onclick="logout()">
+
+    <div class="header-spacer"></div>
+
+
+    <button
+        class="logout"
+        onclick="logout()"
+    >
         Logout
     </button>
 
 </header>
 
 
+<!-- =========================
+     MAIN
+========================= -->
+
 <main class="container">
+
 
     <!-- WELCOME -->
 
@@ -374,20 +1073,73 @@
     </div>
 
 
-    <!-- BALANCE -->
+    <!-- EARNINGS -->
 
-    <div class="balance-card">
+    <div class="section-label">
+        Earnings Overview
+    </div>
 
-        <div class="balance-label">
-            Available Balance
+
+    <div class="earnings-card">
+
+        <div class="earnings-grid">
+
+
+            <div class="earning-box">
+
+                <div class="earning-label">
+                    Available
+                </div>
+
+                <div class="earning-amount green">
+                    KSh <span id="balance">0.00</span>
+                </div>
+
+                <button
+                    class="withdraw-btn"
+                    onclick="withdraw()"
+                >
+                    Withdraw
+                </button>
+
+            </div>
+
+
+            <div class="earning-box">
+
+                <div class="earning-label">
+                    Pending
+                </div>
+
+                <div class="earning-amount white">
+                    KSh <span id="pending">0.00</span>
+                </div>
+
+                <div class="pending-pill">
+                    ◷ Pending Earnings
+                </div>
+
+            </div>
+
         </div>
 
-        <div class="balance">
-            KSh <span id="balance">0.00</span>
-        </div>
+    </div>
+
+
+    <!-- ACTIONS -->
+
+    <div class="actions">
 
         <button
-            class="primary-btn"
+            class="action-btn action-green"
+            onclick="shareReferral()"
+        >
+            Share & Earn
+        </button>
+
+
+        <button
+            class="action-btn action-dark"
             onclick="withdraw()"
         >
             Withdraw
@@ -396,37 +1148,147 @@
     </div>
 
 
-    <!-- STATS -->
+    <!-- PROCESSING ACTIVITY -->
 
-    <div class="stats">
+    <div class="activity-title">
+        ⚙ Processing Activity
+    </div>
 
-        <div class="card">
 
-            <span class="stat-label">
-                Total Earnings
-            </span>
+    <div class="activity-card">
 
-            <strong
-                class="stat-value success"
-            >
-                KSh <span id="earnings">0.00</span>
-            </strong>
+        <div class="activity-grid">
+
+
+            <div class="activity-item">
+
+                <div class="activity-label">
+                    Total Referrals
+                </div>
+
+                <div
+                    class="activity-value"
+                    id="referrals"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="activity-label">
+                    Transactions Logged
+                </div>
+
+                <div
+                    class="activity-value"
+                    id="transactions"
+                >
+                    0
+                </div>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="activity-label">
+                    Referral Earnings
+                </div>
+
+                <div class="activity-value green">
+                    KSh <span id="earnings">0.00</span>
+                </div>
+
+            </div>
+
+
+            <div class="activity-item">
+
+                <div class="activity-label">
+                    Aggregate Completed
+                </div>
+
+                <div class="activity-value green">
+                    KSh <span id="aggregate">0.00</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- EARNINGS SNAPSHOT -->
+
+    <div class="snapshot">
+
+        <div class="snapshot-head">
+
+            <div class="snapshot-title">
+                Earnings Horizon
+            </div>
+
+            <div class="snapshot-subtitle">
+                Performance Tracker
+            </div>
 
         </div>
 
 
-        <div class="card">
+        <div class="progress-row">
 
-            <span class="stat-label">
-                Total Referrals
-            </span>
+            <div class="progress-info">
 
-            <strong
-                class="stat-value"
-                id="referrals"
-            >
-                0
-            </strong>
+                <span class="progress-name">
+                    Available Earnings
+                </span>
+
+                <span
+                    class="progress-number"
+                    id="availableProgress"
+                >
+                    KSh 0.00
+                </span>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div class="progress-fill"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="progress-row">
+
+            <div class="progress-info">
+
+                <span class="progress-name">
+                    Referral Activity
+                </span>
+
+                <span
+                    class="progress-number"
+                    id="referralProgress"
+                >
+                    0 referrals
+                </span>
+
+            </div>
+
+
+            <div class="progress-track">
+
+                <div class="progress-fill blue"></div>
+
+            </div>
 
         </div>
 
@@ -440,6 +1302,7 @@
         <h3>
             Your Referral Code
         </h3>
+
 
         <div
             id="referralLoading"
@@ -459,6 +1322,7 @@
                 id="referralCode"
                 class="referral-code"
             ></span>
+
 
             <button
                 class="copy-btn"
@@ -480,37 +1344,143 @@
     </div>
 
 
+    <!-- RECENT ACTIVITY -->
+
+    <div class="recent-head">
+
+        <div class="recent-title">
+            Recent Activity Stream
+        </div>
+
+        <a
+            href="earnings.html"
+            class="view-link"
+        >
+            View All
+        </a>
+
+    </div>
+
+
+    <div class="recent-card">
+
+        <div class="recent-row">
+
+            <div class="recent-heading">
+                Activity
+            </div>
+
+            <div class="recent-heading">
+                Value
+            </div>
+
+            <div class="recent-heading">
+                State
+            </div>
+
+        </div>
+
+
+        <div class="recent-row">
+
+            <div class="reference">
+                Referral Earnings
+
+                <small>
+                    CheryEarn account
+                </small>
+            </div>
+
+            <div class="volume">
+                KSh <span id="recentEarnings">0.00</span>
+            </div>
+
+            <div class="state">
+                Active
+            </div>
+
+        </div>
+
+
+        <div class="recent-row">
+
+            <div class="reference">
+                Referrals
+
+                <small>
+                    Total members referred
+                </small>
+            </div>
+
+            <div class="volume">
+                <span id="recentReferrals">0</span>
+            </div>
+
+            <div class="state">
+                Active
+            </div>
+
+        </div>
+
+
+        <div class="recent-row">
+
+            <div class="reference">
+                Available Balance
+
+                <small>
+                    Current account balance
+                </small>
+            </div>
+
+            <div class="volume">
+                KSh <span id="recentBalance">0.00</span>
+            </div>
+
+            <div class="state">
+                Ready
+            </div>
+
+        </div>
+
+    </div>
+
+
     <!-- QUICK LINKS -->
 
     <div class="section">
 
         <h3>
-            Quick Links
+            Quick Access
         </h3>
 
+
         <div class="quick-links">
+
 
             <a
                 href="referrals.html"
                 class="quick-link"
             >
-                👥<br>
+                <span class="quick-icon">👥</span>
                 Referrals
             </a>
+
 
             <a
                 href="earnings.html"
                 class="quick-link"
             >
-                💰<br>
+                <span class="quick-icon">💰</span>
                 Earnings
             </a>
+
 
             <a
                 href="withdraw.html"
                 class="quick-link"
             >
-                💸<br>
+                <span class="quick-icon">💸</span>
                 Withdraw
             </a>
 
@@ -524,12 +1494,16 @@
         class="error"
     ></div>
 
+
 </main>
 
 
-<!-- BOTTOM NAV -->
+<!-- =========================
+     BOTTOM NAV
+========================= -->
 
 <nav class="bottom-nav">
+
 
     <a
         href="dashboard.html"
@@ -539,20 +1513,24 @@
         Home
     </a>
 
+
     <a href="invest.html">
         <span>📈</span>
         Invest
     </a>
+
 
     <a href="referrals.html">
         <span>👥</span>
         Referrals
     </a>
 
+
     <a href="profile.html">
         <span>👤</span>
         Profile
     </a>
+
 
 </nav>
 
@@ -561,6 +1539,7 @@
 
     const API_URL =
         "https://cheryearn-backend.onrender.com";
+
 
     const token =
         localStorage.getItem("token");
@@ -573,6 +1552,40 @@
 
     }
 
+
+    /* =========================
+       THREE DOT MENU
+    ========================= */
+
+    function openMenu() {
+
+        document
+            .getElementById("sideMenu")
+            .classList.add("show");
+
+        document
+            .getElementById("menuOverlay")
+            .classList.add("show");
+
+    }
+
+
+    function closeMenu() {
+
+        document
+            .getElementById("sideMenu")
+            .classList.remove("show");
+
+        document
+            .getElementById("menuOverlay")
+            .classList.remove("show");
+
+    }
+
+
+    /* =========================
+       LOAD DASHBOARD
+    ========================= */
 
     async function loadDashboard() {
 
@@ -595,6 +1608,7 @@
             if (response.status === 401) {
 
                 logout();
+
                 return;
 
             }
@@ -625,6 +1639,9 @@
 
             if (user) {
 
+
+                /* NAME */
+
                 document.getElementById(
                     "welcomeName"
                 ).textContent =
@@ -635,31 +1652,121 @@
                     }`;
 
 
+                /* BALANCE */
+
+                const balance =
+                    Number(
+                        user.balance || 0
+                    );
+
+
                 document.getElementById(
                     "balance"
                 ).textContent =
+                    balance.toFixed(2);
+
+
+                document.getElementById(
+                    "recentBalance"
+                ).textContent =
+                    balance.toFixed(2);
+
+
+                document.getElementById(
+                    "availableProgress"
+                ).textContent =
+                    `KSh ${balance.toFixed(2)}`;
+
+
+                /* EARNINGS */
+
+                const earnings =
                     Number(
-                        user.balance || 0
-                    ).toFixed(2);
+                        user.totalEarnings ||
+                        user.earnings ||
+                        0
+                    );
 
 
                 document.getElementById(
                     "earnings"
                 ).textContent =
+                    earnings.toFixed(2);
+
+
+                document.getElementById(
+                    "aggregate"
+                ).textContent =
+                    earnings.toFixed(2);
+
+
+                document.getElementById(
+                    "recentEarnings"
+                ).textContent =
+                    earnings.toFixed(2);
+
+
+                /* PENDING */
+
+                const pending =
                     Number(
-                        user.totalEarnings ||
-                        user.earnings ||
+                        user.pendingEarnings ||
+                        user.pending ||
                         0
-                    ).toFixed(2);
+                    );
+
+
+                document.getElementById(
+                    "pending"
+                ).textContent =
+                    pending.toFixed(2);
+
+
+                /* REFERRALS */
+
+                const referrals =
+                    Number(
+                        user.totalReferrals ||
+                        user.referrals ||
+                        0
+                    );
 
 
                 document.getElementById(
                     "referrals"
                 ).textContent =
-                    user.totalReferrals ||
-                    user.referrals ||
-                    0;
+                    referrals;
 
+
+                document.getElementById(
+                    "recentReferrals"
+                ).textContent =
+                    referrals;
+
+
+                document.getElementById(
+                    "referralProgress"
+                ).textContent =
+                    `${referrals} referrals`;
+
+
+                /* TRANSACTIONS */
+
+                const transactions =
+                    Number(
+                        user.totalTransactions ||
+                        user.transactions ||
+                        0
+                    );
+
+
+                document.getElementById(
+                    "transactions"
+                ).textContent =
+                    transactions;
+
+
+                /* REFERRAL CODE */
 
                 if (user.referralCode) {
 
@@ -703,6 +1810,10 @@
     }
 
 
+    /* =========================
+       COPY REFERRAL
+    ========================= */
+
     function copyReferral() {
 
         const code =
@@ -734,6 +1845,10 @@
 
     }
 
+
+    /* =========================
+       SHARE REFERRAL
+    ========================= */
 
     function shareReferral() {
 
@@ -793,6 +1908,10 @@
     }
 
 
+    /* =========================
+       WITHDRAW
+    ========================= */
+
     function withdraw() {
 
         window.location.href =
@@ -801,21 +1920,31 @@
     }
 
 
+    /* =========================
+       LOGOUT
+    ========================= */
+
     function logout() {
 
         localStorage.removeItem(
             "token"
         );
 
+
         localStorage.removeItem(
             "user"
         );
+
 
         window.location.href =
             "login.html";
 
     }
 
+
+    /* =========================
+       START
+    ========================= */
 
     loadDashboard();
 
