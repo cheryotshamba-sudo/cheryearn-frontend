@@ -7,22 +7,20 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>Create Account - CheryEarn</title>
+    <title>Create Account • CheryEarn</title>
 
     <style>
-
         :root {
             --bg: #050e25;
             --header: #0b1535;
             --card: #0d1738;
             --border: #202d4e;
-
             --white: #f5f7fc;
             --muted: #9aa8c2;
-
             --blue: #1f5fea;
             --green: #43d878;
             --yellow: #f4cb2e;
+            --danger: #ff5b6e;
         }
 
         * {
@@ -31,10 +29,10 @@
 
         body {
             margin: 0;
+            min-height: 100vh;
             background: var(--bg);
             color: var(--white);
             font-family: Arial, sans-serif;
-            min-height: 100vh;
         }
 
         header {
@@ -45,22 +43,22 @@
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 25px;
             font-weight: 800;
-            color: var(--white);
-            margin-bottom: 5px;
+            letter-spacing: 0.3px;
         }
 
         .tagline {
+            margin-top: 5px;
             color: var(--muted);
             font-size: 13px;
         }
 
         .container {
             width: 100%;
-            max-width: 450px;
+            max-width: 470px;
             margin: 0 auto;
-            padding: 25px 18px 35px;
+            padding: 24px 16px 35px;
         }
 
         .card {
@@ -68,38 +66,72 @@
             border: 1px solid var(--border);
             border-radius: 16px;
             padding: 22px 18px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
         }
 
         h1 {
-            margin: 0 0 7px;
+            margin: 0;
             font-size: 24px;
             text-align: center;
         }
 
         .subtitle {
+            margin: 7px 0 22px;
             text-align: center;
             color: var(--muted);
             font-size: 14px;
-            margin-bottom: 22px;
         }
 
-        .form-group {
-            margin-bottom: 16px;
+        .referral-box {
+            display: none;
+            background: rgba(67, 216, 120, 0.08);
+            border: 1px solid rgba(67, 216, 120, 0.35);
+            border-radius: 12px;
+            padding: 13px;
+            margin-bottom: 18px;
+        }
+
+        .referral-title {
+            color: var(--green);
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .referral-value {
+            width: 100%;
+            padding: 11px 12px;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            background: #08122d;
+            color: var(--white);
+            font-size: 14px;
+            outline: none;
+        }
+
+        .referral-status {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--green);
+        }
+
+        .field {
+            margin-bottom: 15px;
         }
 
         label {
             display: block;
-            font-size: 14px;
-            font-weight: 600;
             margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         input {
             width: 100%;
-            padding: 14px;
+            padding: 13px 12px;
             border: 1px solid var(--border);
-            border-radius: 10px;
-            background: var(--bg);
+            border-radius: 9px;
+            background: #08122d;
             color: var(--white);
             font-size: 15px;
             outline: none;
@@ -109,87 +141,66 @@
             border-color: var(--blue);
         }
 
-        input::placeholder {
-            color: #66738e;
+        input[readonly] {
+            cursor: not-allowed;
+            opacity: 0.9;
         }
 
-        .referral-box {
+        .message {
             display: none;
-            margin-bottom: 16px;
-            padding: 13px;
+            margin: 14px 0;
+            padding: 11px 12px;
+            border-radius: 9px;
+            font-size: 13px;
+            line-height: 1.45;
+        }
+
+        .message.error {
+            display: block;
+            background: rgba(255, 91, 110, 0.1);
+            border: 1px solid rgba(255, 91, 110, 0.35);
+            color: #ff9aa7;
+        }
+
+        .message.success {
+            display: block;
+            background: rgba(67, 216, 120, 0.1);
             border: 1px solid rgba(67, 216, 120, 0.35);
-            border-radius: 10px;
-            background: rgba(67, 216, 120, 0.08);
-            text-align: center;
-        }
-
-        .referral-label {
-            color: var(--muted);
-            font-size: 12px;
-            margin-bottom: 5px;
-        }
-
-        .referral-member {
             color: var(--green);
-            font-size: 14px;
-            font-weight: 700;
-            word-break: break-word;
         }
 
         button {
             width: 100%;
-            padding: 14px;
-            border: none;
+            border: 0;
             border-radius: 10px;
-            background: var(--green);
-            color: #04100a;
+            padding: 14px;
+            background: var(--blue);
+            color: white;
             font-size: 16px;
-            font-weight: 800;
+            font-weight: 700;
             cursor: pointer;
             margin-top: 5px;
         }
 
         button:hover {
-            opacity: 0.92;
+            opacity: 0.95;
         }
 
         button:disabled {
-            opacity: 0.6;
+            background: #35415d;
+            color: #9ba5b8;
             cursor: not-allowed;
         }
 
-        .message {
-            display: none;
-            margin-top: 15px;
-            padding: 12px;
-            border-radius: 9px;
-            font-size: 13px;
+        .login-text {
             text-align: center;
-        }
-
-        .message.error {
-            display: block;
-            background: rgba(220, 50, 50, 0.12);
-            border: 1px solid rgba(220, 50, 50, 0.35);
-            color: #ff7777;
-        }
-
-        .message.success {
-            display: block;
-            background: rgba(67, 216, 120, 0.10);
-            border: 1px solid rgba(67, 216, 120, 0.35);
-            color: var(--green);
-        }
-
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
             color: var(--muted);
             font-size: 14px;
+            margin-top: 18px;
         }
 
-        .login-link a {
-            color: var(--green);
+        .login-text a {
+            color: var(--blue);
             text-decoration: none;
             font-weight: 700;
         }
@@ -198,57 +209,51 @@
             text-align: center;
             color: var(--muted);
             font-size: 12px;
-            padding: 0 20px 25px;
+            margin-top: 20px;
         }
-
     </style>
 </head>
 
 <body>
 
 <header>
-
-    <div class="logo">
-        CheryEarn
-    </div>
-
-    <div class="tagline">
-        Earn • Refer • Grow
-    </div>
-
+    <div class="logo">CheryEarn</div>
+    <div class="tagline">Earn • Refer • Grow</div>
 </header>
-
 
 <div class="container">
 
     <div class="card">
 
-        <h1>
-            Create Account
-        </h1>
+        <h1>Create Account</h1>
 
         <div class="subtitle">
             Join CheryEarn today
         </div>
 
-
-        <!-- ==========================================
-             AUTOMATIC REFERRER
-        =========================================== -->
-
+        <!-- LOCKED REFERRAL -->
         <div
             id="referralBox"
             class="referral-box"
         >
 
-            <div class="referral-label">
+            <div class="referral-title">
                 Referred by
             </div>
 
-            <div
+            <input
                 id="referralMember"
-                class="referral-member"
+                class="referral-value"
+                type="text"
+                readonly
+                disabled
             >
+
+            <div
+                id="referralStatus"
+                class="referral-status"
+            >
+                Verifying referral...
             </div>
 
         </div>
@@ -256,101 +261,81 @@
 
         <form id="registerForm">
 
-
-            <div class="form-group">
-
+            <div class="field">
                 <label for="fullName">
                     Full Name
                 </label>
 
                 <input
-                    type="text"
                     id="fullName"
+                    type="text"
                     placeholder="Enter your full name"
-                    autocomplete="name"
                     required
+                    autocomplete="name"
                 >
-
             </div>
 
 
-            <div class="form-group">
-
+            <div class="field">
                 <label for="phone">
                     Phone Number
                 </label>
 
                 <input
-                    type="tel"
                     id="phone"
-                    placeholder="0712345678"
-                    autocomplete="tel"
+                    type="tel"
+                    placeholder="07XXXXXXXX"
                     required
+                    autocomplete="tel"
                 >
-
             </div>
 
 
-            <div class="form-group">
-
+            <div class="field">
                 <label for="email">
                     Email Address
                 </label>
 
                 <input
-                    type="email"
                     id="email"
-                    placeholder="you@example.com"
-                    autocomplete="email"
+                    type="email"
+                    placeholder="Enter your email"
                     required
+                    autocomplete="email"
                 >
-
             </div>
 
 
-            <div class="form-group">
-
+            <div class="field">
                 <label for="password">
                     Password
                 </label>
 
                 <input
-                    type="password"
                     id="password"
-                    placeholder="Enter password"
+                    type="password"
+                    placeholder="Create a password"
+                    required
                     minlength="6"
                     autocomplete="new-password"
-                    required
                 >
-
             </div>
 
 
-            <div class="form-group">
-
+            <div class="field">
                 <label for="confirmPassword">
                     Confirm Password
                 </label>
 
                 <input
-                    type="password"
                     id="confirmPassword"
-                    placeholder="Confirm password"
+                    type="password"
+                    placeholder="Confirm your password"
+                    required
                     minlength="6"
                     autocomplete="new-password"
-                    required
                 >
-
             </div>
-
-
-            <button
-                type="submit"
-                id="registerBtn"
-                disabled
-            >
-                Verify Referral...
-            </button>
 
 
             <div
@@ -359,59 +344,60 @@
             ></div>
 
 
+            <button
+                id="registerBtn"
+                type="submit"
+                disabled
+            >
+                Verifying Referral...
+            </button>
+
         </form>
 
 
-        <div class="login-link">
-
+        <div class="login-text">
             Already have an account?
-
-            <a href="login.html">
-                Login
-            </a>
-
+            <a href="login.html">Login</a>
         </div>
 
     </div>
 
+
+    <footer>
+        © 2026 CheryEarn. All rights reserved.
+    </footer>
+
 </div>
 
 
-<footer>
-    © 2026 CheryEarn. All rights reserved.
-</footer>
-
-
 <script>
-
-    // ==================================================
-    // BACKEND URL
-    // ==================================================
 
     const API_URL =
         "https://cheryearn-backend.onrender.com";
 
 
-    // ==================================================
-    // ELEMENTS
-    // ==================================================
-
-    const form =
-        document.getElementById(
-            "registerForm"
+    const params =
+        new URLSearchParams(
+            window.location.search
         );
 
 
-    const message =
-        document.getElementById(
-            "message"
-        );
+    /*
+     * Referral comes ONLY from the URL.
+     *
+     * Example:
+     *
+     * register.html?member=CheryEarn001-John-Kamau
+     *
+     * The visitor cannot edit it.
+     */
+
+    const member =
+        params.get("member");
 
 
-    const registerBtn =
-        document.getElementById(
-            "registerBtn"
-        );
+    let referralCode =
+        null;
 
 
     const referralBox =
@@ -426,33 +412,43 @@
         );
 
 
-    // ==================================================
-    // READ MEMBER FROM URL
-    // ==================================================
-
-    const params =
-        new URLSearchParams(
-            window.location.search
+    const referralStatus =
+        document.getElementById(
+            "referralStatus"
         );
 
 
-    const member =
-        params.get("member");
+    const registerBtn =
+        document.getElementById(
+            "registerBtn"
+        );
 
 
-    // ==================================================
-    // INTERNAL REFERRAL CODE
-    // ==================================================
-
-    let referralCode =
-        null;
+    const message =
+        document.getElementById(
+            "message"
+        );
 
 
-    // ==================================================
-    // RESOLVE REFERRAL
-    // ==================================================
+    function showMessage(
+        text,
+        type
+    ) {
+
+        message.textContent =
+            text;
+
+        message.className =
+            "message " + type;
+
+    }
+
 
     async function resolveReferral() {
+
+        /*
+         * No member in URL
+         */
 
         if (!member) {
 
@@ -468,8 +464,23 @@
                 "Referral Required";
 
             return;
-
         }
+
+
+        /*
+         * Show the referral immediately.
+         * It is readonly and disabled.
+         */
+
+        referralMember.value =
+            member;
+
+        referralBox.style.display =
+            "block";
+
+
+        referralStatus.textContent =
+            "Verifying referral...";
 
 
         try {
@@ -495,46 +506,69 @@
                 !data.success
             ) {
 
-                showMessage(
-                    "This referral link is invalid.",
-                    "error"
+                throw new Error(
+                    "Invalid referral"
                 );
-
-                registerBtn.disabled =
-                    true;
-
-                registerBtn.textContent =
-                    "Invalid Referral";
-
-                return;
 
             }
 
 
-            // ==========================================
-            // SAVE INTERNAL REFERRAL CODE
-            // ==========================================
+            /*
+             * Accept the referral code regardless
+             * of whether the backend currently
+             * returns camelCase or snake_case.
+             */
 
             referralCode =
-                data.referralCode;
+                data.referralCode ||
+                data.referral_code ||
+                data.user?.referralCode ||
+                data.user?.referral_code ||
+                data.referrer?.referralCode ||
+                data.referrer?.referral_code ||
+                null;
 
 
-            // ==========================================
-            // DISPLAY REFERRER
-            // ==========================================
+            /*
+             * If backend gives another member
+             * display name, use it.
+             * Otherwise keep the exact member
+             * from the URL.
+             */
 
-            referralMember.textContent =
+            referralMember.value =
                 data.member ||
-                member;
+                data.cheryearnMember ||
+                data.cheryearn_number
+                    ? (
+                        data.member ||
+                        data.cheryearnMember ||
+                        member
+                    )
+                    : member;
 
 
-            referralBox.style.display =
-                "block";
+            /*
+             * Referral must have an internal code.
+             */
+
+            if (!referralCode) {
+
+                console.error(
+                    "Referral code missing:",
+                    data
+                );
+
+                throw new Error(
+                    "Referral code missing"
+                );
+
+            }
 
 
-            // ==========================================
-            // ENABLE REGISTRATION
-            // ==========================================
+            referralStatus.textContent =
+                "✓ Referral verified";
+
 
             registerBtn.disabled =
                 false;
@@ -543,23 +577,20 @@
                 "Create Account";
 
 
-            message.className =
-                "message";
-
-            message.textContent =
-                "";
-
-
         } catch (error) {
 
             console.error(
-                "Referral resolution error:",
+                "Referral verification error:",
                 error
             );
 
 
+            referralStatus.textContent =
+                "Referral verification failed";
+
+
             showMessage(
-                "Unable to verify referral link. Please try again.",
+                "This referral link is invalid or has expired. Please use a valid CheryEarn referral link.",
                 "error"
             );
 
@@ -568,210 +599,279 @@
                 true;
 
             registerBtn.textContent =
-                "Referral Verification Failed";
+                "Invalid Referral";
 
         }
 
     }
 
 
-    // ==================================================
-    // START REFERRAL VERIFICATION
-    // ==================================================
+    document
+        .getElementById("registerForm")
+        .addEventListener(
+            "submit",
+            async function (event) {
 
-    resolveReferral();
-
-
-    // ==================================================
-    // REGISTRATION
-    // ==================================================
-
-    form.addEventListener(
-        "submit",
-        async function (e) {
-
-            e.preventDefault();
+                event.preventDefault();
 
 
-            message.className =
-                "message";
+                /*
+                 * Never allow registration
+                 * without a verified referral.
+                 */
 
-            message.textContent =
-                "";
+                if (!referralCode) {
 
-
-            // ==========================================
-            // GET FORM VALUES
-            // ==========================================
-
-            const fullName =
-                document
-                    .getElementById("fullName")
-                    .value
-                    .trim();
-
-
-            const phone =
-                document
-                    .getElementById("phone")
-                    .value
-                    .trim();
-
-
-            const email =
-                document
-                    .getElementById("email")
-                    .value
-                    .trim();
-
-
-            const password =
-                document
-                    .getElementById("password")
-                    .value;
-
-
-            const confirmPassword =
-                document
-                    .getElementById("confirmPassword")
-                    .value;
-
-
-            // ==========================================
-            // VALIDATION
-            // ==========================================
-
-            if (
-                !fullName ||
-                !phone ||
-                !email ||
-                !password
-            ) {
-
-                showMessage(
-                    "Full name, phone, email and password are required.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            if (
-                password.length < 6
-            ) {
-
-                showMessage(
-                    "Password must be at least 6 characters.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            if (
-                password !==
-                confirmPassword
-            ) {
-
-                showMessage(
-                    "Passwords do not match.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            if (!referralCode) {
-
-                showMessage(
-                    "Valid referral verification is required.",
-                    "error"
-                );
-
-                return;
-
-            }
-
-
-            registerBtn.disabled =
-                true;
-
-            registerBtn.textContent =
-                "Creating Account...";
-
-
-            try {
-
-                // ======================================
-                // REGISTER USER
-                // ======================================
-
-                const response =
-                    await fetch(
-                        `${API_URL}/api/auth/register`,
-                        {
-
-                            method:
-                                "POST",
-
-                            headers: {
-
-                                "Content-Type":
-                                    "application/json"
-
-                            },
-
-                            body:
-                                JSON.stringify({
-
-                                    full_name:
-                                        fullName,
-
-                                    phone:
-                                        phone,
-
-                                    email:
-                                        email,
-
-                                    password:
-                                        password,
-
-                                    referral_code:
-                                        referralCode
-
-                                })
-
-                        }
+                    showMessage(
+                        "Valid referral verification is required.",
+                        "error"
                     );
 
-
-                const data =
-                    await response.json();
-
-
-                console.log(
-                    "REGISTRATION RESPONSE:",
-                    data
-                );
+                    return;
+                }
 
 
-                // ======================================
-                // CHECK REGISTRATION
-                // ======================================
+                const fullName =
+                    document
+                        .getElementById("fullName")
+                        .value
+                        .trim();
+
+
+                const phone =
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim();
+
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+
+                const password =
+                    document
+                        .getElementById("password")
+                        .value;
+
+
+                const confirmPassword =
+                    document
+                        .getElementById("confirmPassword")
+                        .value;
+
 
                 if (
-                    !response.ok ||
-                    !data.success
+                    password !==
+                    confirmPassword
                 ) {
 
                     showMessage(
-                        data.message ||
+                        "Passwords do not match.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                if (
+                    password.length < 6
+                ) {
+
+                    showMessage(
+                        "Password must be at least 6 characters.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                registerBtn.disabled =
+                    true;
+
+                registerBtn.textContent =
+                    "Creating Account...";
+
+
+                message.className =
+                    "message";
+
+
+                message.textContent =
+                    "";
+
+
+                try {
+
+                    const response =
+                        await fetch(
+                            `${API_URL}/api/auth/register`,
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body:
+                                    JSON.stringify({
+
+                                        full_name:
+                                            fullName,
+
+                                        phone:
+                                            phone,
+
+                                        email:
+                                            email,
+
+                                        password:
+                                            password,
+
+                                        /*
+                                         * IMPORTANT:
+                                         * Send the verified
+                                         * internal referral code.
+                                         */
+
+                                        referral_code:
+                                            referralCode
+
+                                    })
+                            }
+                        );
+
+
+                    const data =
+                        await response.json();
+
+
+                    console.log(
+                        "REGISTRATION RESPONSE:",
+                        data
+                    );
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            data.message ||
+                            data.error ||
+                            "Registration failed"
+                        );
+
+                    }
+
+
+                    /*
+                     * Save useful account details.
+                     */
+
+                    if (data.user) {
+
+                        localStorage.setItem(
+                            "user",
+                            JSON.stringify(
+                                data.user
+                            )
+                        );
+
+                        if (
+                            data.user.id
+                        ) {
+
+                            localStorage.setItem(
+                                "userId",
+                                data.user.id
+                            );
+
+                        }
+
+                        if (
+                            data.user.phone
+                        ) {
+
+                            localStorage.setItem(
+                                "phone",
+                                data.user.phone
+                            );
+
+                        }
+
+                        if (
+                            data.user.email
+                        ) {
+
+                            localStorage.setItem(
+                                "email",
+                                data.user.email
+                            );
+
+                        }
+
+                        if (
+                            data.user.full_name
+                        ) {
+
+                            localStorage.setItem(
+                                "full_name",
+                                data.user.full_name
+                            );
+
+                        }
+
+                    }
+
+
+                    /*
+                     * Also save the referral code
+                     * used during registration.
+                     */
+
+                    localStorage.setItem(
+                        "referral_code",
+                        referralCode
+                    );
+
+
+                    showMessage(
+                        "Account created successfully. Redirecting to payment...",
+                        "success"
+                    );
+
+
+                    /*
+                     * Give the success message
+                     * a moment before redirecting.
+                     */
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "payment.html";
+
+                        },
+                        1000
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Registration error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        error.message ||
                         "Registration failed. Please try again.",
                         "error"
                     );
@@ -783,150 +883,18 @@
                     registerBtn.textContent =
                         "Create Account";
 
-                    return;
-
                 }
-
-
-                // ======================================
-                // GET CREATED USER
-                // ======================================
-
-                const user =
-                    data.user;
-
-
-                if (
-                    !user ||
-                    !user.id
-                ) {
-
-                    showMessage(
-                        "Account was created, but user information was not returned.",
-                        "error"
-                    );
-
-
-                    registerBtn.disabled =
-                        false;
-
-                    registerBtn.textContent =
-                        "Create Account";
-
-                    return;
-
-                }
-
-
-                // ======================================
-                // SAVE USER INFORMATION
-                // ======================================
-
-                localStorage.setItem(
-                    "cheryearn_user_id",
-                    String(user.id)
-                );
-
-
-                localStorage.setItem(
-                    "cheryearn_user_phone",
-                    user.phone ||
-                    phone
-                );
-
-
-                localStorage.setItem(
-                    "cheryearn_user_email",
-                    user.email ||
-                    email
-                );
-
-
-                localStorage.setItem(
-                    "cheryearn_user_name",
-                    user.full_name ||
-                    fullName
-                );
-
-
-                localStorage.setItem(
-                    "cheryearn_referral_code",
-                    user.referral_code ||
-                    ""
-                );
-
-
-                // ======================================
-                // SUCCESS
-                // ======================================
-
-                showMessage(
-                    "Account created successfully. Redirecting to payment...",
-                    "success"
-                );
-
-
-                registerBtn.textContent =
-                    "Continue to Payment";
-
-
-                // ======================================
-                // PAYMENT PAGE
-                // ======================================
-
-                setTimeout(
-                    function () {
-
-                        window.location.href =
-                            "payment.html";
-
-                    },
-                    1200
-                );
-
-
-            } catch (error) {
-
-                console.error(
-                    "Registration error:",
-                    error
-                );
-
-
-                showMessage(
-                    "Unable to connect to the server. Please try again.",
-                    "error"
-                );
-
-
-                registerBtn.disabled =
-                    false;
-
-                registerBtn.textContent =
-                    "Create Account";
 
             }
-
-        }
-    );
+        );
 
 
-    // ==================================================
-    // MESSAGE FUNCTION
-    // ==================================================
+    /*
+     * Start referral verification
+     * immediately when the page loads.
+     */
 
-    function showMessage(
-        text,
-        type
-    ) {
-
-        message.textContent =
-            text;
-
-        message.className =
-            "message " + type;
-
-    }
+    resolveReferral();
 
 </script>
 
