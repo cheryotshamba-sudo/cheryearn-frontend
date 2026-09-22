@@ -1,300 +1,281 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8"><meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<title>Registration Payment - CheryEarn</title>
 
-    <title>Registration Payment - CheryEarn</title>
+<style>
 
-    <style>
+    :root {
+        --bg: #050e25;
+        --header: #0b1535;
+        --card: #0d1738;
+        --border: #202d4e;
 
-        :root {
-            --bg: #050e25;
-            --header: #0b1535;
-            --card: #0d1738;
-            --border: #202d4e;
+        --white: #f5f7fc;
+        --muted: #9aa8c2;
 
-            --white: #f5f7fc;
-            --muted: #9aa8c2;
+        --green: #43d878;
+        --blue: #1f5fea;
+        --red: #ff7777;
+    }
 
-            --green: #43d878;
-            --blue: #1f5fea;
-            --red: #ff7777;
-        }
+    * {
+        box-sizing: border-box;
+    }
 
-        * {
-            box-sizing: border-box;
-        }
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--white);
+        font-family: Arial, sans-serif;
+    }
 
-        body {
-            margin: 0;
-            min-height: 100vh;
-            background: var(--bg);
-            color: var(--white);
-            font-family: Arial, sans-serif;
-        }
+    header {
+        background: var(--header);
+        border-bottom: 1px solid var(--border);
+        padding: 18px 20px;
+        text-align: center;
+    }
 
-        header {
-            background: var(--header);
-            border-bottom: 1px solid var(--border);
-            padding: 18px 20px;
-            text-align: center;
-        }
+    .logo {
+        font-size: 24px;
+        font-weight: 800;
+        margin-bottom: 5px;
+    }
 
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
+    .tagline {
+        color: var(--muted);
+        font-size: 13px;
+    }
 
-        .tagline {
-            color: var(--muted);
-            font-size: 13px;
-        }
+    .container {
+        width: 100%;
+        max-width: 450px;
+        margin: 0 auto;
+        padding: 25px 18px 35px;
+    }
 
-        .container {
-            width: 100%;
-            max-width: 450px;
-            margin: 0 auto;
-            padding: 25px 18px 35px;
-        }
+    .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 24px 18px;
+    }
 
-        .card {
-            background: var(--card);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px 18px;
-        }
+    h1 {
+        margin: 0 0 8px;
+        text-align: center;
+        font-size: 24px;
+    }
 
-        h1 {
-            margin: 0 0 8px;
-            text-align: center;
-            font-size: 24px;
-        }
+    .subtitle {
+        text-align: center;
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 22px;
+    }
 
-        .subtitle {
-            text-align: center;
-            color: var(--muted);
-            font-size: 14px;
-            margin-bottom: 22px;
-        }
+    .fee-box {
+        text-align: center;
+        background: rgba(67, 216, 120, 0.08);
+        border: 1px solid rgba(67, 216, 120, 0.3);
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 22px;
+    }
 
-        .fee-box {
-            text-align: center;
-            background: rgba(67, 216, 120, 0.08);
-            border: 1px solid rgba(67, 216, 120, 0.3);
-            border-radius: 12px;
-            padding: 18px;
-            margin-bottom: 22px;
-        }
+    .fee-label {
+        color: var(--muted);
+        font-size: 13px;
+        margin-bottom: 6px;
+    }
 
-        .fee-label {
-            color: var(--muted);
-            font-size: 13px;
-            margin-bottom: 6px;
-        }
+    .fee {
+        font-size: 32px;
+        font-weight: 800;
+        color: var(--green);
+    }
 
-        .fee {
-            font-size: 32px;
-            font-weight: 800;
-            color: var(--green);
-        }
+    .form-group {
+        margin-bottom: 16px;
+    }
 
-        .form-group {
-            margin-bottom: 16px;
-        }
+    label {
+        display: block;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 7px;
+    }
 
-        label {
-            display: block;
-            font-size: 14px;
-            font-weight: 600;
-            margin-bottom: 7px;
-        }
+    input {
+        width: 100%;
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--bg);
+        color: var(--white);
+        font-size: 15px;
+        outline: none;
+    }
 
-        input {
-            width: 100%;
-            padding: 14px;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: var(--bg);
-            color: var(--white);
-            font-size: 15px;
-            outline: none;
-        }
+    input:focus {
+        border-color: var(--green);
+    }
 
-        input:focus {
-            border-color: var(--green);
-        }
+    input::placeholder {
+        color: #66738e;
+    }
 
-        input::placeholder {
-            color: #66738e;
-        }
+    button {
+        width: 100%;
+        padding: 14px;
+        border: none;
+        border-radius: 10px;
+        background: var(--green);
+        color: #04100a;
+        font-size: 16px;
+        font-weight: 800;
+        cursor: pointer;
+        margin-top: 5px;
+    }
 
-        button {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            background: var(--green);
-            color: #04100a;
-            font-size: 16px;
-            font-weight: 800;
-            cursor: pointer;
-            margin-top: 5px;
-        }
+    button:hover {
+        opacity: 0.92;
+    }
 
-        button:hover {
-            opacity: 0.92;
-        }
+    button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
 
-        button:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-        }
+    .status {
+        display: none;
+        margin-top: 16px;
+        padding: 13px;
+        border-radius: 10px;
+        text-align: center;
+        font-size: 13px;
+        line-height: 1.5;
+    }
 
-        .status {
-            display: none;
-            margin-top: 16px;
-            padding: 13px;
-            border-radius: 10px;
-            text-align: center;
-            font-size: 13px;
-            line-height: 1.5;
-        }
+    .status.info {
+        display: block;
+        background: rgba(31, 95, 234, 0.10);
+        border: 1px solid rgba(31, 95, 234, 0.35);
+        color: #8db0ff;
+    }
 
-        .status.info {
-            display: block;
-            background: rgba(31, 95, 234, 0.10);
-            border: 1px solid rgba(31, 95, 234, 0.35);
-            color: #8db0ff;
-        }
+    .status.success {
+        display: block;
+        background: rgba(67, 216, 120, 0.10);
+        border: 1px solid rgba(67, 216, 120, 0.35);
+        color: var(--green);
+    }
 
-        .status.success {
-            display: block;
-            background: rgba(67, 216, 120, 0.10);
-            border: 1px solid rgba(67, 216, 120, 0.35);
-            color: var(--green);
-        }
+    .status.error {
+        display: block;
+        background: rgba(220, 50, 50, 0.12);
+        border: 1px solid rgba(220, 50, 50, 0.35);
+        color: var(--red);
+    }
 
-        .status.error {
-            display: block;
-            background: rgba(220, 50, 50, 0.12);
-            border: 1px solid rgba(220, 50, 50, 0.35);
-            color: var(--red);
-        }
+    .note {
+        color: var(--muted);
+        font-size: 12px;
+        text-align: center;
+        margin-top: 18px;
+        line-height: 1.5;
+    }
 
-        .note {
-            color: var(--muted);
-            font-size: 12px;
-            text-align: center;
-            margin-top: 18px;
-            line-height: 1.5;
-        }
+    footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 12px;
+        padding: 0 20px 25px;
+    }
 
-        footer {
-            text-align: center;
-            color: var(--muted);
-            font-size: 12px;
-            padding: 0 20px 25px;
-        }
+</style>
 
-    </style>
-</head>
+</head><body><header><div class="logo">
+    CheryEarn
+</div>
 
-<body>
+<div class="tagline">
+    Earn • Refer • Grow
+</div>
 
-<header>
+</header><div class="container"><div class="card">
 
-    <div class="logo">
-        CheryEarn
+    <h1>
+        Registration Payment
+    </h1>
+
+    <div class="subtitle">
+        Complete your registration to continue.
     </div>
 
-    <div class="tagline">
-        Earn • Refer • Grow
+
+    <div class="fee-box">
+
+        <div class="fee-label">
+            Registration Fee
+        </div>
+
+        <div class="fee">
+            KSh 10
+        </div>
+
     </div>
 
-</header>
 
+    <div class="form-group">
 
-<div class="container">
+        <label for="phone">
+            M-Pesa Phone Number
+        </label>
 
-    <div class="card">
-
-        <h1>
-            Registration Payment
-        </h1>
-
-        <div class="subtitle">
-            Complete your registration to continue.
-        </div>
-
-
-        <div class="fee-box">
-
-            <div class="fee-label">
-                Registration Fee
-            </div>
-
-            <div class="fee">
-                KSh 10
-            </div>
-
-        </div>
-
-
-        <div class="form-group">
-
-            <label for="phone">
-                M-Pesa Phone Number
-            </label>
-
-            <input
-                type="tel"
-                id="phone"
-                placeholder="0712345678"
-                autocomplete="tel"
-                required
-            >
-
-        </div>
-
-
-        <button
-            type="button"
-            id="payBtn"
+        <input
+            type="tel"
+            id="phone"
+            placeholder="0712345678"
+            autocomplete="tel"
+            required
         >
-            Pay KSh 10
-        </button>
+
+    </div>
 
 
-        <div
-            id="status"
-            class="status"
-        ></div>
+    <button
+        type="button"
+        id="payBtn"
+    >
+        Pay KSh 10
+    </button>
 
 
-        <div class="note">
-            After you click the payment button,
-            an M-Pesa STK prompt will be sent to
-            your phone. Enter your M-Pesa PIN
-            to complete the payment.
-        </div>
+    <div
+        id="status"
+        class="status"
+    ></div>
 
+
+    <div class="note">
+        After you click the payment button,
+        an M-Pesa STK prompt will be sent to
+        your phone. Enter your M-Pesa PIN
+        to complete the payment.
     </div>
 
 </div>
 
-
-<footer>
+</div><footer>
     © 2026 CheryEarn. All rights reserved.
-</footer>
-
-
-<script>
+</footer><script>
 
     // ==================================================
     // BACKEND
@@ -310,6 +291,14 @@
 
     const REGISTRATION_FEE =
         10;
+
+
+    // ==================================================
+    // DASHBOARD
+    // ==================================================
+
+    const DASHBOARD_URL =
+        "dashboard.html";
 
 
     // ==================================================
@@ -745,13 +734,32 @@
 
 
                                 showStatus(
-                                    "Payment successful! Your registration payment has been received.",
+                                    "Payment successful! Redirecting to your CheryEarn dashboard...",
                                     "success"
                                 );
 
 
                                 payBtn.textContent =
                                     "Payment Successful";
+
+
+                                /*
+                                 * Give the success message
+                                 * a moment to display, then
+                                 * send the newly registered
+                                 * member to the dashboard.
+                                 */
+
+                                setTimeout(
+                                    function () {
+
+                                        window.location.replace(
+                                            DASHBOARD_URL
+                                        );
+
+                                    },
+                                    1200
+                                );
 
 
                                 return;
@@ -838,7 +846,5 @@
 
     }
 
-</script>
-
-</body>
+</script></body>
 </html>
