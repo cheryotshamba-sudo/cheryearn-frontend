@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
@@ -239,7 +240,7 @@
             </div>
 
             <div class="fee">
-                KSh 200
+                KSh 10
             </div>
 
         </div>
@@ -266,7 +267,7 @@
             type="button"
             id="payBtn"
         >
-            Pay KSh 200
+            Pay KSh 10
         </button>
 
 
@@ -304,17 +305,78 @@
 
 
     // ==================================================
+    // TEMPORARY TEST AMOUNT
+    // ==================================================
+
+    const REGISTRATION_FEE =
+        10;
+
+
+    // ==================================================
+    // GET SAVED USER
+    // ==================================================
+
+    const userId =
+        localStorage.getItem(
+            "cheryearn_user_id"
+        );
+
+
+    const savedPhone =
+        localStorage.getItem(
+            "cheryearn_user_phone"
+        );
+
+
+    // ==================================================
     // ELEMENTS
     // ==================================================
 
     const phoneInput =
-        document.getElementById("phone");
+        document.getElementById(
+            "phone"
+        );
+
 
     const payBtn =
-        document.getElementById("payBtn");
+        document.getElementById(
+            "payBtn"
+        );
+
 
     const statusBox =
-        document.getElementById("status");
+        document.getElementById(
+            "status"
+        );
+
+
+    // ==================================================
+    // LOAD REGISTERED PHONE
+    // ==================================================
+
+    if (savedPhone) {
+
+        phoneInput.value =
+            savedPhone;
+
+    }
+
+
+    // ==================================================
+    // CHECK USER ID
+    // ==================================================
+
+    if (!userId) {
+
+        showStatus(
+            "Registration information was not found. Please create your account again.",
+            "error"
+        );
+
+        payBtn.disabled =
+            true;
+
+    }
 
 
     // ==================================================
@@ -345,6 +407,18 @@
 
             let phone =
                 phoneInput.value.trim();
+
+
+            if (!userId) {
+
+                showStatus(
+                    "User account information is missing. Please register again.",
+                    "error"
+                );
+
+                return;
+
+            }
 
 
             if (!phone) {
@@ -418,7 +492,7 @@
 
 
             showStatus(
-                "Please wait. Sending the M-Pesa payment request...",
+                "Please wait. Sending the KSh 10 M-Pesa payment request...",
                 "info"
             );
 
@@ -447,11 +521,14 @@
                             body:
                                 JSON.stringify({
 
+                                    userId:
+                                        userId,
+
                                     phone:
                                         phone,
 
                                     amount:
-                                        200
+                                        REGISTRATION_FEE
 
                                 })
 
@@ -487,10 +564,35 @@
                     data.checkout_request_id;
 
 
+                const reference =
+                    data.reference ||
+                    "";
+
+
                 if (!transactionId) {
 
                     throw new Error(
                         "Payment transaction ID was not returned."
+                    );
+
+                }
+
+
+                // ======================================
+                // SAVE PAYMENT INFORMATION
+                // ======================================
+
+                localStorage.setItem(
+                    "cheryearn_transaction_id",
+                    String(transactionId)
+                );
+
+
+                if (reference) {
+
+                    localStorage.setItem(
+                        "cheryearn_payment_reference",
+                        String(reference)
                     );
 
                 }
@@ -515,7 +617,8 @@
                 // ======================================
 
                 await checkPayment(
-                    transactionId
+                    transactionId,
+                    reference
                 );
 
 
@@ -538,7 +641,7 @@
                     false;
 
                 payBtn.textContent =
-                    "Pay KSh 200";
+                    "Pay KSh 10";
 
             }
 
@@ -551,7 +654,8 @@
     // ==================================================
 
     async function checkPayment(
-        transactionId
+        transactionId,
+        reference
     ) {
 
         const maxAttempts =
@@ -589,7 +693,13 @@
                                         JSON.stringify({
 
                                             transactionId:
-                                                transactionId
+                                                transactionId,
+
+                                            reference:
+                                                reference,
+
+                                            userId:
+                                                userId
 
                                         })
 
@@ -625,4 +735,110 @@
                             if (
                                 status === "completed" ||
                                 status === "success" ||
-                                status === "successful
+                                status === "successful" ||
+                                status === "paid"
+                            ) {
+
+                                clearInterval(
+                                    interval
+                                );
+
+
+                                showStatus(
+                                    "Payment successful! Your registration payment has been received.",
+                                    "success"
+                                );
+
+
+                                payBtn.textContent =
+                                    "Payment Successful";
+
+
+                                return;
+
+                            }
+
+
+                            // ==========================
+                            // FAILED
+                            // ==========================
+
+                            if (
+                                status === "failed" ||
+                                status === "cancelled" ||
+                                status === "canceled"
+                            ) {
+
+                                clearInterval(
+                                    interval
+                                );
+
+
+                                showStatus(
+                                    "Payment was not completed. Please try again.",
+                                    "error"
+                                );
+
+
+                                payBtn.disabled =
+                                    false;
+
+                                payBtn.textContent =
+                                    "Pay KSh 10";
+
+
+                                return;
+
+                            }
+
+                        }
+
+
+                        // ==============================
+                        // STOP AFTER TIMEOUT
+                        // ==============================
+
+                        if (
+                            attempts >=
+                            maxAttempts
+                        ) {
+
+                            clearInterval(
+                                interval
+                            );
+
+
+                            showStatus(
+                                "We could not confirm the payment yet. Please check your M-Pesa message before trying again.",
+                                "error"
+                            );
+
+
+                            payBtn.disabled =
+                                false;
+
+                            payBtn.textContent =
+                                "Check Payment Again";
+
+                        }
+
+
+                    } catch (error) {
+
+                        console.error(
+                            "Status check error:",
+                            error
+                        );
+
+                    }
+
+                },
+                5000
+            );
+
+    }
+
+</script>
+
+</body>
+</html>
