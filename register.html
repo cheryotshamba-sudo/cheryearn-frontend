@@ -2,10 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Create Account - CheryEarn</title>
 
     <style>
+
         :root {
             --bg: #050e25;
             --header: #0b1535;
@@ -18,8 +23,6 @@
             --blue: #1f5fea;
             --green: #43d878;
             --yellow: #f4cb2e;
-
-            --bottom: #0b1535;
         }
 
         * {
@@ -180,227 +183,591 @@
             font-size: 12px;
             padding: 0 20px 25px;
         }
+
     </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">CheryEarn</div>
-    <div class="tagline">Earn • Refer • Grow</div>
+
+    <div class="logo">
+        CheryEarn
+    </div>
+
+    <div class="tagline">
+        Earn • Refer • Grow
+    </div>
+
 </header>
+
 
 <div class="container">
 
     <div class="card">
 
-        <h1>Create Account</h1>
-        <div class="subtitle">Join CheryEarn today</div>
+        <h1>
+            Create Account
+        </h1>
+
+        <div class="subtitle">
+            Join CheryEarn today
+        </div>
+
 
         <form id="registerForm">
 
+
             <div class="form-group">
-                <label for="fullName">Full Name</label>
+
+                <label for="fullName">
+                    Full Name
+                </label>
+
                 <input
                     type="text"
                     id="fullName"
                     placeholder="Enter your full name"
+                    autocomplete="name"
                     required
                 >
+
             </div>
 
+
             <div class="form-group">
-                <label for="phone">Phone Number</label>
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
                 <input
                     type="tel"
                     id="phone"
                     placeholder="0712345678"
+                    autocomplete="tel"
                     required
                 >
+
             </div>
 
+
             <div class="form-group">
-                <label for="email">Email Address</label>
+
+                <label for="email">
+                    Email Address
+                </label>
+
                 <input
                     type="email"
                     id="email"
                     placeholder="you@example.com"
+                    autocomplete="email"
                     required
                 >
+
             </div>
 
+
             <div class="form-group">
-                <label for="password">Password</label>
+
+                <label for="password">
+                    Password
+                </label>
+
                 <input
                     type="password"
                     id="password"
                     placeholder="Enter password"
                     minlength="6"
+                    autocomplete="new-password"
                     required
                 >
+
             </div>
 
+
             <div class="form-group">
-                <label for="confirmPassword">Confirm Password</label>
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
                 <input
                     type="password"
                     id="confirmPassword"
                     placeholder="Confirm password"
                     minlength="6"
+                    autocomplete="new-password"
                     required
                 >
+
             </div>
 
+
             <div class="form-group">
-                <label for="referralCode">Referral Code</label>
+
+                <label for="referralCode">
+                    Referral Code
+                </label>
+
                 <input
                     type="text"
                     id="referralCode"
                     placeholder="Optional"
+                    autocomplete="off"
                 >
+
                 <div class="referral-info">
                     Enter a referral code if someone invited you.
                 </div>
+
             </div>
 
-            <button type="submit" id="registerBtn">
+
+            <button
+                type="submit"
+                id="registerBtn"
+            >
                 Create Account
             </button>
 
-            <div id="message" class="message"></div>
+
+            <div
+                id="message"
+                class="message"
+            ></div>
+
 
         </form>
 
+
         <div class="login-link">
+
             Already have an account?
-            <a href="login.html">Login</a>
+
+            <a href="login.html">
+                Login
+            </a>
+
         </div>
 
     </div>
 
 </div>
 
+
 <footer>
     © 2026 CheryEarn. All rights reserved.
 </footer>
 
+
 <script>
-    const API_URL = "https://cheryearn-backend.onrender.com";
 
-    const form = document.getElementById("registerForm");
-    const message = document.getElementById("message");
-    const registerBtn = document.getElementById("registerBtn");
+    // ==================================================
+    // BACKEND URL
+    // ==================================================
 
-    // Automatically read referral code from:
-    // register.html?ref=CHERY123456
-    const params = new URLSearchParams(window.location.search);
-    const referralFromUrl = params.get("ref");
+    const API_URL =
+        "https://cheryearn-backend.onrender.com";
+
+
+    // ==================================================
+    // ELEMENTS
+    // ==================================================
+
+    const form =
+        document.getElementById(
+            "registerForm"
+        );
+
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    const registerBtn =
+        document.getElementById(
+            "registerBtn"
+        );
+
+
+    // ==================================================
+    // READ REFERRAL CODE FROM URL
+    // ==================================================
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+
+    const referralFromUrl =
+        params.get("ref");
+
 
     if (referralFromUrl) {
-        document.getElementById("referralCode").value =
+
+        document.getElementById(
+            "referralCode"
+        ).value =
             referralFromUrl.toUpperCase();
+
     }
 
-    form.addEventListener("submit", async function (e) {
-        e.preventDefault();
 
-        message.className = "message";
-        message.textContent = "";
+    // ==================================================
+    // REGISTRATION
+    // ==================================================
 
-        const fullName = document.getElementById("fullName").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const password = document.getElementById("password").value;
-        const confirmPassword =
-            document.getElementById("confirmPassword").value;
-        const referralCode =
-            document.getElementById("referralCode").value.trim();
+    form.addEventListener(
+        "submit",
+        async function (e) {
 
-        if (!fullName || !phone || !email || !password) {
-            showMessage(
-                "Full name, phone, email and password are required.",
-                "error"
-            );
-            return;
-        }
+            e.preventDefault();
 
-        if (password.length < 6) {
-            showMessage(
-                "Password must be at least 6 characters.",
-                "error"
-            );
-            return;
-        }
 
-        if (password !== confirmPassword) {
-            showMessage(
-                "Passwords do not match.",
-                "error"
-            );
-            return;
-        }
+            message.className =
+                "message";
 
-        registerBtn.disabled = true;
-        registerBtn.textContent = "Creating Account...";
 
-        try {
-            const response = await fetch(
-                `${API_URL}/api/auth/register`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        // These names MUST match the backend.
-                        full_name: fullName,
-                        phone: phone,
-                        email: email,
-                        password: password,
-                        referral_code: referralCode
-                    })
-                }
-            );
+            message.textContent =
+                "";
 
-            const data = await response.json();
 
-            if (!response.ok || !data.success) {
+            // ==========================================
+            // GET FORM VALUES
+            // ==========================================
+
+            const fullName =
+                document
+                    .getElementById("fullName")
+                    .value
+                    .trim();
+
+
+            const phone =
+                document
+                    .getElementById("phone")
+                    .value
+                    .trim();
+
+
+            const email =
+                document
+                    .getElementById("email")
+                    .value
+                    .trim();
+
+
+            const password =
+                document
+                    .getElementById("password")
+                    .value;
+
+
+            const confirmPassword =
+                document
+                    .getElementById("confirmPassword")
+                    .value;
+
+
+            const referralCode =
+                document
+                    .getElementById("referralCode")
+                    .value
+                    .trim()
+                    .toUpperCase();
+
+
+            // ==========================================
+            // VALIDATION
+            // ==========================================
+
+            if (
+                !fullName ||
+                !phone ||
+                !email ||
+                !password
+            ) {
+
                 showMessage(
-                    data.message || "Registration failed. Please try again.",
+                    "Full name, phone, email and password are required.",
                     "error"
                 );
 
-                registerBtn.disabled = false;
-                registerBtn.textContent = "Create Account";
                 return;
+
             }
 
-            showMessage(
-                data.message || "Registration successful.",
-                "success"
-            );
 
-            setTimeout(() => {
-                window.location.href = "login.html";
-            }, 1800);
+            if (
+                password.length < 6
+            ) {
 
-        } catch (error) {
-            console.error("Registration error:", error);
+                showMessage(
+                    "Password must be at least 6 characters.",
+                    "error"
+                );
 
-            showMessage(
-                "Unable to connect to the server. Please try again.",
-                "error"
-            );
+                return;
 
-            registerBtn.disabled = false;
-            registerBtn.textContent = "Create Account";
+            }
+
+
+            if (
+                password !==
+                confirmPassword
+            ) {
+
+                showMessage(
+                    "Passwords do not match.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            registerBtn.disabled =
+                true;
+
+
+            registerBtn.textContent =
+                "Creating Account...";
+
+
+            try {
+
+                // ======================================
+                // REGISTER USER
+                // ======================================
+
+                const response =
+                    await fetch(
+                        `${API_URL}/api/auth/register`,
+                        {
+
+                            method:
+                                "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    full_name:
+                                        fullName,
+
+                                    phone:
+                                        phone,
+
+                                    email:
+                                        email,
+
+                                    password:
+                                        password,
+
+                                    referral_code:
+                                        referralCode ||
+                                        null
+
+                                })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "REGISTRATION RESPONSE:",
+                    data
+                );
+
+
+                // ======================================
+                // CHECK REGISTRATION
+                // ======================================
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    showMessage(
+                        data.message ||
+                        "Registration failed. Please try again.",
+                        "error"
+                    );
+
+
+                    registerBtn.disabled =
+                        false;
+
+
+                    registerBtn.textContent =
+                        "Create Account";
+
+
+                    return;
+
+                }
+
+
+                // ======================================
+                // GET CREATED USER
+                // ======================================
+
+                const user =
+                    data.user;
+
+
+                if (
+                    !user ||
+                    !user.id
+                ) {
+
+                    showMessage(
+                        "Account was created, but user information was not returned.",
+                        "error"
+                    );
+
+
+                    registerBtn.disabled =
+                        false;
+
+
+                    registerBtn.textContent =
+                        "Create Account";
+
+
+                    return;
+
+                }
+
+
+                // ======================================
+                // SAVE USER INFORMATION
+                // ======================================
+
+                localStorage.setItem(
+                    "cheryearn_user_id",
+                    String(user.id)
+                );
+
+
+                localStorage.setItem(
+                    "cheryearn_user_phone",
+                    user.phone ||
+                    phone
+                );
+
+
+                localStorage.setItem(
+                    "cheryearn_user_email",
+                    user.email ||
+                    email
+                );
+
+
+                localStorage.setItem(
+                    "cheryearn_user_name",
+                    user.full_name ||
+                    fullName
+                );
+
+
+                localStorage.setItem(
+                    "cheryearn_referral_code",
+                    user.referral_code ||
+                    ""
+                );
+
+
+                // ======================================
+                // SUCCESS
+                // ======================================
+
+                showMessage(
+                    "Account created successfully. Redirecting to payment...",
+                    "success"
+                );
+
+
+                registerBtn.textContent =
+                    "Continue to Payment";
+
+
+                // ======================================
+                // PAYMENT PAGE
+                // ======================================
+
+                setTimeout(
+                    function () {
+
+                        window.location.href =
+                            "payment.html";
+
+                    },
+                    1200
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Registration error:",
+                    error
+                );
+
+
+                showMessage(
+                    "Unable to connect to the server. Please try again.",
+                    "error"
+                );
+
+
+                registerBtn.disabled =
+                    false;
+
+
+                registerBtn.textContent =
+                    "Create Account";
+
+            }
+
         }
-    });
+    );
 
-    function showMessage(text, type) {
-        message.textContent = text;
-        message.className = "message " + type;
+
+    // ==================================================
+    // MESSAGE FUNCTION
+    // ==================================================
+
+    function showMessage(
+        text,
+        type
+    ) {
+
+        message.textContent =
+            text;
+
+        message.className =
+            "message " + type;
+
     }
+
 </script>
 
 </body>
