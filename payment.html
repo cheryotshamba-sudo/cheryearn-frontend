@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Registration Payment - CheryEarn</title>
+
+    <style>
+
+        :root {
+            --bg: #050e25;
+            --header: #0b1535;
+            --card: #0d1738;
+            --border: #202d4e;
+
+            --white: #f5f7fc;
+            --muted: #9aa8c2;
+
+            --green: #43d878;
+            --blue: #1f5fea;
+            --red: #ff7777;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--white);
+            font-family: Arial, sans-serif;
+        }
+
+        header {
+            background: var(--header);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 25px 18px 35px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px 18px;
+        }
+
+        h1 {
+            margin: 0 0 8px;
+            text-align: center;
+            font-size: 24px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--muted);
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .fee-box {
+            text-align: center;
+            background: rgba(67, 216, 120, 0.08);
+            border: 1px solid rgba(67, 216, 120, 0.3);
+            border-radius: 12px;
+            padding: 18px;
+            margin-bottom: 22px;
+        }
+
+        .fee-label {
+            color: var(--muted);
+            font-size: 13px;
+            margin-bottom: 6px;
+        }
+
+        .fee {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--green);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--white);
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: var(--green);
+        }
+
+        input::placeholder {
+            color: #66738e;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            background: var(--green);
+            color: #04100a;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        button:hover {
+            opacity: 0.92;
+        }
+
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .status {
+            display: none;
+            margin-top: 16px;
+            padding: 13px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .status.info {
+            display: block;
+            background: rgba(31, 95, 234, 0.10);
+            border: 1px solid rgba(31, 95, 234, 0.35);
+            color: #8db0ff;
+        }
+
+        .status.success {
+            display: block;
+            background: rgba(67, 216, 120, 0.10);
+            border: 1px solid rgba(67, 216, 120, 0.35);
+            color: var(--green);
+        }
+
+        .status.error {
+            display: block;
+            background: rgba(220, 50, 50, 0.12);
+            border: 1px solid rgba(220, 50, 50, 0.35);
+            color: var(--red);
+        }
+
+        .note {
+            color: var(--muted);
+            font-size: 12px;
+            text-align: center;
+            margin-top: 18px;
+            line-height: 1.5;
+        }
+
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+            padding: 0 20px 25px;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        CheryEarn
+    </div>
+
+    <div class="tagline">
+        Earn • Refer • Grow
+    </div>
+
+</header>
+
+
+<div class="container">
+
+    <div class="card">
+
+        <h1>
+            Registration Payment
+        </h1>
+
+        <div class="subtitle">
+            Complete your registration to continue.
+        </div>
+
+
+        <div class="fee-box">
+
+            <div class="fee-label">
+                Registration Fee
+            </div>
+
+            <div class="fee">
+                KSh 200
+            </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="phone">
+                M-Pesa Phone Number
+            </label>
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="0712345678"
+                autocomplete="tel"
+                required
+            >
+
+        </div>
+
+
+        <button
+            type="button"
+            id="payBtn"
+        >
+            Pay KSh 200
+        </button>
+
+
+        <div
+            id="status"
+            class="status"
+        ></div>
+
+
+        <div class="note">
+            After you click the payment button,
+            an M-Pesa STK prompt will be sent to
+            your phone. Enter your M-Pesa PIN
+            to complete the payment.
+        </div>
+
+    </div>
+
+</div>
+
+
+<footer>
+    © 2026 CheryEarn. All rights reserved.
+</footer>
+
+
+<script>
+
+    // ==================================================
+    // BACKEND
+    // ==================================================
+
+    const API_URL =
+        "https://cheryearn-backend.onrender.com";
+
+
+    // ==================================================
+    // ELEMENTS
+    // ==================================================
+
+    const phoneInput =
+        document.getElementById("phone");
+
+    const payBtn =
+        document.getElementById("payBtn");
+
+    const statusBox =
+        document.getElementById("status");
+
+
+    // ==================================================
+    // SHOW STATUS
+    // ==================================================
+
+    function showStatus(
+        message,
+        type
+    ) {
+
+        statusBox.textContent =
+            message;
+
+        statusBox.className =
+            "status " + type;
+
+    }
+
+
+    // ==================================================
+    // PAY
+    // ==================================================
+
+    payBtn.addEventListener(
+        "click",
+        async function () {
+
+            let phone =
+                phoneInput.value.trim();
+
+
+            if (!phone) {
+
+                showStatus(
+                    "Please enter your M-Pesa phone number.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            // ==========================================
+            // NORMALIZE PHONE
+            // ==========================================
+
+            phone =
+                phone.replace(
+                    /\s+/g,
+                    ""
+                );
+
+
+            if (
+                phone.startsWith("0")
+            ) {
+
+                phone =
+                    "254" +
+                    phone.substring(1);
+
+            }
+
+
+            if (
+                phone.startsWith("+254")
+            ) {
+
+                phone =
+                    phone.substring(1);
+
+            }
+
+
+            // ==========================================
+            // BASIC KENYAN PHONE CHECK
+            // ==========================================
+
+            if (
+                !/^2547\d{8}$/.test(phone) &&
+                !/^2541\d{8}$/.test(phone)
+            ) {
+
+                showStatus(
+                    "Please enter a valid Kenyan M-Pesa number.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
+            payBtn.disabled =
+                true;
+
+            payBtn.textContent =
+                "Sending STK Push...";
+
+
+            showStatus(
+                "Please wait. Sending the M-Pesa payment request...",
+                "info"
+            );
+
+
+            try {
+
+                // ======================================
+                // SEND PAYMENT REQUEST
+                // ======================================
+
+                const response =
+                    await fetch(
+                        `${API_URL}/stk-push`,
+                        {
+
+                            method:
+                                "POST",
+
+                            headers: {
+
+                                "Content-Type":
+                                    "application/json"
+
+                            },
+
+                            body:
+                                JSON.stringify({
+
+                                    phone:
+                                        phone,
+
+                                    amount:
+                                        200
+
+                                })
+
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                console.log(
+                    "STK RESPONSE:",
+                    data
+                );
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.message ||
+                        "Unable to send STK Push."
+                    );
+
+                }
+
+
+                const transactionId =
+                    data.transactionId ||
+                    data.checkout_request_id;
+
+
+                if (!transactionId) {
+
+                    throw new Error(
+                        "Payment transaction ID was not returned."
+                    );
+
+                }
+
+
+                // ======================================
+                // STK SENT
+                // ======================================
+
+                showStatus(
+                    "STK Push sent. Check your phone and enter your M-Pesa PIN.",
+                    "info"
+                );
+
+
+                payBtn.textContent =
+                    "Waiting for Payment...";
+
+
+                // ======================================
+                // CHECK PAYMENT
+                // ======================================
+
+                await checkPayment(
+                    transactionId
+                );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Payment error:",
+                    error
+                );
+
+
+                showStatus(
+                    error.message ||
+                    "Payment failed. Please try again.",
+                    "error"
+                );
+
+
+                payBtn.disabled =
+                    false;
+
+                payBtn.textContent =
+                    "Pay KSh 200";
+
+            }
+
+        }
+    );
+
+
+    // ==================================================
+    // PAYMENT STATUS CHECK
+    // ==================================================
+
+    async function checkPayment(
+        transactionId
+    ) {
+
+        const maxAttempts =
+            30;
+
+        let attempts =
+            0;
+
+
+        const interval =
+            setInterval(
+                async function () {
+
+                    attempts++;
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                `${API_URL}/payment-status`,
+                                {
+
+                                    method:
+                                        "POST",
+
+                                    headers: {
+
+                                        "Content-Type":
+                                            "application/json"
+
+                                    },
+
+                                    body:
+                                        JSON.stringify({
+
+                                            transactionId:
+                                                transactionId
+
+                                        })
+
+                                }
+                            );
+
+
+                        const data =
+                            await response.json();
+
+
+                        console.log(
+                            "PAYMENT STATUS:",
+                            data
+                        );
+
+
+                        if (
+                            data.success
+                        ) {
+
+                            const status =
+                                String(
+                                    data.status ||
+                                    ""
+                                ).toLowerCase();
+
+
+                            // ==========================
+                            // SUCCESS
+                            // ==========================
+
+                            if (
+                                status === "completed" ||
+                                status === "success" ||
+                                status === "successful
