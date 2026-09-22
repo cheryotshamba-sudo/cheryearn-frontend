@@ -1402,12 +1402,6 @@ function displayReferrals(data) {
             "CheryEarn Member";
 
 
-        /*
-         * PHONE NUMBER
-         *
-         * Supports several possible backend
-         * field names.
-         */
         const phone =
             member.phone ||
             member.phoneNumber ||
@@ -1418,18 +1412,12 @@ function displayReferrals(data) {
             "";
 
 
-        /*
-         * Direct / Indirect
-         */
         const level =
             member.referralLevel ||
             member.level ||
             "Direct";
 
 
-        /*
-         * Payment status
-         */
         const status =
             member.paymentStatus ||
             member.payment_status ||
@@ -1450,12 +1438,6 @@ function displayReferrals(data) {
                 : "Pending";
 
 
-        /*
-         * AMOUNT PAID
-         *
-         * Supports several possible backend
-         * field names.
-         */
         const amount =
             member.amountPaid ??
             member.amount_paid ??
@@ -1467,12 +1449,6 @@ function displayReferrals(data) {
             0;
 
 
-        /*
-         * PAYMENT DATE/TIME
-         *
-         * We check payment time first,
-         * then registration/join time.
-         */
         const paymentDate =
             member.paidAt ||
             member.paid_at ||
@@ -1551,7 +1527,7 @@ function displayReferrals(data) {
                         statusText === "Paid"
                             ? escapeHtml(
                                 formatMoney(amount)
-                            ) + " paid"
+                            )
                             : "Payment pending"
                     }
                 </div>
@@ -1671,9 +1647,6 @@ function applyDashboardData(data) {
         total;
 
 
-    /*
-     * Display actual referred members.
-     */
     displayReferrals(data);
 
 
