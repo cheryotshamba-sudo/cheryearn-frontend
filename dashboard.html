@@ -764,10 +764,6 @@
 
 <script>
 
-    /* =========================
-       BACKEND
-    ========================= */
-
     const API_URL =
         "https://cheryearn-backend.onrender.com";
 
@@ -787,13 +783,11 @@
         if (savedTheme === "light") {
 
             document.body.classList.add("light-mode");
-
             button.textContent = "☾";
 
         } else {
 
             document.body.classList.remove("light-mode");
-
             button.textContent = "☀";
         }
     }
@@ -1022,8 +1016,8 @@
 
 
     /* =========================
-       CREATE ORIGINAL LINK
-    ========================= */
+       CREATE REFERRAL LINK
+       ========================= */
 
     function buildReferralLink(user) {
 
@@ -1031,39 +1025,100 @@
             return "";
         }
 
+
+        /*
+         * Accept all possible backend
+         * field names for the CheryEarn number.
+         */
+        let number =
+            user.cheryearn_number ??
+            user.cheryearnNumber ??
+            user.cheryearn_id ??
+            user.cheryearnId ??
+            "";
+
+
         let cheryearnId =
-            user.cheryearn_id ||
-            user.cheryearnId ||
-            "";
-
-        let username =
-            user.username ||
-            user.uniqueName ||
-            "";
+            String(number).trim();
 
 
-        if (
-            !cheryearnId &&
-            user.cheryearn_number !== undefined &&
-            user.cheryearn_number !== null
-        ) {
+        /*
+         * Convert:
+         *
+         * 2
+         * into
+         * CheryEarn002
+         *
+         * and preserve an already formatted
+         * CheryEarn002 value.
+         */
+        if (cheryearnId) {
 
-            cheryearnId =
-                "CheryEarn" +
-                String(user.cheryearn_number)
-                    .padStart(3, "0");
+            if (/^\d+$/.test(cheryearnId)) {
+
+                cheryearnId =
+                    "CheryEarn" +
+                    cheryearnId.padStart(3, "0");
+
+            } else if (
+                !cheryearnId
+                    .toLowerCase()
+                    .startsWith("cheryearn")
+            ) {
+
+                const digits =
+                    cheryearnId.match(/\d+/);
+
+                if (digits) {
+
+                    cheryearnId =
+                        "CheryEarn" +
+                        digits[0].padStart(3, "0");
+                }
+            }
         }
 
 
-        if (
-            !cheryearnId ||
-            !username
-        ) {
+        /*
+         * Get username.
+         */
+        let username =
+            user.username ||
+            user.uniqueName ||
+            user.unique_name ||
+            "";
+
+
+        username =
+            String(username)
+                .trim()
+                .replace(/\s+/g, "")
+                .replace(/[^a-zA-Z0-9_.-]/g, "");
+
+
+        /*
+         * Both values are required.
+         */
+        if (!cheryearnId || !username) {
+
+            console.log(
+                "Referral link data missing:",
+                {
+                    cheryearnId,
+                    username,
+                    user
+                }
+            );
 
             return "";
         }
 
 
+        /*
+         * REQUIRED FORMAT:
+         *
+         * https://cheryearn1.onrender.com/register.html?member=CheryEarn002-username
+         */
         return (
             "https://cheryearn1.onrender.com/register.html?member=" +
             encodeURIComponent(
@@ -1084,6 +1139,11 @@
         }
 
 
+        /*
+         * Find user information regardless
+         * of whether the backend returns it
+         * at the top level or inside user/profile/data.
+         */
         const user =
             data.user ||
             data.profile ||
@@ -1209,11 +1269,46 @@
             "";
 
 
+        /*
+         * If backend did not provide the link,
+         * create it locally from the user's
+         * CheryEarn number and username.
+         */
         if (!referralLink) {
 
             referralLink =
                 buildReferralLink(user);
+        }
 
+
+        /*
+         * Also check the original saved user
+         * information if the first user object
+         * did not contain enough information.
+         */
+        if (!referralLink) {
+
+            const savedUser =
+                localStorage.getItem("user");
+
+            if (savedUser) {
+
+                try {
+
+                    const localUser =
+                        JSON.parse(savedUser);
+
+                    referralLink =
+                        buildReferralLink(localUser);
+
+                } catch (error) {
+
+                    console.error(
+                        "Local referral data error:",
+                        error
+                    );
+                }
+            }
         }
 
 
@@ -1229,8 +1324,8 @@
 
 
     /* =========================
-       FETCH DASHBOARD FROM BACKEND
-       ========================= */
+       FETCH DASHBOARD
+    ========================= */
 
     window.fetchDashboardData =
         async function() {
@@ -1317,10 +1412,8 @@
         try {
 
             /*
-             * First load the saved information
-             * so the page can display immediately.
+             * Load saved dashboard first.
              */
-
             const savedData =
                 localStorage.getItem(
                     "dashboardData"
@@ -1341,15 +1434,13 @@
                         "Saved dashboard data error:",
                         error
                     );
-
                 }
             }
 
 
             /*
-             * Load saved user information too.
+             * Load saved user information.
              */
-
             const savedUser =
                 localStorage.getItem("user");
 
@@ -1371,17 +1462,13 @@
                         "Saved user error:",
                         error
                     );
-
                 }
             }
 
 
             /*
-             * IMPORTANT:
-             * Always fetch the latest dashboard
-             * information from the backend.
+             * Always get fresh data from backend.
              */
-
             const response =
                 await window.fetchDashboardData();
 
@@ -1391,7 +1478,6 @@
                 applyDashboardData(
                     response
                 );
-
             }
 
         } catch (error) {
