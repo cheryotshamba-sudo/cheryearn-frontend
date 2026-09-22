@@ -24,94 +24,81 @@
 
         body {
             margin: 0;
-            background: #0a1429;
+            background: #050d26;
             color: #f8fafc;
             font-family: 'Inter', sans-serif;
             min-height: 100vh;
-            padding-bottom: 82px;
+            padding-bottom: 85px;
         }
 
-        /* =========================
-           HEADER
-        ========================= */
+        /* HEADER */
 
         .header {
-            height: 68px;
-            background: #101d34;
-            border-bottom: 1px solid #263550;
+            background: #0d1738;
+            border-bottom: 1px solid #202b4d;
+            padding: 17px 18px;
 
             display: flex;
             align-items: center;
 
             position: sticky;
             top: 0;
-            z-index: 200;
-
-            padding: 0 20px;
+            z-index: 100;
         }
 
+        /* THREE DOTS */
+
         .menu-btn {
-            width: 40px;
-            height: 40px;
+            background: transparent;
+            border: none;
+            color: #f8fafc;
+
+            font-size: 28px;
+            line-height: 1;
+
+            width: 35px;
+            height: 35px;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            background: transparent;
-            border: none;
-
-            color: #d7e0ef;
-
-            font-size: 28px;
-            line-height: 1;
-
             cursor: pointer;
 
-            border-radius: 10px;
+            margin-right: 8px;
         }
 
-        .menu-btn:active {
-            background: #1c2a43;
+        .menu-btn:hover {
+            color: #60a5fa;
         }
 
         .logo {
-            margin-left: 10px;
-
-            font-size: 22px;
+            font-size: 23px;
             font-weight: 800;
-
-            color: #ffffff;
-        }
-
-        .logo span {
-            color: #10b981;
+            color: #f8fafc;
         }
 
         .header-spacer {
-            margin-left: auto;
+            flex: 1;
         }
 
         .logout {
-            background: #1b2940;
-            color: #dbe5f2;
-
-            border: 1px solid #30405a;
-
-            border-radius: 9px;
-
-            padding: 8px 12px;
-
+            background: transparent;
+            color: #f8fafc;
+            border: 1px solid #202b4d;
+            border-radius: 10px;
+            padding: 9px 14px;
             font-family: inherit;
-            font-size: 12px;
             font-weight: 600;
-
             cursor: pointer;
         }
 
-        /* =========================
-           SIDE MENU
-        ========================= */
+        .logout:hover {
+            border-color: #2563eb;
+        }
+
+
+        /* SIDE MENU */
 
         .menu-overlay {
             position: fixed;
@@ -134,22 +121,22 @@
             top: 0;
             left: 0;
 
-            width: 280px;
+            width: 270px;
             max-width: 82%;
 
             height: 100vh;
 
-            background: #101d34;
+            background: #0d1738;
 
-            border-right: 1px solid #2a3953;
+            border-right: 1px solid #202b4d;
 
             z-index: 600;
+
+            padding: 22px 15px;
 
             transform: translateX(-100%);
 
             transition: transform 0.25s ease;
-
-            padding: 22px 16px;
         }
 
         .side-menu.show {
@@ -161,20 +148,16 @@
             align-items: center;
             justify-content: space-between;
 
-            padding: 4px 5px 22px;
+            padding: 0 5px 18px;
 
-            border-bottom: 1px solid #263550;
+            border-bottom: 1px solid #202b4d;
 
-            margin-bottom: 14px;
+            margin-bottom: 15px;
         }
 
         .menu-title {
-            font-size: 20px;
+            font-size: 21px;
             font-weight: 800;
-        }
-
-        .menu-title span {
-            color: #10b981;
         }
 
         .close-menu {
@@ -183,14 +166,12 @@
 
             color: #94a3b8;
 
-            font-size: 25px;
+            font-size: 26px;
 
             cursor: pointer;
         }
 
         .menu-item {
-            width: 100%;
-
             display: flex;
             align-items: center;
 
@@ -198,9 +179,9 @@
 
             text-decoration: none;
 
-            color: #d8e1ef;
+            color: #f8fafc;
 
-            padding: 14px 13px;
+            padding: 14px 12px;
 
             border-radius: 10px;
 
@@ -211,8 +192,8 @@
         }
 
         .menu-item:hover {
-            background: #1b2a43;
-            color: #ffffff;
+            background: #16244a;
+            color: #60a5fa;
         }
 
         .menu-icon {
@@ -221,387 +202,217 @@
             font-size: 18px;
         }
 
-        /* =========================
-           MAIN
-        ========================= */
+
+        /* MAIN */
 
         .container {
             width: 100%;
-            max-width: 680px;
-
+            max-width: 600px;
             margin: auto;
-
-            padding: 20px 16px 25px;
+            padding: 22px 16px 25px;
         }
 
-        /* =========================
-           WELCOME
-        ========================= */
+        /* WELCOME */
 
         .welcome {
-            margin-bottom: 18px;
+            margin-bottom: 20px;
         }
 
         .welcome h2 {
-            font-size: 21px;
+            font-size: 23px;
             font-weight: 700;
-
-            margin-bottom: 5px;
+            margin-bottom: 6px;
         }
 
         .welcome p {
-            color: #7f8da4;
+            color: #94a3b8;
+            font-size: 14px;
+        }
 
+
+        /* BALANCE */
+
+        .balance-card {
+            background: #0d1738;
+            border: 1px solid #202b4d;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 16px;
+        }
+
+        .balance-label {
+            color: #94a3b8;
             font-size: 13px;
+            margin-bottom: 8px;
         }
 
-        /* =========================
-           EARNINGS HEADER
-        ========================= */
+        .balance {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
 
-        .section-label {
-            color: #74839b;
+        .primary-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 24px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
 
-            font-size: 12px;
+        .primary-btn:hover {
+            opacity: 0.9;
+        }
+
+
+        /* NEW EARNINGS PART */
+
+        .earnings-section {
+            background: #0d1738;
+
+            border: 1px solid #202b4d;
+
+            border-radius: 18px;
+
+            padding: 20px;
+
+            margin-bottom: 16px;
+        }
+
+        .earnings-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            margin-bottom: 15px;
+        }
+
+        .earnings-header h3 {
+            font-size: 17px;
             font-weight: 700;
-
-            text-transform: uppercase;
-
-            letter-spacing: 0.5px;
-
-            margin: 0 0 9px 2px;
         }
 
-        /* =========================
-           EARNINGS CARD
-        ========================= */
-
-        .earnings-card {
-            background: #1c293e;
-
-            border: 1px solid #30405a;
-
-            border-radius: 17px;
-
-            overflow: hidden;
-
-            margin-bottom: 17px;
+        .earnings-header span {
+            color: #94a3b8;
+            font-size: 12px;
         }
 
         .earnings-grid {
             display: grid;
+
             grid-template-columns: 1fr 1fr;
+
+            gap: 10px;
         }
 
         .earning-box {
-            padding: 20px 18px;
+            background: #050d26;
 
-            min-height: 125px;
-        }
+            border: 1px solid #202b4d;
 
-        .earning-box + .earning-box {
-            border-left: 1px solid #30405a;
+            border-radius: 13px;
+
+            padding: 16px;
         }
 
         .earning-label {
-            color: #7d8ba2;
+            color: #94a3b8;
 
             font-size: 12px;
-            font-weight: 700;
 
-            text-transform: uppercase;
+            margin-bottom: 7px;
+        }
 
+        .earning-value {
+            font-size: 19px;
+
+            font-weight: 800;
+        }
+
+        .earning-value.green {
+            color: #4ade80;
+        }
+
+        .earning-value.yellow {
+            color: #facc15;
+        }
+
+        .earning-status {
+            margin-top: 8px;
+
+            font-size: 11px;
+
+            color: #94a3b8;
+        }
+
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .card {
+            background: #0d1738;
+            border: 1px solid #202b4d;
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .stat-label {
+            display: block;
+            color: #94a3b8;
+            font-size: 13px;
             margin-bottom: 9px;
         }
 
-        .earning-amount {
-            font-size: 25px;
-            font-weight: 800;
-
-            margin-bottom: 13px;
-        }
-
-        .earning-amount.green {
-            color: #13a66f;
-        }
-
-        .earning-amount.white {
-            color: #f8fafc;
-        }
-
-        .pending-pill {
-            display: inline-block;
-
-            background: rgba(245, 158, 11, 0.12);
-
-            color: #f5c43d;
-
-            border-radius: 20px;
-
-            padding: 5px 9px;
-
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .withdraw-btn {
-            background: #10b981;
-
-            color: #ffffff;
-
-            border: none;
-
-            border-radius: 9px;
-
-            padding: 8px 14px;
-
-            font-family: inherit;
-
-            font-size: 12px;
-            font-weight: 700;
-
-            cursor: pointer;
-        }
-
-        .withdraw-btn:active {
-            transform: scale(0.98);
-        }
-
-        /* =========================
-           ACTION BUTTONS
-        ========================= */
-
-        .actions {
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 13px;
-
-            margin-bottom: 20px;
-        }
-
-        .action-btn {
-            min-height: 58px;
-
-            border: none;
-
-            border-radius: 15px;
-
-            font-family: inherit;
-
-            font-size: 15px;
-            font-weight: 700;
-
-            cursor: pointer;
-        }
-
-        .action-green {
-            background: #10b981;
-            color: #ffffff;
-        }
-
-        .action-dark {
-            background: #34445a;
-            color: #f4f7fb;
-        }
-
-        /* =========================
-           PROCESSING ACTIVITY
-        ========================= */
-
-        .activity-title {
-            display: flex;
-            align-items: center;
-
-            gap: 6px;
-
-            color: #74839b;
-
-            font-size: 12px;
-            font-weight: 700;
-
-            text-transform: uppercase;
-
-            margin-bottom: 7px;
-        }
-
-        .activity-card {
-            background: #1c293e;
-
-            border: 1px solid #30405a;
-
-            border-left: 4px solid #10b981;
-
-            border-radius: 17px;
-
-            overflow: hidden;
-
-            margin-bottom: 20px;
-        }
-
-        .activity-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-        }
-
-        .activity-item {
-            padding: 18px 17px;
-
-            min-height: 90px;
-        }
-
-        .activity-item:nth-child(2),
-        .activity-item:nth-child(4) {
-            border-left: 1px solid #30405a;
-        }
-
-        .activity-item:nth-child(3),
-        .activity-item:nth-child(4) {
-            border-top: 1px solid #30405a;
-        }
-
-        .activity-label {
-            color: #718098;
-
-            font-size: 11px;
-            font-weight: 700;
-
-            text-transform: uppercase;
-
-            margin-bottom: 8px;
-        }
-
-        .activity-value {
-            color: #f5f7fb;
-
-            font-size: 18px;
-            font-weight: 800;
-        }
-
-        .activity-value.green {
-            color: #10a66f;
-        }
-
-        /* =========================
-           EARNINGS SNAPSHOT
-        ========================= */
-
-        .snapshot {
-            background: #1c293e;
-
-            border: 1px solid #30405a;
-
-            border-radius: 17px;
-
-            padding: 19px;
-
-            margin-bottom: 20px;
-        }
-
-        .snapshot-head {
-            display: flex;
-
-            justify-content: space-between;
-            align-items: center;
-
-            margin-bottom: 19px;
-        }
-
-        .snapshot-title {
-            color: #7c8ba2;
-
-            font-size: 12px;
-            font-weight: 700;
-
-            text-transform: uppercase;
-        }
-
-        .snapshot-subtitle {
-            color: #a5afbd;
-
-            font-size: 12px;
-        }
-
-        .progress-row {
-            margin-bottom: 15px;
-        }
-
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-
-            margin-bottom: 7px;
-
-            font-size: 12px;
-        }
-
-        .progress-name {
-            color: #9ba8ba;
-        }
-
-        .progress-number {
-            color: #e8edf5;
+        .stat-value {
+            font-size: 20px;
             font-weight: 700;
         }
 
-        .progress-track {
-            height: 7px;
 
-            background: #111e32;
+        /* COLORS */
 
-            border-radius: 20px;
-
-            overflow: hidden;
+        .success {
+            color: #4ade80;
         }
 
-        .progress-fill {
-            height: 100%;
-
-            width: 65%;
-
-            background: #10b981;
-
-            border-radius: 20px;
+        .warning {
+            color: #facc15;
         }
 
-        .progress-fill.blue {
-            width: 42%;
-            background: #3b82f6;
-        }
 
-        /* =========================
-           REFERRAL
-        ========================= */
+        /* SECTIONS */
 
         .section {
-            background: #1c293e;
-
-            border: 1px solid #30405a;
-
-            border-radius: 17px;
-
-            padding: 19px;
-
-            margin-bottom: 17px;
+            background: #0d1738;
+            border: 1px solid #202b4d;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 16px;
         }
 
         .section h3 {
-            font-size: 15px;
-
-            margin-bottom: 13px;
-
+            font-size: 17px;
+            margin-bottom: 14px;
             font-weight: 700;
         }
 
+
+        /* REFERRAL */
+
         .referral-box {
-            background: #111e32;
-
-            border: 1px dashed #10b981;
-
-            border-radius: 11px;
-
-            padding: 12px;
+            background: #050d26;
+            border: 1px dashed #2563eb;
+            border-radius: 12px;
+            padding: 13px;
 
             display: flex;
             align-items: center;
@@ -611,304 +422,149 @@
         }
 
         .referral-code {
-            color: #4ade80;
-
+            color: #60a5fa;
             font-weight: 700;
-
             word-break: break-all;
-
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .copy-btn {
-            background: #10b981;
-
+            background: #2563eb;
             color: white;
-
             border: none;
-
-            border-radius: 8px;
-
-            padding: 8px 12px;
-
+            border-radius: 9px;
+            padding: 9px 13px;
             font-family: inherit;
-
-            font-size: 12px;
-            font-weight: 700;
-
+            font-weight: 600;
             cursor: pointer;
-
             flex-shrink: 0;
         }
 
         .share-btn {
             width: 100%;
+            margin-top: 12px;
+            padding: 13px;
 
-            margin-top: 11px;
+            background: #2563eb;
+            color: white;
 
-            padding: 12px;
-
-            background: #263851;
-
-            color: #ffffff;
-
-            border: 1px solid #3a4b65;
-
-            border-radius: 10px;
+            border: none;
+            border-radius: 12px;
 
             font-family: inherit;
-
-            font-weight: 700;
-
+            font-weight: 600;
             cursor: pointer;
         }
 
-        /* =========================
-           RECENT ACTIVITY
-        ========================= */
 
-        .recent-head {
-            display: flex;
-
-            justify-content: space-between;
-            align-items: center;
-
-            margin-bottom: 8px;
-        }
-
-        .recent-title {
-            color: #77859c;
-
-            font-size: 12px;
-            font-weight: 700;
-
-            text-transform: uppercase;
-        }
-
-        .view-link {
-            color: #b9c2cf;
-
-            font-size: 12px;
-            font-weight: 600;
-
-            text-decoration: none;
-        }
-
-        .recent-card {
-            background: #1c293e;
-
-            border: 1px solid #30405a;
-
-            border-radius: 17px;
-
-            overflow: hidden;
-
-            margin-bottom: 17px;
-        }
-
-        .recent-row {
-            display: grid;
-
-            grid-template-columns: 1.5fr 1fr 0.9fr;
-
-            align-items: center;
-
-            padding: 13px 14px;
-
-            border-bottom: 1px solid #30405a;
-        }
-
-        .recent-row:last-child {
-            border-bottom: none;
-        }
-
-        .recent-heading {
-            color: #8794a8;
-
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .reference {
-            color: #f3f6fa;
-
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .reference small {
-            display: block;
-
-            color: #8390a4;
-
-            font-size: 10px;
-            font-weight: 500;
-
-            margin-top: 3px;
-        }
-
-        .volume {
-            color: #f5f7fb;
-
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        .state {
-            color: #8491a4;
-
-            font-size: 11px;
-
-            text-align: right;
-        }
-
-        .state::before {
-            content: "";
-
-            width: 8px;
-            height: 8px;
-
-            display: inline-block;
-
-            border-radius: 50%;
-
-            background: #10b981;
-
-            margin-right: 5px;
-        }
-
-        /* =========================
-           QUICK LINKS
-        ========================= */
+        /* QUICK LINKS */
 
         .quick-links {
             display: grid;
-
             grid-template-columns: repeat(3, 1fr);
-
-            gap: 9px;
+            gap: 10px;
         }
 
         .quick-link {
             text-decoration: none;
-
             text-align: center;
 
-            background: #111e32;
+            background: #050d26;
+            border: 1px solid #202b4d;
 
-            border: 1px solid #30405a;
+            color: #f8fafc;
 
-            color: #e7edf6;
+            padding: 14px 5px;
+            border-radius: 12px;
 
-            padding: 13px 4px;
-
-            border-radius: 11px;
-
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
         }
 
         .quick-link:hover {
-            border-color: #10b981;
+            border-color: #2563eb;
+            color: #60a5fa;
         }
 
-        .quick-icon {
-            display: block;
 
-            font-size: 18px;
-
-            margin-bottom: 4px;
-        }
-
-        /* =========================
-           STATUS
-        ========================= */
+        /* STATUS */
 
         .loading {
-            color: #8d9aae;
-            font-size: 13px;
+            color: #94a3b8;
+            font-size: 14px;
         }
 
         .error {
             color: #f87171;
-
-            font-size: 13px;
-
+            font-size: 14px;
             margin-top: 10px;
         }
 
-        /* =========================
-           BOTTOM NAV
-        ========================= */
+
+        /* BOTTOM NAV */
 
         .bottom-nav {
-            background: #101d34;
-
-            border-top: 1px solid #293850;
+            background: #0d1738;
+            border-top: 1px solid #202b4d;
 
             position: fixed;
-
             bottom: 0;
             left: 0;
 
             width: 100%;
 
             display: grid;
-
             grid-template-columns: repeat(4, 1fr);
 
-            padding: 8px 5px;
+            padding: 10px 5px;
 
-            z-index: 300;
+            z-index: 100;
         }
 
         .bottom-nav a {
             text-decoration: none;
-
-            color: #8492a8;
+            color: #94a3b8;
 
             text-align: center;
 
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 600;
 
-            padding: 5px 2px;
+            padding: 6px 2px;
         }
 
         .bottom-nav a span {
             display: block;
-
             font-size: 19px;
-
             margin-bottom: 3px;
         }
 
         .bottom-nav a.active {
-            color: #10b981;
+            color: #60a5fa;
         }
 
-        /* =========================
-           MOBILE
-        ========================= */
+
+        /* MOBILE */
 
         @media (max-width: 380px) {
 
-            .earning-amount {
-                font-size: 21px;
+            .balance {
+                font-size: 28px;
             }
 
-            .container {
-                padding-left: 12px;
-                padding-right: 12px;
+            .card,
+            .section,
+            .balance-card,
+            .earnings-section {
+                padding: 17px;
             }
 
-            .recent-row {
-                padding: 12px 10px;
+            .quick-links {
+                grid-template-columns: 1fr;
             }
 
-            .reference,
-            .volume {
-                font-size: 12px;
+            .earning-value {
+                font-size: 17px;
             }
 
         }
@@ -920,9 +576,7 @@
 <body>
 
 
-<!-- =========================
-     SIDE MENU
-========================= -->
+<!-- SIDE MENU -->
 
 <div
     id="menuOverlay"
@@ -939,7 +593,7 @@
     <div class="menu-header">
 
         <div class="menu-title">
-            Chery<span>Earn</span>
+            CheryEarn
         </div>
 
         <button
@@ -966,7 +620,7 @@
         class="menu-item"
     >
         <span class="menu-icon">👥</span>
-        My Referrals
+        Referrals
     </a>
 
 
@@ -1018,9 +672,7 @@
 </div>
 
 
-<!-- =========================
-     HEADER
-========================= -->
+<!-- HEADER -->
 
 <header class="header">
 
@@ -1034,7 +686,7 @@
 
 
     <div class="logo">
-        Chery<span>Earn</span>
+        CheryEarn
     </div>
 
 
@@ -1051,9 +703,7 @@
 </header>
 
 
-<!-- =========================
-     MAIN
-========================= -->
+<!-- MAIN -->
 
 <main class="container">
 
@@ -1073,73 +723,20 @@
     </div>
 
 
-    <!-- EARNINGS -->
+    <!-- BALANCE -->
 
-    <div class="section-label">
-        Earnings Overview
-    </div>
+    <div class="balance-card">
 
-
-    <div class="earnings-card">
-
-        <div class="earnings-grid">
-
-
-            <div class="earning-box">
-
-                <div class="earning-label">
-                    Available
-                </div>
-
-                <div class="earning-amount green">
-                    KSh <span id="balance">0.00</span>
-                </div>
-
-                <button
-                    class="withdraw-btn"
-                    onclick="withdraw()"
-                >
-                    Withdraw
-                </button>
-
-            </div>
-
-
-            <div class="earning-box">
-
-                <div class="earning-label">
-                    Pending
-                </div>
-
-                <div class="earning-amount white">
-                    KSh <span id="pending">0.00</span>
-                </div>
-
-                <div class="pending-pill">
-                    ◷ Pending Earnings
-                </div>
-
-            </div>
-
+        <div class="balance-label">
+            Available Balance
         </div>
 
-    </div>
-
-
-    <!-- ACTIONS -->
-
-    <div class="actions">
+        <div class="balance">
+            KSh <span id="balance">0.00</span>
+        </div>
 
         <button
-            class="action-btn action-green"
-            onclick="shareReferral()"
-        >
-            Share & Earn
-        </button>
-
-
-        <button
-            class="action-btn action-dark"
+            class="primary-btn"
             onclick="withdraw()"
         >
             Withdraw
@@ -1148,71 +745,108 @@
     </div>
 
 
-    <!-- PROCESSING ACTIVITY -->
+    <!-- NEW EARNINGS SECTION -->
 
-    <div class="activity-title">
-        ⚙ Processing Activity
-    </div>
+    <div class="earnings-section">
+
+        <div class="earnings-header">
+
+            <h3>
+                Earnings
+            </h3>
+
+            <span>
+                Account Overview
+            </span>
+
+        </div>
 
 
-    <div class="activity-card">
-
-        <div class="activity-grid">
+        <div class="earnings-grid">
 
 
-            <div class="activity-item">
+            <div class="earning-box">
 
-                <div class="activity-label">
+                <div class="earning-label">
+                    Total Earnings
+                </div>
+
+                <div class="earning-value green">
+
+                    KSh
+                    <span id="earnings">
+                        0.00
+                    </span>
+
+                </div>
+
+                <div class="earning-status">
+                    Referral earnings
+                </div>
+
+            </div>
+
+
+            <div class="earning-box">
+
+                <div class="earning-label">
+                    Pending Earnings
+                </div>
+
+                <div class="earning-value yellow">
+
+                    KSh
+                    <span id="pending">
+                        0.00
+                    </span>
+
+                </div>
+
+                <div class="earning-status">
+                    Processing
+                </div>
+
+            </div>
+
+
+            <div class="earning-box">
+
+                <div class="earning-label">
                     Total Referrals
                 </div>
 
-                <div
-                    class="activity-value"
-                    id="referrals"
-                >
-                    0
+                <div class="earning-value">
+
+                    <span id="earningsReferrals">
+                        0
+                    </span>
+
+                </div>
+
+                <div class="earning-status">
+                    Referred members
                 </div>
 
             </div>
 
 
-            <div class="activity-item">
+            <div class="earning-box">
 
-                <div class="activity-label">
-                    Transactions Logged
+                <div class="earning-label">
+                    Completed
                 </div>
 
-                <div
-                    class="activity-value"
-                    id="transactions"
-                >
-                    0
+                <div class="earning-value green">
+
+                    KSh
+                    <span id="completed">
+                        0.00
+                    </span>
+
                 </div>
 
-            </div>
-
-
-            <div class="activity-item">
-
-                <div class="activity-label">
-                    Referral Earnings
-                </div>
-
-                <div class="activity-value green">
-                    KSh <span id="earnings">0.00</span>
-                </div>
-
-            </div>
-
-
-            <div class="activity-item">
-
-                <div class="activity-label">
-                    Aggregate Completed
-                </div>
-
-                <div class="activity-value green">
-                    KSh <span id="aggregate">0.00</span>
+                <div class="earning-status">
+                    Completed earnings
                 </div>
 
             </div>
@@ -1222,73 +856,37 @@
     </div>
 
 
-    <!-- EARNINGS SNAPSHOT -->
+    <!-- STATS -->
 
-    <div class="snapshot">
+    <div class="stats">
 
-        <div class="snapshot-head">
+        <div class="card">
 
-            <div class="snapshot-title">
-                Earnings Horizon
-            </div>
+            <span class="stat-label">
+                Total Earnings
+            </span>
 
-            <div class="snapshot-subtitle">
-                Performance Tracker
-            </div>
-
-        </div>
-
-
-        <div class="progress-row">
-
-            <div class="progress-info">
-
-                <span class="progress-name">
-                    Available Earnings
-                </span>
-
-                <span
-                    class="progress-number"
-                    id="availableProgress"
-                >
-                    KSh 0.00
-                </span>
-
-            </div>
-
-
-            <div class="progress-track">
-
-                <div class="progress-fill"></div>
-
-            </div>
+            <strong
+                class="stat-value success"
+            >
+                KSh <span id="earnings2">0.00</span>
+            </strong>
 
         </div>
 
 
-        <div class="progress-row">
+        <div class="card">
 
-            <div class="progress-info">
+            <span class="stat-label">
+                Total Referrals
+            </span>
 
-                <span class="progress-name">
-                    Referral Activity
-                </span>
-
-                <span
-                    class="progress-number"
-                    id="referralProgress"
-                >
-                    0 referrals
-                </span>
-
-            </div>
-
-
-            <div class="progress-track">
-
-                <div class="progress-fill blue"></div>
-
-            </div>
+            <strong
+                class="stat-value"
+                id="referrals"
+            >
+                0
+            </strong>
 
         </div>
 
@@ -1302,7 +900,6 @@
         <h3>
             Your Referral Code
         </h3>
-
 
         <div
             id="referralLoading"
@@ -1322,7 +919,6 @@
                 id="referralCode"
                 class="referral-code"
             ></span>
-
 
             <button
                 class="copy-btn"
@@ -1344,143 +940,37 @@
     </div>
 
 
-    <!-- RECENT ACTIVITY -->
-
-    <div class="recent-head">
-
-        <div class="recent-title">
-            Recent Activity Stream
-        </div>
-
-        <a
-            href="earnings.html"
-            class="view-link"
-        >
-            View All
-        </a>
-
-    </div>
-
-
-    <div class="recent-card">
-
-        <div class="recent-row">
-
-            <div class="recent-heading">
-                Activity
-            </div>
-
-            <div class="recent-heading">
-                Value
-            </div>
-
-            <div class="recent-heading">
-                State
-            </div>
-
-        </div>
-
-
-        <div class="recent-row">
-
-            <div class="reference">
-                Referral Earnings
-
-                <small>
-                    CheryEarn account
-                </small>
-            </div>
-
-            <div class="volume">
-                KSh <span id="recentEarnings">0.00</span>
-            </div>
-
-            <div class="state">
-                Active
-            </div>
-
-        </div>
-
-
-        <div class="recent-row">
-
-            <div class="reference">
-                Referrals
-
-                <small>
-                    Total members referred
-                </small>
-            </div>
-
-            <div class="volume">
-                <span id="recentReferrals">0</span>
-            </div>
-
-            <div class="state">
-                Active
-            </div>
-
-        </div>
-
-
-        <div class="recent-row">
-
-            <div class="reference">
-                Available Balance
-
-                <small>
-                    Current account balance
-                </small>
-            </div>
-
-            <div class="volume">
-                KSh <span id="recentBalance">0.00</span>
-            </div>
-
-            <div class="state">
-                Ready
-            </div>
-
-        </div>
-
-    </div>
-
-
     <!-- QUICK LINKS -->
 
     <div class="section">
 
         <h3>
-            Quick Access
+            Quick Links
         </h3>
 
-
         <div class="quick-links">
-
 
             <a
                 href="referrals.html"
                 class="quick-link"
             >
-                <span class="quick-icon">👥</span>
+                👥<br>
                 Referrals
             </a>
-
 
             <a
                 href="earnings.html"
                 class="quick-link"
             >
-                <span class="quick-icon">💰</span>
+                💰<br>
                 Earnings
             </a>
-
 
             <a
                 href="withdraw.html"
                 class="quick-link"
             >
-                <span class="quick-icon">💸</span>
+                💸<br>
                 Withdraw
             </a>
 
@@ -1494,16 +984,12 @@
         class="error"
     ></div>
 
-
 </main>
 
 
-<!-- =========================
-     BOTTOM NAV
-========================= -->
+<!-- BOTTOM NAV -->
 
 <nav class="bottom-nav">
-
 
     <a
         href="dashboard.html"
@@ -1513,24 +999,20 @@
         Home
     </a>
 
-
     <a href="invest.html">
         <span>📈</span>
         Invest
     </a>
-
 
     <a href="referrals.html">
         <span>👥</span>
         Referrals
     </a>
 
-
     <a href="profile.html">
         <span>👤</span>
         Profile
     </a>
-
 
 </nav>
 
@@ -1539,7 +1021,6 @@
 
     const API_URL =
         "https://cheryearn-backend.onrender.com";
-
 
     const token =
         localStorage.getItem("token");
@@ -1553,9 +1034,7 @@
     }
 
 
-    /* =========================
-       THREE DOT MENU
-    ========================= */
+    /* THREE DOT MENU */
 
     function openMenu() {
 
@@ -1583,9 +1062,7 @@
     }
 
 
-    /* =========================
-       LOAD DASHBOARD
-    ========================= */
+    /* LOAD DASHBOARD */
 
     async function loadDashboard() {
 
@@ -1608,7 +1085,6 @@
             if (response.status === 401) {
 
                 logout();
-
                 return;
 
             }
@@ -1639,7 +1115,6 @@
 
             if (user) {
 
-
                 /* NAME */
 
                 document.getElementById(
@@ -1657,25 +1132,13 @@
                 const balance =
                     Number(
                         user.balance || 0
-                    );
+                    ).toFixed(2);
 
 
                 document.getElementById(
                     "balance"
                 ).textContent =
-                    balance.toFixed(2);
-
-
-                document.getElementById(
-                    "recentBalance"
-                ).textContent =
-                    balance.toFixed(2);
-
-
-                document.getElementById(
-                    "availableProgress"
-                ).textContent =
-                    `KSh ${balance.toFixed(2)}`;
+                    balance;
 
 
                 /* EARNINGS */
@@ -1685,25 +1148,25 @@
                         user.totalEarnings ||
                         user.earnings ||
                         0
-                    );
+                    ).toFixed(2);
 
 
                 document.getElementById(
                     "earnings"
                 ).textContent =
-                    earnings.toFixed(2);
+                    earnings;
 
 
                 document.getElementById(
-                    "aggregate"
+                    "earnings2"
                 ).textContent =
-                    earnings.toFixed(2);
+                    earnings;
 
 
                 document.getElementById(
-                    "recentEarnings"
+                    "completed"
                 ).textContent =
-                    earnings.toFixed(2);
+                    earnings;
 
 
                 /* PENDING */
@@ -1713,23 +1176,21 @@
                         user.pendingEarnings ||
                         user.pending ||
                         0
-                    );
+                    ).toFixed(2);
 
 
                 document.getElementById(
                     "pending"
                 ).textContent =
-                    pending.toFixed(2);
+                    pending;
 
 
                 /* REFERRALS */
 
                 const referrals =
-                    Number(
-                        user.totalReferrals ||
-                        user.referrals ||
-                        0
-                    );
+                    user.totalReferrals ||
+                    user.referrals ||
+                    0;
 
 
                 document.getElementById(
@@ -1739,31 +1200,9 @@
 
 
                 document.getElementById(
-                    "recentReferrals"
+                    "earningsReferrals"
                 ).textContent =
                     referrals;
-
-
-                document.getElementById(
-                    "referralProgress"
-                ).textContent =
-                    `${referrals} referrals`;
-
-
-                /* TRANSACTIONS */
-
-                const transactions =
-                    Number(
-                        user.totalTransactions ||
-                        user.transactions ||
-                        0
-                    );
-
-
-                document.getElementById(
-                    "transactions"
-                ).textContent =
-                    transactions;
 
 
                 /* REFERRAL CODE */
@@ -1810,9 +1249,7 @@
     }
 
 
-    /* =========================
-       COPY REFERRAL
-    ========================= */
+    /* COPY REFERRAL */
 
     function copyReferral() {
 
@@ -1846,9 +1283,7 @@
     }
 
 
-    /* =========================
-       SHARE REFERRAL
-    ========================= */
+    /* SHARE REFERRAL */
 
     function shareReferral() {
 
@@ -1908,9 +1343,7 @@
     }
 
 
-    /* =========================
-       WITHDRAW
-    ========================= */
+    /* WITHDRAW */
 
     function withdraw() {
 
@@ -1920,9 +1353,7 @@
     }
 
 
-    /* =========================
-       LOGOUT
-    ========================= */
+    /* LOGOUT */
 
     function logout() {
 
@@ -1930,11 +1361,9 @@
             "token"
         );
 
-
         localStorage.removeItem(
             "user"
         );
-
 
         window.location.href =
             "login.html";
@@ -1942,9 +1371,7 @@
     }
 
 
-    /* =========================
-       START
-    ========================= */
+    /* START */
 
     loadDashboard();
 
