@@ -1,8 +1,11 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CheryEarn Dashboard</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>CheryEarn Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
     * {
@@ -300,35 +303,84 @@
         margin-bottom: 17px;
     }
 
-    .earnings-title {
+    /* REFERRALS */
+    .members-title {
         font-size: 16px;
         font-weight: 600;
         margin-bottom: 9px;
     }
 
-    .earnings-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+    .referrals-list {
+        display: flex;
+        flex-direction: column;
         gap: 9px;
+        margin-bottom: 17px;
     }
 
-    .earning-card {
+    .referral-member {
         background: var(--earning-bg);
         border: 1px solid var(--border);
         border-radius: 12px;
-        padding: 12px;
+        padding: 11px 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
     }
 
-    .earning-label {
+    .member-left {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .member-name {
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 2px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .member-number {
+        color: var(--muted);
+        font-size: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .member-right {
+        flex-shrink: 0;
+        text-align: right;
+    }
+
+    .member-level {
+        display: inline-block;
+        font-size: 9px;
+        font-weight: 600;
+        padding: 3px 7px;
+        border-radius: 7px;
+        background: rgba(40,100,232,.15);
+        color: var(--blue-light);
+        margin-bottom: 3px;
+    }
+
+    .member-status {
+        color: #42df83;
+        font-size: 9px;
+        font-weight: 500;
+    }
+
+    .no-referrals {
+        background: var(--earning-bg);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 13px;
         color: var(--muted);
         font-size: 11px;
-        margin-bottom: 4px;
-    }
-
-    .earning-value {
-        color: #42df83;
-        font-size: 16px;
-        font-weight: 600;
+        text-align: center;
+        margin-bottom: 17px;
     }
 
     .support-button {
@@ -506,17 +558,35 @@
             padding: 10px;
         }
 
-        .earnings-title {
+        .members-title {
             font-size: 15px;
         }
 
-        .earning-value {
-            font-size: 15px;
+        .member-name {
+            font-size: 12px;
+        }
+
+        .member-number {
+            font-size: 9px;
+        }
+
+        .member-level {
+            font-size: 8px;
+        }
+
+        .member-status {
+            font-size: 8px;
         }
     }
 </style>
 
-</head><body><div class="page"><header class="header">
+</head>
+
+<body>
+
+<div class="page">
+
+<header class="header">
 
     <div class="header-left">
 
@@ -525,11 +595,17 @@
             <button class="menu-dots" id="menuDots">⋮</button>
 
             <div class="dropdown" id="dropdownMenu">
+
                 <button onclick="goTo('dashboard.html')">Dashboard</button>
+
                 <button onclick="goTo('referrals.html')">Referrals</button>
+
                 <button onclick="goTo('earnings.html')">Earnings</button>
+
                 <button onclick="goTo('profile.html')">Profile</button>
+
                 <button onclick="logout()">Logout</button>
+
             </div>
 
         </div>
@@ -556,6 +632,7 @@
 
 </header>
 
+
 <main class="content">
 
     <h1 class="welcome-title" id="welcomeTitle">
@@ -565,6 +642,7 @@
     <p class="welcome-subtitle">
         Your CheryEarn account overview
     </p>
+
 
     <section class="balance-card">
 
@@ -584,6 +662,7 @@
 
     </section>
 
+
     <div class="stats">
 
         <div class="stat-card">
@@ -599,6 +678,7 @@
             </div>
 
         </div>
+
 
         <div class="stat-card">
 
@@ -616,6 +696,7 @@
 
     </div>
 
+
     <section class="referral-section">
 
         <div class="referral-title">
@@ -625,6 +706,7 @@
         <div class="referral-description">
             Share this link with people you want to invite:
         </div>
+
 
         <div class="referral-box">
 
@@ -642,44 +724,26 @@
 
         </div>
 
+
         <button
             class="share-btn"
             onclick="shareReferralLink()">
             Share Referral Link
         </button>
 
-        <div class="earnings-title">
-            Referral Earnings
+
+        <!-- ACTUAL REFERRALS -->
+
+        <div class="members-title">
+            Your Referrals
         </div>
 
-        <div class="earnings-grid">
+        <div
+            class="referrals-list"
+            id="referralsList">
 
-            <div class="earning-card">
-
-                <div class="earning-label">
-                    Direct Earnings
-                </div>
-
-                <div
-                    class="earning-value"
-                    id="directEarnings">
-                    KSh 0.00
-                </div>
-
-            </div>
-
-            <div class="earning-card">
-
-                <div class="earning-label">
-                    Indirect Earnings
-                </div>
-
-                <div
-                    class="earning-value"
-                    id="indirectEarnings">
-                    KSh 0.00
-                </div>
-
+            <div class="no-referrals">
+                Loading referrals...
             </div>
 
         </div>
@@ -688,49 +752,64 @@
 
 </main>
 
-</div><button
-class="support-button"
-onclick="openSupport()">
-☎
-</button>
+</div>
 
-<nav class="bottom-nav"><button
-    class="nav-btn active"
-    onclick="goTo('dashboard.html')">
-
-    <span class="nav-icon">⌂</span>
-    Home
-
-</button>
 
 <button
-    class="nav-btn"
-    onclick="goTo('invest.html')">
-
-    <span class="nav-icon">📈</span>
-    Invest
-
+    class="support-button"
+    onclick="openSupport()">
+    ☎
 </button>
 
-<button
-    class="nav-btn"
-    onclick="goTo('referrals.html')">
 
-    <span class="nav-icon">👥</span>
-    Referrals
+<nav class="bottom-nav">
 
-</button>
+    <button
+        class="nav-btn active"
+        onclick="goTo('dashboard.html')">
 
-<button
-    class="nav-btn"
-    onclick="goTo('profile.html')">
+        <span class="nav-icon">⌂</span>
+        Home
 
-    <span class="nav-icon">👤</span>
-    Profile
+    </button>
 
-</button>
 
-</nav><div class="toast" id="toast"></div><script>
+    <button
+        class="nav-btn"
+        onclick="goTo('invest.html')">
+
+        <span class="nav-icon">📈</span>
+        Invest
+
+    </button>
+
+
+    <button
+        class="nav-btn"
+        onclick="goTo('referrals.html')">
+
+        <span class="nav-icon">👥</span>
+        Referrals
+
+    </button>
+
+
+    <button
+        class="nav-btn"
+        onclick="goTo('profile.html')">
+
+        <span class="nav-icon">👤</span>
+        Profile
+
+    </button>
+
+</nav>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
 
 const API_URL = "https://cheryearn-backend.onrender.com";
 
@@ -775,6 +854,7 @@ function toggleTheme() {
         isLight ? "☾" : "☀";
 }
 
+
 applyTheme();
 
 
@@ -812,6 +892,7 @@ const menuDots =
 const dropdownMenu =
     document.getElementById("dropdownMenu");
 
+
 menuDots.addEventListener("click", function(event) {
 
     event.stopPropagation();
@@ -819,6 +900,7 @@ menuDots.addEventListener("click", function(event) {
     dropdownMenu.classList.toggle("show");
 
 });
+
 
 document.addEventListener("click", function(event) {
 
@@ -875,6 +957,7 @@ function copyReferralLink() {
         return;
     }
 
+
     navigator.clipboard.writeText(link)
         .then(function() {
 
@@ -908,6 +991,7 @@ function shareReferralLink() {
 
         return;
     }
+
 
     if (navigator.share) {
 
@@ -1009,6 +1093,7 @@ function getReferralLink(data) {
         data ||
         {};
 
+
     let number =
         user.cheryearn_number ??
         user.cheryearnNumber ??
@@ -1018,6 +1103,7 @@ function getReferralLink(data) {
         user.cheryearnId ??
         data?.cheryearnId ??
         "";
+
 
     let cheryearnId =
         String(number).trim();
@@ -1095,9 +1181,11 @@ async function loadReferralLink() {
     const token =
         localStorage.getItem("token");
 
+
     if (!referralElement) {
         return;
     }
+
 
     if (!token) {
 
@@ -1106,6 +1194,7 @@ async function loadReferralLink() {
 
         return;
     }
+
 
     try {
 
@@ -1172,6 +1261,147 @@ async function loadReferralLink() {
 
 
 /* =========================
+   DISPLAY REFERRALS
+========================= */
+
+function displayReferrals(data) {
+
+    const referralsList =
+        document.getElementById("referralsList");
+
+    if (!referralsList) {
+        return;
+    }
+
+
+    const direct =
+        Array.isArray(data?.directReferrals)
+            ? data.directReferrals
+            : [];
+
+
+    const indirect =
+        Array.isArray(data?.indirectReferrals)
+            ? data.indirectReferrals
+            : [];
+
+
+    const referrals = [
+        ...direct,
+        ...indirect
+    ];
+
+
+    referralsList.innerHTML = "";
+
+
+    if (referrals.length === 0) {
+
+        referralsList.innerHTML = `
+            <div class="no-referrals">
+                No referrals yet
+            </div>
+        `;
+
+        return;
+    }
+
+
+    referrals.forEach(function(member) {
+
+        const name =
+            member.fullName ||
+            member.full_name ||
+            member.name ||
+            member.username ||
+            "CheryEarn Member";
+
+
+        const number =
+            member.cheryearnNumber ||
+            member.cheryearn_number ||
+            member.cheryearnId ||
+            member.cheryearn_id ||
+            "";
+
+
+        const level =
+            member.level ||
+            "Direct";
+
+
+        const status =
+            member.paymentStatus ||
+            member.payment_status ||
+            "Pending";
+
+
+        const statusText =
+            String(status).toLowerCase() === "completed" ||
+            String(status).toLowerCase() === "success" ||
+            String(status).toLowerCase() === "paid"
+                ? "Paid"
+                : status;
+
+
+        const item =
+            document.createElement("div");
+
+        item.className =
+            "referral-member";
+
+
+        item.innerHTML = `
+
+            <div class="member-left">
+
+                <div class="member-name">
+                    ${escapeHtml(name)}
+                </div>
+
+                <div class="member-number">
+                    ${escapeHtml(number)}
+                </div>
+
+            </div>
+
+            <div class="member-right">
+
+                <div class="member-level">
+                    ${escapeHtml(level)}
+                </div>
+
+                <div class="member-status">
+                    ${escapeHtml(statusText)}
+                </div>
+
+            </div>
+
+        `;
+
+
+        referralsList.appendChild(item);
+
+    });
+}
+
+
+/* =========================
+   SAFE HTML
+========================= */
+
+function escapeHtml(value) {
+
+    return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =========================
    APPLY DASHBOARD DATA
 ========================= */
 
@@ -1232,30 +1462,6 @@ function applyDashboardData(data) {
         formatMoney(totalEarnings);
 
 
-    const directEarnings =
-        data.directEarnings ??
-        user.directEarnings ??
-        0;
-
-
-    document.getElementById(
-        "directEarnings"
-    ).textContent =
-        formatMoney(directEarnings);
-
-
-    const indirectEarnings =
-        data.indirectEarnings ??
-        user.indirectEarnings ??
-        0;
-
-
-    document.getElementById(
-        "indirectEarnings"
-    ).textContent =
-        formatMoney(indirectEarnings);
-
-
     const total =
         data.totalReferrals ??
         user.totalReferrals ??
@@ -1269,6 +1475,12 @@ function applyDashboardData(data) {
         "totalReferrals"
     ).textContent =
         total;
+
+
+    /*
+     * Display actual referred members.
+     */
+    displayReferrals(data);
 
 
     const referralLink =
@@ -1385,6 +1597,7 @@ async function loadDashboard() {
                 "cheryearnReferralLink"
             );
 
+
         if (savedReferral) {
 
             document.getElementById(
@@ -1457,10 +1670,6 @@ async function loadDashboard() {
         }
 
 
-        /*
-         * Get the logged-in user's real referral
-         * link directly from the backend.
-         */
         await loadReferralLink();
 
 
@@ -1480,5 +1689,7 @@ async function loadDashboard() {
 
 loadDashboard();
 
-</script></body>
+</script>
+
+</body>
 </html>
