@@ -1,1840 +1,1124 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CheryEarn Dashboard</title>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-:root{
-    --bg:#02091f;
-    --header:#0d1a40;
-    --card:#0d193d;
-    --card2:#101f48;
-    --border:#21335f;
-    --primary:#2864e8;
-    --primary-light:#61a0ff;
-    --text:#ffffff;
-    --muted:#9aa8c5;
-    --green:#42df83;
-    --danger:#ff6262;
-    --nav:#081431;
-    --input:#081633;
-}
-
-body.light-mode{
-    --bg:#f3f6fb;
-    --header:#ffffff;
-    --card:#ffffff;
-    --card2:#f7f9fd;
-    --border:#dce3ef;
-    --primary:#2864e8;
-    --primary-light:#2864e8;
-    --text:#172033;
-    --muted:#69758a;
-    --green:#16a85a;
-    --danger:#dc4444;
-    --nav:#ffffff;
-    --input:#f1f4f9;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:"Poppins",sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    min-height:100vh;
-    padding-bottom:78px;
-    transition:.25s;
-}
-
-button,
-input{
-    font-family:"Poppins",sans-serif;
-}
-
-a{
-    color:inherit;
-    text-decoration:none;
-}
-
-.app{
-    width:100%;
-    max-width:720px;
-    margin:auto;
-}
-
-/* HEADER */
-
-.header{
-    height:62px;
-    position:sticky;
-    top:0;
-    z-index:1000;
-
-    background:var(--header);
-    border-bottom:1px solid var(--border);
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:0 12px;
-}
-
-.brand{
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.brand-logo{
-    width:34px;
-    height:34px;
-    border-radius:9px;
-
-    background:var(--primary);
-    color:#fff;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:16px;
-    font-weight:700;
-}
-
-.brand-name{
-    font-size:17px;
-    font-weight:700;
-}
-
-.header-actions{
-    display:flex;
-    align-items:center;
-    gap:6px;
-}
-
-/* THEME */
-
-.theme-toggle,
-.menu-dots{
-    width:36px;
-    height:36px;
-
-    border:1px solid var(--border);
-    border-radius:9px;
-
-    background:var(--card2);
-    color:var(--text);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    cursor:pointer;
-}
-
-.theme-toggle{
-    font-size:17px;
-}
-
-.menu-dots{
-    font-size:21px;
-}
-
-.logout-btn{
-    height:36px;
-
-    padding:0 11px;
-
-    border:1px solid var(--border);
-    border-radius:9px;
-
-    background:var(--card2);
-    color:var(--text);
-
-    font-size:10px;
-    font-weight:600;
-
-    cursor:pointer;
-}
-
-/* THREE DOT MENU */
-
-.menu-wrapper{
-    position:relative;
-}
-
-.dropdown-menu{
-    position:absolute;
-    right:0;
-    top:43px;
-
-    width:175px;
-
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:12px;
-
-    padding:6px;
-
-    box-shadow:0 10px 30px rgba(0,0,0,.25);
-
-    display:none;
-    z-index:2000;
-}
-
-.dropdown-menu.show{
-    display:block;
-}
-
-.dropdown-menu a,
-.dropdown-menu button{
-    width:100%;
-
-    display:flex;
-    align-items:center;
-    gap:9px;
-
-    padding:9px 10px;
-
-    border:0;
-    border-radius:8px;
-
-    background:transparent;
-    color:var(--text);
-
-    font-size:11px;
-    text-align:left;
-
-    cursor:pointer;
-}
-
-.dropdown-menu a:hover,
-.dropdown-menu button:hover{
-    background:var(--card2);
-}
-
-/* MAIN */
-
-main{
-    padding:13px 12px 25px;
-}
-
-.welcome{
-    margin-bottom:11px;
-}
-
-.welcome small{
-    color:var(--muted);
-    font-size:9px;
-}
-
-.welcome h1{
-    font-size:19px;
-    font-weight:700;
-    line-height:1.2;
-}
-
-/* BALANCE */
-
-.balance-card{
-    background:linear-gradient(
-        135deg,
-        var(--primary),
-        #153ca5
-    );
-
-    border-radius:14px;
-
-    padding:13px 15px;
-
-    margin-bottom:9px;
-
-    color:#fff;
-
-    box-shadow:0 6px 18px rgba(0,0,0,.16);
-}
-
-.balance-label{
-    font-size:9px;
-    opacity:.82;
-}
-
-.balance-amount{
-    font-size:23px;
-    font-weight:700;
-    margin:2px 0 9px;
-}
-
-.balance-row{
-    display:flex;
-    justify-content:space-between;
-    gap:8px;
-}
-
-.balance-mini{
-    font-size:8px;
-    opacity:.85;
-}
-
-.balance-mini strong{
-    display:block;
-    font-size:10px;
-    margin-top:1px;
-}
-
-/* STATS */
-
-.stats{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
-
-    margin-bottom:9px;
-}
-
-.stat-card{
-    background:var(--card);
-    border:1px solid var(--border);
-
-    border-radius:11px;
-
-    padding:10px 11px;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.10);
-}
-
-.stat-title{
-    color:var(--muted);
-    font-size:8px;
-    margin-bottom:2px;
-}
-
-.stat-value{
-    font-size:16px;
-    font-weight:700;
-}
-
-.stat-value.green{
-    color:var(--green);
-}
-
-/* SECTIONS */
-
-.section{
-    background:var(--card);
-    border:1px solid var(--border);
-
-    border-radius:12px;
-
-    padding:11px;
-
-    margin-bottom:9px;
-
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
-}
-
-.section-title{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    margin-bottom:8px;
-}
-
-.section-title h2{
-    font-size:12px;
-    font-weight:700;
-}
-
-.section-count{
-    min-width:24px;
-    height:24px;
-
-    padding:0 6px;
-
-    background:rgba(40,100,232,.13);
-    color:var(--primary-light);
-
-    border-radius:7px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:9px;
-    font-weight:700;
-}
-
-/* REFERRAL LINK */
-
-.referral-label{
-    color:var(--muted);
-    font-size:8px;
-    margin-bottom:4px;
-}
-
-.referral-box{
-    display:flex;
-    gap:6px;
-}
-
-.referral-input{
-    flex:1;
-    min-width:0;
-
-    height:37px;
-
-    background:var(--input);
-    border:1px solid var(--border);
-    border-radius:8px;
-
-    color:var(--text);
-
-    padding:0 9px;
-
-    font-size:8px;
-    outline:none;
-}
-
-.copy-btn{
-    height:37px;
-
-    padding:0 12px;
-
-    border:0;
-    border-radius:8px;
-
-    background:var(--primary);
-    color:#fff;
-
-    font-size:9px;
-    font-weight:600;
-
-    cursor:pointer;
-}
-
-.share-btn{
-    width:100%;
-    height:35px;
-
-    margin-top:6px;
-
-    border:1px solid var(--border);
-    border-radius:8px;
-
-    background:var(--card2);
-    color:var(--text);
-
-    font-size:9px;
-    font-weight:600;
-
-    cursor:pointer;
-}
-
-/* REFERRALS */
-
-.referral-list{
-    display:flex;
-    flex-direction:column;
-    gap:6px;
-}
-
-.referral-member{
-    background:var(--card2);
-    border:1px solid var(--border);
-
-    border-radius:9px;
-
-    padding:8px;
-}
-
-.member-top{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-start;
-
-    gap:7px;
-
-    margin-bottom:6px;
-}
-
-.member-name{
-    font-size:10px;
-    font-weight:600;
-}
-
-.member-id{
-    display:block;
-
-    color:var(--muted);
-    font-size:7px;
-
-    margin-top:1px;
-}
-
-.status{
-    flex-shrink:0;
-
-    padding:3px 6px;
-
-    border-radius:6px;
-
-    font-size:7px;
-    font-weight:600;
-}
-
-.status-paid{
-    background:rgba(66,223,131,.13);
-    color:var(--green);
-}
-
-.status-pending{
-    background:rgba(255,184,77,.13);
-    color:#ffb84d;
-}
-
-.status-unpaid{
-    background:rgba(255,98,98,.13);
-    color:var(--danger);
-}
-
-.member-details{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:5px;
-}
-
-.detail-box{
-    background:rgba(128,150,190,.06);
-
-    border-radius:6px;
-
-    padding:5px 6px;
-}
-
-.detail-label{
-    display:block;
-
-    color:var(--muted);
-    font-size:7px;
-
-    margin-bottom:1px;
-}
-
-.detail-value{
-    display:block;
-
-    color:var(--text);
-    font-size:8px;
-    font-weight:600;
-}
-
-.empty-referrals{
-    text-align:center;
-
-    color:var(--muted);
-
-    font-size:9px;
-
-    padding:15px 5px;
-}
-
-/* ACTIONS */
-
-.action-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:6px;
-}
-
-.action-btn{
-    min-height:38px;
-
-    border:1px solid var(--border);
-    border-radius:8px;
-
-    background:var(--card2);
-    color:var(--text);
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    gap:5px;
-
-    font-size:9px;
-    font-weight:600;
-
-    cursor:pointer;
-}
-
-.action-btn.primary{
-    background:var(--primary);
-    border-color:var(--primary);
-    color:#fff;
-}
-
-/* BOTTOM NAV */
-
-.bottom-nav{
-    position:fixed;
-    left:50%;
-    bottom:0;
-
-    transform:translateX(-50%);
-
-    width:100%;
-    max-width:720px;
-
-    height:62px;
-
-    background:var(--nav);
-    border-top:1px solid var(--border);
-
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-
-    z-index:900;
-}
-
-.nav-item{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-
-    gap:2px;
-
-    color:var(--muted);
-
-    font-size:8px;
-}
-
-.nav-icon{
-    font-size:16px;
-}
-
-.nav-item.active{
-    color:var(--primary-light);
-}
-
-/* TOAST */
-
-.toast{
-    position:fixed;
-
-    left:50%;
-    bottom:72px;
-
-    transform:translate(-50%,20px);
-
-    background:#111827;
-    color:#fff;
-
-    padding:8px 12px;
-
-    border-radius:7px;
-
-    font-size:9px;
-
-    opacity:0;
-    pointer-events:none;
-
-    transition:.25s;
-
-    z-index:3000;
-}
-
-.toast.show{
-    opacity:1;
-    transform:translate(-50%,0);
-}
-
-@media(max-width:380px){
-
-    .brand-name{
-        font-size:15px;
-    }
-
-    .logout-btn{
-        padding:0 8px;
-    }
-
-    .balance-amount{
-        font-size:21px;
-    }
-
-    .section{
-        padding:10px;
-    }
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheryEarn Dashboard</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: "Poppins", sans-serif;
+            background: #02091f;
+            color: #ffffff;
+            min-height: 100vh;
+            padding-bottom: 75px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 720px;
+            margin: auto;
+            padding: 12px;
+        }
+
+        /* HEADER */
+        .header {
+            background: #0d1a40;
+            border: 1px solid #21335f;
+            border-radius: 14px;
+            padding: 10px 12px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 9px;
+        }
+
+        .brand-logo {
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            background: #2864e8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        .brand-name {
+            font-size: 17px;
+            font-weight: 700;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .header-btn {
+            border: 1px solid #21335f;
+            background: #101f49;
+            color: #ffffff;
+            border-radius: 9px;
+            padding: 7px 9px;
+            font-family: inherit;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .menu-dots {
+            width: 34px;
+            height: 34px;
+            border-radius: 9px;
+            border: 1px solid #21335f;
+            background: #101f49;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        /* DROPDOWN */
+        .menu-wrapper {
+            position: relative;
+        }
+
+        .dropdown {
+            position: absolute;
+            right: 0;
+            top: 42px;
+            width: 175px;
+            background: #0d193d;
+            border: 1px solid #21335f;
+            border-radius: 12px;
+            padding: 7px;
+            display: none;
+            z-index: 1000;
+            box-shadow: 0 10px 30px rgba(0,0,0,.35);
+        }
+
+        .dropdown.show {
+            display: block;
+        }
+
+        .dropdown button {
+            width: 100%;
+            border: 0;
+            background: transparent;
+            color: #ffffff;
+            padding: 10px;
+            text-align: left;
+            border-radius: 8px;
+            font-family: inherit;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .dropdown button:hover {
+            background: #16285a;
+        }
+
+        /* BALANCE */
+        .balance-card {
+            background: #0d193d;
+            border: 1px solid #21335f;
+            border-radius: 13px;
+            padding: 11px 14px;
+            margin-bottom: 8px;
+        }
+
+        .balance-label {
+            color: #9aa8c5;
+            font-size: 11px;
+            margin-bottom: 2px;
+        }
+
+        .balance-amount {
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+
+        .balance-actions {
+            display: flex;
+            gap: 7px;
+            margin-top: 8px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            flex: 1;
+            border-radius: 8px;
+            padding: 7px 8px;
+            font-family: inherit;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .primary-btn {
+            background: #2864e8;
+            border: 1px solid #2864e8;
+            color: white;
+        }
+
+        .secondary-btn {
+            background: transparent;
+            border: 1px solid #2864e8;
+            color: #61a0ff;
+        }
+
+        /* STATS */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 7px;
+            margin-bottom: 9px;
+        }
+
+        .stat-card {
+            background: #0d193d;
+            border: 1px solid #21335f;
+            border-radius: 11px;
+            padding: 9px 7px;
+            min-width: 0;
+        }
+
+        .stat-title {
+            color: #9aa8c5;
+            font-size: 9px;
+            margin-bottom: 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .stat-value {
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .green {
+            color: #42df83;
+        }
+
+        /* SECTION */
+        .section {
+            background: #0d193d;
+            border: 1px solid #21335f;
+            border-radius: 13px;
+            padding: 12px;
+            margin-bottom: 9px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 9px;
+        }
+
+        /* REFERRAL LINK */
+        .referral-link-box {
+            display: flex;
+            gap: 7px;
+            margin-bottom: 9px;
+        }
+
+        .referral-link {
+            flex: 1;
+            min-width: 0;
+            background: #07122f;
+            border: 1px solid #21335f;
+            color: #9fb5df;
+            border-radius: 8px;
+            padding: 8px;
+            font-size: 10px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .copy-btn {
+            background: #2864e8;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0 11px;
+            font-family: inherit;
+            font-size: 10px;
+            cursor: pointer;
+        }
+
+        /* REFERRAL TYPE */
+        .referral-type {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .referral-type-left {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .referral-count {
+            font-size: 12px;
+            color: #61a0ff;
+        }
+
+        /* REFERRAL LIST */
+        .referral-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .referral-card {
+            background: #07122f;
+            border: 1px solid #21335f;
+            border-radius: 9px;
+            padding: 8px;
+        }
+
+        .referral-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+
+        .member-name {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .member-id {
+            color: #8999b9;
+            font-size: 9px;
+            margin-top: 1px;
+        }
+
+        .status {
+            font-size: 9px;
+            padding: 3px 6px;
+            border-radius: 6px;
+            background: rgba(66,223,131,.12);
+            color: #42df83;
+            white-space: nowrap;
+            height: fit-content;
+        }
+
+        .referral-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 5px;
+            margin-top: 6px;
+        }
+
+        .detail-item {
+            color: #8f9db9;
+            font-size: 8px;
+        }
+
+        .detail-value {
+            display: block;
+            color: #ffffff;
+            font-size: 9px;
+            margin-top: 1px;
+        }
+
+        .empty {
+            color: #8999b9;
+            font-size: 10px;
+            text-align: center;
+            padding: 12px 5px;
+        }
+
+        /* QUICK ACTIONS */
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 7px;
+        }
+
+        .quick-btn {
+            background: #07122f;
+            border: 1px solid #21335f;
+            color: #ffffff;
+            border-radius: 9px;
+            padding: 9px 4px;
+            font-family: inherit;
+            font-size: 9px;
+            cursor: pointer;
+        }
+
+        .quick-icon {
+            display: block;
+            font-size: 16px;
+            margin-bottom: 3px;
+        }
+
+        /* BOTTOM NAV */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 720px;
+            background: #0d1a40;
+            border-top: 1px solid #21335f;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            padding: 7px 6px;
+            z-index: 500;
+        }
+
+        .nav-btn {
+            border: 0;
+            background: transparent;
+            color: #8796b5;
+            font-family: inherit;
+            font-size: 9px;
+            cursor: pointer;
+            padding: 3px;
+        }
+
+        .nav-btn.active {
+            color: #61a0ff;
+        }
+
+        .nav-icon {
+            display: block;
+            font-size: 17px;
+            margin-bottom: 1px;
+        }
+
+        /* TOAST */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: 78px;
+            transform: translateX(-50%);
+            background: #16285a;
+            color: white;
+            padding: 8px 13px;
+            border-radius: 8px;
+            font-size: 10px;
+            display: none;
+            z-index: 2000;
+        }
+
+        .toast.show {
+            display: block;
+        }
+
+        /* LIGHT MODE */
+        body.light-mode {
+            background: #f4f7fc;
+            color: #17213b;
+        }
+
+        body.light-mode .header,
+        body.light-mode .balance-card,
+        body.light-mode .stat-card,
+        body.light-mode .section,
+        body.light-mode .bottom-nav,
+        body.light-mode .dropdown {
+            background: #ffffff;
+            border-color: #dbe3f2;
+        }
+
+        body.light-mode .header-btn,
+        body.light-mode .menu-dots {
+            background: #f4f7fc;
+            color: #17213b;
+            border-color: #dbe3f2;
+        }
+
+        body.light-mode .dropdown button {
+            color: #17213b;
+        }
+
+        body.light-mode .dropdown button:hover {
+            background: #eef3fb;
+        }
+
+        body.light-mode .referral-link,
+        body.light-mode .referral-card,
+        body.light-mode .quick-btn {
+            background: #f7f9fd;
+            border-color: #dbe3f2;
+        }
+
+        body.light-mode .detail-value,
+        body.light-mode .member-name {
+            color: #17213b;
+        }
+
+        body.light-mode .bottom-nav {
+            border-top-color: #dbe3f2;
+        }
+
+        /* MOBILE */
+        @media (max-width: 480px) {
+            .container {
+                padding: 9px;
+            }
+
+            .header {
+                padding: 9px 10px;
+            }
+
+            .brand-name {
+                font-size: 15px;
+            }
+
+            .header-btn {
+                font-size: 10px;
+                padding: 6px 7px;
+            }
+
+            .balance-card {
+                padding: 10px 12px;
+            }
+
+            .balance-amount {
+                font-size: 21px;
+            }
+
+            .stat-card {
+                padding: 8px 6px;
+            }
+
+            .stat-value {
+                font-size: 13px;
+            }
+
+            .section {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<div class="app">
+<div class="container">
 
-<header class="header">
-
-    <div class="brand">
-        <div class="brand-logo">C</div>
-        <div class="brand-name">CheryEarn</div>
-    </div>
-
-    <div class="header-actions">
-
-        <!-- LIGHT / DARK MODE -->
-        <button
-            class="theme-toggle"
-            id="themeToggle"
-            type="button"
-        >🌙</button>
-
-        <!-- LOGOUT -->
-        <button
-            class="logout-btn"
-            id="logoutBtn"
-            type="button"
-        >
-            Logout
-        </button>
-
-        <!-- THREE DOTS -->
-        <div class="menu-wrapper">
-
-            <button
-                class="menu-dots"
-                id="menuDots"
-                type="button"
-            >
-                ⋮
-            </button>
-
-            <div
-                class="dropdown-menu"
-                id="dropdownMenu"
-            >
-
-                <a href="dashboard.html">
-                    🏠 Dashboard
-                </a>
-
-                <a href="referrals.html">
-                    👥 Referrals
-                </a>
-
-                <a href="earnings.html">
-                    💰 Earnings
-                </a>
-
-                <a href="profile.html">
-                    👤 Profile
-                </a>
-
-                <button
-                    type="button"
-                    id="menuLogout"
-                >
-                    🚪 Logout
-                </button>
-
-            </div>
-
+    <!-- HEADER -->
+    <header class="header">
+        <div class="brand">
+            <div class="brand-logo">C</div>
+            <div class="brand-name">CheryEarn</div>
         </div>
 
-    </div>
+        <div class="header-actions">
+            <button class="header-btn" id="themeToggle">☀️</button>
+            <button class="header-btn" onclick="logout()">Logout</button>
 
-</header>
+            <div class="menu-wrapper">
+                <button class="menu-dots" id="menuDots">⋮</button>
 
+                <div class="dropdown" id="dropdownMenu">
+                    <button onclick="goTo('dashboard.html')">Dashboard</button>
+                    <button onclick="goTo('referrals.html')">Referrals</button>
+                    <button onclick="goTo('earnings.html')">Earnings</button>
+                    <button onclick="goTo('profile.html')">Profile</button>
+                    <button onclick="logout()">Logout</button>
+                </div>
+            </div>
+        </div>
+    </header>
 
-<main>
-
-    <!-- WELCOME -->
-
-    <section class="welcome">
-
-        <small>Welcome back</small>
-
-        <h1 id="welcomeName">
-            Member
-        </h1>
-
-    </section>
-
-
-    <!-- BALANCE -->
-
+    <!-- AVAILABLE BALANCE -->
     <section class="balance-card">
+        <div class="balance-label">Available Balance</div>
+        <div class="balance-amount" id="availableBalance">KSh 0.00</div>
 
-        <div class="balance-label">
-            Available Balance
+        <div class="balance-actions">
+            <button class="primary-btn" onclick="goTo('deposit.html')">Deposit</button>
+            <button class="secondary-btn" onclick="goTo('withdraw.html')">Withdraw</button>
         </div>
-
-        <div
-            class="balance-amount"
-            id="balanceAmount"
-        >
-            KSh 0.00
-        </div>
-
-        <div class="balance-row">
-
-            <div class="balance-mini">
-                Total earnings
-                <strong id="totalEarnings">
-                    KSh 0.00
-                </strong>
-            </div>
-
-            <div class="balance-mini">
-                Referral earnings
-                <strong id="referralEarnings">
-                    KSh 0.00
-                </strong>
-            </div>
-
-        </div>
-
     </section>
-
 
     <!-- STATS -->
-
-    <section class="stats">
-
-        <div class="stat-card">
-
-            <div class="stat-title">
-                Total Referrals
-            </div>
-
-            <div
-                class="stat-value"
-                id="totalReferrals"
-            >
-                0
-            </div>
-
-        </div>
-
+    <div class="stats">
 
         <div class="stat-card">
-
-            <div class="stat-title">
-                Referral Earnings
-            </div>
-
-            <div
-                class="stat-value green"
-                id="referralEarningsStat"
-            >
-                KSh 0
-            </div>
-
+            <div class="stat-title">Total Earnings</div>
+            <div class="stat-value green" id="totalEarnings">KSh 0.00</div>
         </div>
 
-    </section>
+        <div class="stat-card">
+            <div class="stat-title">Referral Earnings</div>
+            <div class="stat-value green" id="referralEarnings">KSh 0.00</div>
+        </div>
 
+        <div class="stat-card">
+            <div class="stat-title">Total Referrals</div>
+            <div class="stat-value" id="totalReferrals">0</div>
+        </div>
 
-    <!-- REFERRAL LINK -->
+    </div>
 
+    <!-- REFERRALS -->
     <section class="section">
 
-        <div class="section-title">
-            <h2>Your Referral Link</h2>
-        </div>
+        <div class="section-title">My Referrals</div>
 
-        <div class="referral-label">
-            Share this link to invite new members
-        </div>
+        <div class="referral-link-box">
+            <div class="referral-link" id="referralLink">
+                Loading referral link...
+            </div>
 
-        <div class="referral-box">
-
-            <input
-                type="text"
-                id="referralLink"
-                class="referral-input"
-                readonly
-            >
-
-            <button
-                class="copy-btn"
-                id="copyReferral"
-                type="button"
-            >
+            <button class="copy-btn" onclick="copyReferralLink()">
                 Copy
             </button>
-
         </div>
 
-        <button
-            class="share-btn"
-            id="shareReferral"
-            type="button"
-        >
-            📤 Share Referral Link
-        </button>
-
-    </section>
-
-
-    <!-- DIRECT REFERRALS -->
-
-    <section class="section">
-
-        <div class="section-title">
-
-            <h2>
-                Direct Referrals
-            </h2>
-
-            <span
-                class="section-count"
-                id="directReferrals"
-            >
-                0
-            </span>
-
-        </div>
-
-        <div
-            class="referral-list"
-            id="directReferralsList"
-        >
-            <div class="empty-referrals">
-                No direct referrals yet.
+        <!-- DIRECT -->
+        <div class="referral-type">
+            <div class="referral-type-left">
+                <strong style="font-size:12px;">Direct Referrals</strong>
+                <span class="referral-count" id="directReferrals">0</span>
             </div>
         </div>
 
-    </section>
-
-
-    <!-- INDIRECT REFERRALS -->
-
-    <section class="section">
-
-        <div class="section-title">
-
-            <h2>
-                Indirect Referrals
-            </h2>
-
-            <span
-                class="section-count"
-                id="indirectReferrals"
-            >
-                0
-            </span>
-
+        <div class="referral-list" id="directReferralsList">
+            <div class="empty">No direct referrals yet.</div>
         </div>
 
-        <div
-            class="referral-list"
-            id="indirectReferralsList"
-        >
-            <div class="empty-referrals">
-                No indirect referrals yet.
+        <!-- INDIRECT -->
+        <div class="referral-type" style="margin-top:12px;">
+            <div class="referral-type-left">
+                <strong style="font-size:12px;">Indirect Referrals</strong>
+                <span class="referral-count" id="indirectReferrals">0</span>
             </div>
         </div>
 
+        <div class="referral-list" id="indirectReferralsList">
+            <div class="empty">No indirect referrals yet.</div>
+        </div>
+
     </section>
 
-
-    <!-- ACTIONS -->
-
+    <!-- QUICK ACTIONS -->
     <section class="section">
 
-        <div class="section-title">
-            <h2>Quick Actions</h2>
-        </div>
+        <div class="section-title">Quick Actions</div>
 
-        <div class="action-grid">
+        <div class="quick-grid">
 
-            <button
-                class="action-btn primary"
-                onclick="location.href='deposit.html'"
-            >
-                💳 Deposit
+            <button class="quick-btn" onclick="goTo('deposit.html')">
+                <span class="quick-icon">💰</span>
+                Deposit
             </button>
 
-            <button
-                class="action-btn"
-                onclick="location.href='withdraw.html'"
-            >
-                💸 Withdraw
+            <button class="quick-btn" onclick="goTo('withdraw.html')">
+                <span class="quick-icon">💸</span>
+                Withdraw
             </button>
 
-            <button
-                class="action-btn"
-                onclick="location.href='referrals.html'"
-            >
-                👥 Referrals
+            <button class="quick-btn" onclick="goTo('referrals.html')">
+                <span class="quick-icon">👥</span>
+                Referrals
             </button>
 
-            <button
-                class="action-btn"
-                onclick="location.href='profile.html'"
-            >
-                👤 Profile
+            <button class="quick-btn" onclick="goTo('profile.html')">
+                <span class="quick-icon">👤</span>
+                Profile
             </button>
 
         </div>
 
     </section>
-
-</main>
 
 </div>
 
-
 <!-- BOTTOM NAV -->
-
 <nav class="bottom-nav">
 
-    <a
-        href="dashboard.html"
-        class="nav-item active"
-    >
-        <span class="nav-icon">🏠</span>
-        <span>Home</span>
-    </a>
+    <button class="nav-btn active" onclick="goTo('dashboard.html')">
+        <span class="nav-icon">⌂</span>
+        Home
+    </button>
 
-    <a
-        href="referrals.html"
-        class="nav-item"
-    >
+    <button class="nav-btn" onclick="goTo('referrals.html')">
         <span class="nav-icon">👥</span>
-        <span>Referrals</span>
-    </a>
+        Referrals
+    </button>
 
-    <a
-        href="earnings.html"
-        class="nav-item"
-    >
+    <button class="nav-btn" onclick="goTo('earnings.html')">
         <span class="nav-icon">💰</span>
-        <span>Earnings</span>
-    </a>
+        Earnings
+    </button>
 
-    <a
-        href="profile.html"
-        class="nav-item"
-    >
+    <button class="nav-btn" onclick="goTo('profile.html')">
         <span class="nav-icon">👤</span>
-        <span>Profile</span>
-    </a>
+        Profile
+    </button>
 
 </nav>
 
-
-<div
-    class="toast"
-    id="toast"
->
-    Copied successfully
-</div>
-
+<div class="toast" id="toast"></div>
 
 <script>
+    /* =========================
+       NAVIGATION
+    ========================= */
 
-/* =========================
-   THEME
-========================= */
-
-const themeToggle =
-    document.getElementById("themeToggle");
-
-function applyTheme(theme){
-
-    if(theme === "light"){
-
-        document.body.classList.add(
-            "light-mode"
-        );
-
-        themeToggle.textContent = "☀️";
-
-    }else{
-
-        document.body.classList.remove(
-            "light-mode"
-        );
-
-        themeToggle.textContent = "🌙";
+    function goTo(page) {
+        window.location.href = page;
     }
 
-    localStorage.setItem(
-        "cheryearn_theme",
-        theme
-    );
-}
 
+    /* =========================
+       LOGOUT
+    ========================= */
 
-const savedTheme =
-    localStorage.getItem(
-        "cheryearn_theme"
-    ) || "dark";
+    function logout() {
+        localStorage.removeItem("token");
+        localStorage.removeItem("authToken");
+        localStorage.removeItem("user");
+        localStorage.removeItem("dashboardData");
 
-applyTheme(savedTheme);
-
-
-themeToggle.addEventListener(
-    "click",
-    function(){
-
-        const light =
-            document.body.classList.contains(
-                "light-mode"
-            );
-
-        applyTheme(
-            light ? "dark" : "light"
-        );
-
+        window.location.href = "login.html";
     }
-);
 
 
-/* =========================
-   THREE DOT MENU
-========================= */
+    /* =========================
+       THREE DOT MENU
+    ========================= */
 
-const menuDots =
-    document.getElementById(
-        "menuDots"
-    );
+    const menuDots = document.getElementById("menuDots");
+    const dropdownMenu = document.getElementById("dropdownMenu");
 
-const dropdownMenu =
-    document.getElementById(
-        "dropdownMenu"
-    );
-
-menuDots.addEventListener(
-    "click",
-    function(event){
-
+    menuDots.addEventListener("click", function(event) {
         event.stopPropagation();
+        dropdownMenu.classList.toggle("show");
+    });
 
-        dropdownMenu.classList.toggle(
-            "show"
-        );
-
-    }
-);
-
-document.addEventListener(
-    "click",
-    function(event){
-
-        if(
-            !event.target.closest(
-                ".menu-wrapper"
-            )
-        ){
-
-            dropdownMenu.classList.remove(
-                "show"
-            );
-
+    document.addEventListener("click", function(event) {
+        if (!dropdownMenu.contains(event.target) &&
+            !menuDots.contains(event.target)) {
+            dropdownMenu.classList.remove("show");
         }
+    });
 
+
+    /* =========================
+       LIGHT / DARK MODE
+    ========================= */
+
+    const themeToggle = document.getElementById("themeToggle");
+
+    function applyTheme() {
+        const savedTheme = localStorage.getItem("cheryearn_theme");
+
+        if (savedTheme === "light") {
+            document.body.classList.add("light-mode");
+            themeToggle.textContent = "🌙";
+        } else {
+            document.body.classList.remove("light-mode");
+            themeToggle.textContent = "☀️";
+        }
     }
-);
+
+    themeToggle.addEventListener("click", function() {
+
+        document.body.classList.toggle("light-mode");
+
+        if (document.body.classList.contains("light-mode")) {
+            localStorage.setItem("cheryearn_theme", "light");
+            themeToggle.textContent = "🌙";
+        } else {
+            localStorage.setItem("cheryearn_theme", "dark");
+            themeToggle.textContent = "☀️";
+        }
+    });
+
+    applyTheme();
 
 
-/* =========================
-   TOAST
-========================= */
+    /* =========================
+       TOAST
+    ========================= */
 
-function showToast(message){
+    function showToast(message) {
+        const toast = document.getElementById("toast");
 
-    const toast =
-        document.getElementById(
-            "toast"
-        );
+        toast.textContent = message;
+        toast.classList.add("show");
 
-    toast.textContent = message;
-
-    toast.classList.add("show");
-
-    setTimeout(
-        function(){
-
-            toast.classList.remove(
-                "show"
-            );
-
-        },
-        2000
-    );
-}
+        setTimeout(() => {
+            toast.classList.remove("show");
+        }, 1800);
+    }
 
 
-/* =========================
-   LOGOUT
-========================= */
+    /* =========================
+       COPY REFERRAL LINK
+    ========================= */
 
-function logout(){
+    function copyReferralLink() {
 
-    localStorage.removeItem("token");
-    localStorage.removeItem("authToken");
-    localStorage.removeItem("user");
+        const text = document.getElementById("referralLink").textContent.trim();
 
-    window.location.href =
-        "login.html";
-}
-
-document.getElementById(
-    "logoutBtn"
-).addEventListener(
-    "click",
-    logout
-);
-
-document.getElementById(
-    "menuLogout"
-).addEventListener(
-    "click",
-    logout
-);
-
-
-/* =========================
-   COPY
-========================= */
-
-document.getElementById(
-    "copyReferral"
-).addEventListener(
-    "click",
-    async function(){
-
-        const input =
-            document.getElementById(
-                "referralLink"
-            );
-
-        if(!input.value){
-
-            showToast(
-                "Referral link not available"
-            );
-
+        if (!text || text === "Loading referral link...") {
+            showToast("Referral link not available");
             return;
         }
 
-        try{
+        navigator.clipboard.writeText(text)
+            .then(() => {
+                showToast("Referral link copied");
+            })
+            .catch(() => {
+                showToast("Unable to copy link");
+            });
+    }
 
-            await navigator.clipboard.writeText(
-                input.value
-            );
 
-            showToast(
-                "Referral link copied"
-            );
+    /* =========================
+       FORMAT MONEY
+    ========================= */
 
-        }catch(error){
+    function formatMoney(value) {
 
-            input.select();
+        const amount = Number(value || 0);
 
-            document.execCommand(
-                "copy"
-            );
+        return "KSh " + amount.toLocaleString("en-KE", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        });
+    }
 
-            showToast(
-                "Referral link copied"
-            );
+
+    /* =========================
+       FORMAT DATE
+    ========================= */
+
+    function formatDate(value) {
+
+        if (!value) {
+            return "—";
         }
 
-    }
-);
+        const date = new Date(value);
 
-
-/* =========================
-   SHARE
-========================= */
-
-document.getElementById(
-    "shareReferral"
-).addEventListener(
-    "click",
-    async function(){
-
-        const link =
-            document.getElementById(
-                "referralLink"
-            ).value;
-
-        if(!link){
-
-            showToast(
-                "Referral link not available"
-            );
-
-            return;
+        if (isNaN(date.getTime())) {
+            return value;
         }
 
-        if(navigator.share){
-
-            try{
-
-                await navigator.share({
-                    title:"Join CheryEarn",
-                    text:"Join me on CheryEarn.",
-                    url:link
-                });
-
-            }catch(error){}
-
-        }else{
-
-            await navigator.clipboard.writeText(
-                link
-            );
-
-            showToast(
-                "Referral link copied"
-            );
-        }
-
-    }
-);
-
-
-/* =========================
-   MONEY
-========================= */
-
-function formatMoney(value){
-
-    return "KSh " +
-        Number(value || 0)
-        .toLocaleString(
-            "en-KE",
-            {
-                minimumFractionDigits:2,
-                maximumFractionDigits:2
-            }
-        );
-}
-
-
-/* =========================
-   DATE
-========================= */
-
-function formatDate(value){
-
-    if(!value){
-        return "—";
+        return date.toLocaleString("en-KE", {
+            dateStyle: "short",
+            timeStyle: "short"
+        });
     }
 
-    const date =
-        new Date(value);
 
-    if(
-        Number.isNaN(
-            date.getTime()
-        )
-    ){
-        return String(value);
-    }
+    /* =========================
+       REFERRAL CARD
+    ========================= */
 
-    return date.toLocaleString(
-        "en-KE",
-        {
-            day:"2-digit",
-            month:"short",
-            year:"numeric",
-            hour:"2-digit",
-            minute:"2-digit"
-        }
-    );
-}
+    function createReferralCard(referral) {
 
+        const name =
+            referral.uniqueName ||
+            referral.username ||
+            referral.name ||
+            referral.fullName ||
+            referral.memberName ||
+            "Member";
 
-/* =========================
-   ESCAPE HTML
-========================= */
+        const memberId =
+            referral.memberId ||
+            referral.userId ||
+            referral.id ||
+            referral.identifier ||
+            "—";
 
-function escapeHtml(value){
+        const joinedAt =
+            referral.joinedAt ||
+            referral.createdAt ||
+            referral.registeredAt ||
+            referral.joined;
 
-    return String(
-        value ?? ""
-    )
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
-}
+        const amount =
+            referral.amountPaid ??
+            referral.paidAmount ??
+            referral.amount ??
+            referral.paymentAmount ??
+            0;
 
+        const status =
+            referral.status ||
+            referral.paymentStatus ||
+            "Pending";
 
-/* =========================
-   STATUS
-========================= */
+        const card = document.createElement("div");
+        card.className = "referral-card";
 
-function statusClass(status){
+        card.innerHTML = `
+            <div class="referral-top">
 
-    const s =
-        String(status || "")
-        .toLowerCase();
+                <div>
+                    <div class="member-name">
+                        ${escapeHtml(name)}
+                    </div>
 
-    if(
-        s.includes("paid") ||
-        s.includes("success") ||
-        s.includes("complete")
-    ){
-        return "status-paid";
-    }
-
-    if(
-        s.includes("pending") ||
-        s.includes("process")
-    ){
-        return "status-pending";
-    }
-
-    return "status-unpaid";
-}
-
-
-/* =========================
-   REFERRAL CARD
-========================= */
-
-function createReferralCard(member){
-
-    const name =
-        member.uniqueName ||
-        member.username ||
-        member.name ||
-        member.fullName ||
-        member.memberName ||
-        "Member";
-
-    const memberId =
-        member.memberId ||
-        member.userId ||
-        member.id ||
-        member.identifier ||
-        "";
-
-    const joined =
-        member.joinedAt ||
-        member.createdAt ||
-        member.registeredAt ||
-        member.joined ||
-        null;
-
-    const amount =
-        member.amountPaid ??
-        member.paidAmount ??
-        member.amount ??
-        member.paymentAmount ??
-        0;
-
-    const status =
-        member.status ||
-        member.paymentStatus ||
-        "Pending";
-
-    const card =
-        document.createElement("div");
-
-    card.className =
-        "referral-member";
-
-    card.innerHTML = `
-
-        <div class="member-top">
-
-            <div>
-
-                <div class="member-name">
-                    ${escapeHtml(name)}
+                    <div class="member-id">
+                        ID: ${escapeHtml(String(memberId))}
+                    </div>
                 </div>
 
-                ${
-                    memberId
-                    ? `
-                    <span class="member-id">
-                        Member ID: ${escapeHtml(memberId)}
-                    </span>
-                    `
-                    : ""
-                }
+                <div class="status">
+                    ${escapeHtml(String(status))}
+                </div>
 
             </div>
 
-            <span
-                class="status ${statusClass(status)}"
-            >
-                ${escapeHtml(status)}
-            </span>
+            <div class="referral-details">
 
-        </div>
-
-        <div class="member-details">
-
-            <div class="detail-box">
-
-                <span class="detail-label">
+                <div class="detail-item">
                     Joined
-                </span>
+                    <span class="detail-value">
+                        ${escapeHtml(formatDate(joinedAt))}
+                    </span>
+                </div>
 
-                <span class="detail-value">
-                    ${escapeHtml(
-                        formatDate(joined)
-                    )}
-                </span>
-
-            </div>
-
-            <div class="detail-box">
-
-                <span class="detail-label">
+                <div class="detail-item">
                     Amount Paid
-                </span>
+                    <span class="detail-value">
+                        ${escapeHtml(formatMoney(amount))}
+                    </span>
+                </div>
 
-                <span class="detail-value">
-                    ${escapeHtml(
-                        formatMoney(amount)
-                    )}
-                </span>
+                <div class="detail-item">
+                    Status
+                    <span class="detail-value">
+                        ${escapeHtml(String(status))}
+                    </span>
+                </div>
 
-            </div>
-
-        </div>
-    `;
-
-    return card;
-}
-
-
-/* =========================
-   RENDER LIST
-========================= */
-
-function renderReferralList(
-    id,
-    referrals
-){
-
-    const container =
-        document.getElementById(id);
-
-    container.innerHTML = "";
-
-    if(
-        !Array.isArray(referrals) ||
-        referrals.length === 0
-    ){
-
-        container.innerHTML = `
-            <div class="empty-referrals">
-                No referrals yet.
             </div>
         `;
 
-        return;
+        return card;
     }
 
-    referrals.forEach(
-        function(member){
 
+    /* =========================
+       ESCAPE HTML
+    ========================= */
+
+    function escapeHtml(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+
+    /* =========================
+       RENDER REFERRALS
+    ========================= */
+
+    function renderReferralList(elementId, referrals) {
+
+        const container = document.getElementById(elementId);
+
+        container.innerHTML = "";
+
+        if (!Array.isArray(referrals) || referrals.length === 0) {
+
+            container.innerHTML =
+                '<div class="empty">No referrals yet.</div>';
+
+            return;
+        }
+
+        referrals.forEach(referral => {
             container.appendChild(
-                createReferralCard(member)
+                createReferralCard(referral)
             );
-
-        }
-    );
-}
-
-
-/* =========================
-   APPLY DASHBOARD DATA
-========================= */
-
-function applyDashboardData(data){
-
-    if(!data){
-        return;
+        });
     }
 
-    const user =
-        data.user ||
-        data.profile ||
-        data;
 
-    const name =
-        user.name ||
-        user.fullName ||
-        user.username ||
-        user.uniqueName ||
-        user.memberName ||
-        "Member";
+    /* =========================
+       DASHBOARD DATA
+    ========================= */
 
-    document.getElementById(
-        "welcomeName"
-    ).textContent = name;
+    function applyDashboardData(data) {
 
+        if (!data) return;
 
-    const balance =
-        data.balance ??
-        user.balance ??
-        data.availableBalance ??
-        0;
+        const user =
+            data.user ||
+            data.profile ||
+            data;
 
-    document.getElementById(
-        "balanceAmount"
-    ).textContent =
-        formatMoney(balance);
+        const balance =
+            user.availableBalance ??
+            user.balance ??
+            data.availableBalance ??
+            data.balance ??
+            0;
 
+        const totalEarnings =
+            user.totalEarnings ??
+            data.totalEarnings ??
+            0;
 
-    const earnings =
-        data.totalEarnings ??
-        user.totalEarnings ??
-        data.earnings ??
-        0;
+        const referralEarnings =
+            user.referralEarnings ??
+            data.referralEarnings ??
+            0;
 
-    document.getElementById(
-        "totalEarnings"
-    ).textContent =
-        formatMoney(earnings);
+        document.getElementById("availableBalance").textContent =
+            formatMoney(balance);
 
+        document.getElementById("totalEarnings").textContent =
+            formatMoney(totalEarnings);
 
-    const referralEarnings =
-        data.referralEarnings ??
-        data.totalReferralEarnings ??
-        user.referralEarnings ??
-        0;
-
-    document.getElementById(
-        "referralEarnings"
-    ).textContent =
-        formatMoney(referralEarnings);
-
-    document.getElementById(
-        "referralEarningsStat"
-    ).textContent =
-        formatMoney(referralEarnings);
+        document.getElementById("referralEarnings").textContent =
+            formatMoney(referralEarnings);
 
 
-    const direct =
-        data.directReferrals ||
-        data.referrals?.direct ||
-        data.direct ||
-        [];
+        const direct =
+            data.directReferrals ||
+            (data.referrals && data.referrals.direct) ||
+            data.direct ||
+            [];
+
+        const indirect =
+            data.indirectReferrals ||
+            (data.referrals && data.referrals.indirect) ||
+            data.indirect ||
+            [];
 
 
-    const indirect =
-        data.indirectReferrals ||
-        data.referrals?.indirect ||
-        data.indirect ||
-        [];
+        document.getElementById("directReferrals").textContent =
+            direct.length;
+
+        document.getElementById("indirectReferrals").textContent =
+            indirect.length;
+
+        document.getElementById("totalReferrals").textContent =
+            direct.length + indirect.length;
 
 
-    document.getElementById(
-        "directReferrals"
-    ).textContent =
-        direct.length;
-
-
-    document.getElementById(
-        "indirectReferrals"
-    ).textContent =
-        indirect.length;
-
-
-    document.getElementById(
-        "totalReferrals"
-    ).textContent =
-        direct.length +
-        indirect.length;
-
-
-    renderReferralList(
-        "directReferralsList",
-        direct
-    );
-
-    renderReferralList(
-        "indirectReferralsList",
-        indirect
-    );
-
-
-    const referralLink =
-        data.referralLink ||
-        user.referralLink ||
-        data.referral_url ||
-        user.referral_url ||
-        data.referralUrl ||
-        user.referralUrl ||
-        "";
-
-    if(referralLink){
-
-        document.getElementById(
-            "referralLink"
-        ).value =
-            referralLink;
-
-    }
-}
-
-
-/* =========================
-   LOAD SAVED DATA
-========================= */
-
-function loadSavedData(){
-
-    try{
-
-        const saved =
-            localStorage.getItem(
-                "dashboardData"
-            );
-
-        if(saved){
-
-            applyDashboardData(
-                JSON.parse(saved)
-            );
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "Dashboard data error:",
-            error
+        renderReferralList(
+            "directReferralsList",
+            direct
         );
-    }
 
-
-    try{
-
-        const savedUser =
-            localStorage.getItem(
-                "user"
-            );
-
-        if(savedUser){
-
-            const user =
-                JSON.parse(savedUser);
-
-            const name =
-                user.name ||
-                user.fullName ||
-                user.username ||
-                user.uniqueName;
-
-            if(name){
-
-                document.getElementById(
-                    "welcomeName"
-                ).textContent =
-                    name;
-            }
-
-
-            const link =
-                user.referralLink ||
-                user.referral_url ||
-                user.referralUrl;
-
-            if(link){
-
-                document.getElementById(
-                    "referralLink"
-                ).value =
-                    link;
-            }
-
-        }
-
-    }catch(error){
-
-        console.error(
-            "User data error:",
-            error
+        renderReferralList(
+            "indirectReferralsList",
+            indirect
         );
+
+
+        const referralLink =
+            user.referralLink ||
+            user.referralCodeLink ||
+            data.referralLink ||
+            data.referralUrl ||
+            data.referral_url ||
+            "";
+
+        if (referralLink) {
+            document.getElementById("referralLink").textContent =
+                referralLink;
+        }
     }
-}
 
 
-/* =========================
-   EXISTING BACKEND HOOK
-========================= */
+    /* =========================
+       LOAD DASHBOARD
+    ========================= */
 
-async function loadDashboard(){
+    async function loadDashboard() {
 
-    loadSavedData();
+        try {
 
-    /*
-     * If your existing authentication/dashboard
-     * system provides fetchDashboardData(),
-     * it will automatically be used.
-     */
+            const savedData =
+                localStorage.getItem("dashboardData");
 
-    if(
-        typeof window.fetchDashboardData ===
-        "function"
-    ){
+            if (savedData) {
 
-        try{
-
-            const data =
-                await window.fetchDashboardData();
-
-            if(data){
-
-                applyDashboardData(data);
-
+                try {
+                    applyDashboardData(
+                        JSON.parse(savedData)
+                    );
+                } catch (error) {
+                    console.error(error);
+                }
             }
 
-        }catch(error){
+
+            const savedUser =
+                localStorage.getItem("user");
+
+            if (savedUser) {
+
+                try {
+                    applyDashboardData({
+                        user: JSON.parse(savedUser)
+                    });
+                } catch (error) {
+                    console.error(error);
+                }
+            }
+
+
+            /*
+             * If your existing authentication/dashboard
+             * system provides fetchDashboardData(),
+             * it will be used automatically.
+             */
+
+            if (typeof window.fetchDashboardData === "function") {
+
+                const response =
+                    await window.fetchDashboardData();
+
+                if (response) {
+                    applyDashboardData(response);
+                }
+            }
+
+        } catch (error) {
 
             console.error(
                 "Dashboard loading error:",
                 error
             );
-
         }
-
     }
-}
 
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function(){
-
-        loadDashboard();
-
-    }
-);
+    loadDashboard();
 
 </script>
 
