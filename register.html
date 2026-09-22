@@ -6,68 +6,82 @@
     <title>Create Account - CheryEarn</title>
 
     <style>
+        :root {
+            --bg: #050e25;
+            --header: #0b1535;
+            --card: #0d1738;
+            --border: #202d4e;
+
+            --white: #f5f7fc;
+            --muted: #9aa8c2;
+
+            --blue: #1f5fea;
+            --green: #43d878;
+            --yellow: #f4cb2e;
+
+            --bottom: #0b1535;
+        }
+
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
         }
 
         body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--white);
             font-family: Arial, sans-serif;
-            background: #0b0b0b;
-            color: #ffffff;
             min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
+        }
+
+        header {
+            background: var(--header);
+            border-bottom: 1px solid var(--border);
+            padding: 18px 20px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+
+        .tagline {
+            color: var(--muted);
+            font-size: 13px;
         }
 
         .container {
             width: 100%;
-            max-width: 420px;
-        }
-
-        .logo {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .logo h1 {
-            font-size: 32px;
-            font-weight: 800;
-            color: #00c853;
-        }
-
-        .logo p {
-            color: #999;
-            font-size: 14px;
-            margin-top: 6px;
+            max-width: 450px;
+            margin: 0 auto;
+            padding: 25px 18px 35px;
         }
 
         .card {
-            background: #151515;
-            border: 1px solid #292929;
+            background: var(--card);
+            border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 25px 20px;
-            box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+            padding: 22px 18px;
         }
 
-        .card h2 {
-            text-align: center;
+        h1 {
+            margin: 0 0 7px;
             font-size: 24px;
-            margin-bottom: 8px;
+            text-align: center;
         }
 
         .subtitle {
             text-align: center;
-            color: #999;
+            color: var(--muted);
             font-size: 14px;
             margin-bottom: 22px;
         }
 
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
 
         label {
@@ -80,32 +94,46 @@
         input {
             width: 100%;
             padding: 14px;
-            border-radius: 9px;
-            border: 1px solid #333;
-            background: #0d0d0d;
-            color: #fff;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--white);
             font-size: 15px;
             outline: none;
         }
 
         input:focus {
-            border-color: #00c853;
+            border-color: var(--blue);
         }
 
-        .register-btn {
+        input::placeholder {
+            color: #66738e;
+        }
+
+        .referral-info {
+            color: var(--muted);
+            font-size: 12px;
+            margin-top: 6px;
+        }
+
+        button {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             border: none;
-            border-radius: 9px;
-            background: #00c853;
-            color: #000;
+            border-radius: 10px;
+            background: var(--green);
+            color: #04100a;
             font-size: 16px;
             font-weight: 800;
             cursor: pointer;
             margin-top: 5px;
         }
 
-        .register-btn:disabled {
+        button:hover {
+            opacity: 0.92;
+        }
+
+        button:disabled {
             opacity: 0.6;
             cursor: not-allowed;
         }
@@ -114,75 +142,68 @@
             display: none;
             margin-top: 15px;
             padding: 12px;
-            border-radius: 8px;
-            font-size: 14px;
+            border-radius: 9px;
+            font-size: 13px;
             text-align: center;
         }
 
-        .error {
+        .message.error {
             display: block;
-            background: #3a1111;
+            background: rgba(220, 50, 50, 0.12);
+            border: 1px solid rgba(220, 50, 50, 0.35);
             color: #ff7777;
         }
 
-        .success {
+        .message.success {
             display: block;
-            background: #10351e;
-            color: #55e889;
+            background: rgba(67, 216, 120, 0.10);
+            border: 1px solid rgba(67, 216, 120, 0.35);
+            color: var(--green);
         }
 
-        .login {
+        .login-link {
             text-align: center;
             margin-top: 20px;
-            color: #999;
+            color: var(--muted);
             font-size: 14px;
         }
 
-        .login a {
-            color: #00c853;
+        .login-link a {
+            color: var(--green);
             text-decoration: none;
             font-weight: 700;
         }
 
-        .referral-info {
-            background: #101d15;
-            border: 1px solid #193b27;
-            border-radius: 9px;
-            padding: 11px;
-            margin-bottom: 18px;
-            font-size: 13px;
-            color: #9ee8b7;
+        footer {
+            text-align: center;
+            color: var(--muted);
+            font-size: 12px;
+            padding: 0 20px 25px;
         }
     </style>
 </head>
 
 <body>
 
-<div class="container">
+<header>
+    <div class="logo">CheryEarn</div>
+    <div class="tagline">Earn • Refer • Grow</div>
+</header>
 
-    <div class="logo">
-        <h1>CheryEarn</h1>
-        <p>Earn • Refer • Grow</p>
-    </div>
+<div class="container">
 
     <div class="card">
 
-        <h2>Create Account</h2>
-        <p class="subtitle">Join CheryEarn today</p>
-
-        <div id="referralInfo" class="referral-info" style="display:none;">
-            Referral code detected:
-            <strong id="referralCodeText"></strong>
-        </div>
+        <h1>Create Account</h1>
+        <div class="subtitle">Join CheryEarn today</div>
 
         <form id="registerForm">
 
             <div class="form-group">
-                <label for="name">Full Name</label>
+                <label for="fullName">Full Name</label>
                 <input
                     type="text"
-                    id="name"
-                    name="name"
+                    id="fullName"
                     placeholder="Enter your full name"
                     required
                 >
@@ -193,8 +214,7 @@
                 <input
                     type="tel"
                     id="phone"
-                    name="phone"
-                    placeholder="07XXXXXXXX"
+                    placeholder="0712345678"
                     required
                 >
             </div>
@@ -204,8 +224,7 @@
                 <input
                     type="email"
                     id="email"
-                    name="email"
-                    placeholder="example@email.com"
+                    placeholder="you@example.com"
                     required
                 >
             </div>
@@ -215,8 +234,7 @@
                 <input
                     type="password"
                     id="password"
-                    name="password"
-                    placeholder="Create a password"
+                    placeholder="Enter password"
                     minlength="6"
                     required
                 >
@@ -227,14 +245,25 @@
                 <input
                     type="password"
                     id="confirmPassword"
-                    name="confirmPassword"
-                    placeholder="Confirm your password"
+                    placeholder="Confirm password"
                     minlength="6"
                     required
                 >
             </div>
 
-            <button type="submit" class="register-btn" id="registerBtn">
+            <div class="form-group">
+                <label for="referralCode">Referral Code</label>
+                <input
+                    type="text"
+                    id="referralCode"
+                    placeholder="Optional"
+                >
+                <div class="referral-info">
+                    Enter a referral code if someone invited you.
+                </div>
+            </div>
+
+            <button type="submit" id="registerBtn">
                 Create Account
             </button>
 
@@ -242,13 +271,18 @@
 
         </form>
 
-        <div class="login">
+        <div class="login-link">
             Already have an account?
             <a href="login.html">Login</a>
         </div>
 
     </div>
+
 </div>
+
+<footer>
+    © 2026 CheryEarn. All rights reserved.
+</footer>
 
 <script>
     const API_URL = "https://cheryearn-backend.onrender.com";
@@ -257,36 +291,52 @@
     const message = document.getElementById("message");
     const registerBtn = document.getElementById("registerBtn");
 
-    // Get referral code from URL
+    // Automatically read referral code from:
+    // register.html?ref=CHERY123456
     const params = new URLSearchParams(window.location.search);
-    const referralCode = params.get("ref");
+    const referralFromUrl = params.get("ref");
 
-    if (referralCode) {
-        document.getElementById("referralInfo").style.display = "block";
-        document.getElementById("referralCodeText").textContent = referralCode;
+    if (referralFromUrl) {
+        document.getElementById("referralCode").value =
+            referralFromUrl.toUpperCase();
     }
 
-    form.addEventListener("submit", async function(e) {
+    form.addEventListener("submit", async function (e) {
         e.preventDefault();
 
         message.className = "message";
         message.textContent = "";
 
-        const name = document.getElementById("name").value.trim();
+        const fullName = document.getElementById("fullName").value.trim();
         const phone = document.getElementById("phone").value.trim();
         const email = document.getElementById("email").value.trim();
         const password = document.getElementById("password").value;
-        const confirmPassword = document.getElementById("confirmPassword").value;
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
+        const referralCode =
+            document.getElementById("referralCode").value.trim();
 
-        if (password !== confirmPassword) {
-            message.className = "message error";
-            message.textContent = "Passwords do not match.";
+        if (!fullName || !phone || !email || !password) {
+            showMessage(
+                "Full name, phone, email and password are required.",
+                "error"
+            );
             return;
         }
 
         if (password.length < 6) {
-            message.className = "message error";
-            message.textContent = "Password must be at least 6 characters.";
+            showMessage(
+                "Password must be at least 6 characters.",
+                "error"
+            );
+            return;
+        }
+
+        if (password !== confirmPassword) {
+            showMessage(
+                "Passwords do not match.",
+                "error"
+            );
             return;
         }
 
@@ -294,43 +344,63 @@
         registerBtn.textContent = "Creating Account...";
 
         try {
-            const response = await fetch(`${API_URL}/api/auth/register`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    name: name,
-                    phone: phone,
-                    email: email,
-                    password: password,
-                    referralCode: referralCode || null
-                })
-            });
+            const response = await fetch(
+                `${API_URL}/api/auth/register`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        // These names MUST match the backend.
+                        full_name: fullName,
+                        phone: phone,
+                        email: email,
+                        password: password,
+                        referral_code: referralCode
+                    })
+                }
+            );
 
             const data = await response.json();
 
-            if (!response.ok || data.success === false) {
-                throw new Error(data.message || "Registration failed.");
+            if (!response.ok || !data.success) {
+                showMessage(
+                    data.message || "Registration failed. Please try again.",
+                    "error"
+                );
+
+                registerBtn.disabled = false;
+                registerBtn.textContent = "Create Account";
+                return;
             }
 
-            message.className = "message success";
-            message.textContent = data.message || "Account created successfully!";
-
-            form.reset();
+            showMessage(
+                data.message || "Registration successful.",
+                "success"
+            );
 
             setTimeout(() => {
                 window.location.href = "login.html";
-            }, 1500);
+            }, 1800);
 
         } catch (error) {
-            message.className = "message error";
-            message.textContent = error.message || "Unable to create account. Please try again.";
-        }
+            console.error("Registration error:", error);
 
-        registerBtn.disabled = false;
-        registerBtn.textContent = "Create Account";
+            showMessage(
+                "Unable to connect to the server. Please try again.",
+                "error"
+            );
+
+            registerBtn.disabled = false;
+            registerBtn.textContent = "Create Account";
+        }
     });
+
+    function showMessage(text, type) {
+        message.textContent = text;
+        message.className = "message " + type;
+    }
 </script>
 
 </body>
