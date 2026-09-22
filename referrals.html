@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Referrals - CheryEarn</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0b0b;
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #151515;
+            border-bottom: 1px solid #292929;
+            padding: 16px 18px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            color: #00c853;
+            font-size: 24px;
+            font-weight: 800;
+        }
+
+        .back {
+            color: #fff;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            padding: 22px 16px 40px;
+        }
+
+        h2 {
+            font-size: 24px;
+            margin-bottom: 6px;
+        }
+
+        .subtitle {
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .summary {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .summary-card {
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 13px;
+            padding: 18px;
+        }
+
+        .summary-card span {
+            display: block;
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 7px;
+        }
+
+        .summary-card strong {
+            font-size: 22px;
+        }
+
+        .referral-link {
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 13px;
+            padding: 18px;
+            margin-bottom: 18px;
+        }
+
+        .referral-link h3 {
+            font-size: 16px;
+            margin-bottom: 12px;
+        }
+
+        .link-box {
+            display: flex;
+            gap: 8px;
+        }
+
+        .link-box input {
+            min-width: 0;
+            flex: 1;
+            background: #0d0d0d;
+            color: #00c853;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 13px;
+            outline: none;
+        }
+
+        .copy-btn {
+            border: none;
+            border-radius: 8px;
+            padding: 0 14px;
+            background: #00c853;
+            color: #000;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .list {
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 13px;
+            overflow: hidden;
+        }
+
+        .list-header {
+            padding: 17px;
+            border-bottom: 1px solid #292929;
+        }
+
+        .list-header h3 {
+            font-size: 17px;
+        }
+
+        .referral {
+            padding: 16px;
+            border-bottom: 1px solid #242424;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .referral:last-child {
+            border-bottom: none;
+        }
+
+        .person {
+            min-width: 0;
+        }
+
+        .person strong {
+            display: block;
+            font-size: 15px;
+            margin-bottom: 5px;
+        }
+
+        .person small {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .earning {
+            color: #00c853;
+            font-weight: 800;
+            white-space: nowrap;
+            font-size: 14px;
+        }
+
+        .empty {
+            padding: 30px 18px;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        .error {
+            color: #ff7777;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .loading {
+            padding: 30px 18px;
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+        }
+
+        @media (max-width: 380px) {
+            .link-box {
+                flex-direction: column;
+            }
+
+            .copy-btn {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+    <div class="logo">CheryEarn</div>
+    <a href="dashboard.html" class="back">← Dashboard</a>
+</header>
+
+<main class="container">
+
+    <h2>My Referrals</h2>
+    <p class="subtitle">
+        Track the people who joined through your referral link.
+    </p>
+
+    <div class="summary">
+
+        <div class="summary-card">
+            <span>Total Referrals</span>
+            <strong id="totalReferrals">0</strong>
+        </div>
+
+        <div class="summary-card">
+            <span>Referral Earnings</span>
+            <strong>
+                KSh <span id="referralEarnings">0.00</span>
+            </strong>
+        </div>
+
+    </div>
+
+    <div class="referral-link">
+
+        <h3>Your Referral Link</h3>
+
+        <div class="link-box">
+            <input
+                type="text"
+                id="referralLink"
+                readonly
+                placeholder="Loading..."
+            >
+
+            <button class="copy-btn" onclick="copyLink()">
+                Copy
+            </button>
+        </div>
+
+    </div>
+
+    <div class="list">
+
+        <div class="list-header">
+            <h3>People You Referred</h3>
+        </div>
+
+        <div id="referralsList">
+            <div class="loading">
+                Loading referrals...
+            </div>
+        </div>
+
+    </div>
+
+    <div id="error" class="error"></div>
+
+</main>
+
+<script>
+
+    const API_URL = "https://cheryearn-backend.onrender.com";
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        window.location.href = "login.html";
+    }
+
+    async function loadReferrals() {
+
+        try {
+
+            const response = await fetch(
+                `${API_URL}/api/user/referrals`,
+                {
+                    method: "GET",
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
+            );
+
+            if (response.status === 401) {
+                localStorage.removeItem("token");
+                localStorage.removeItem("user");
+                window.location.href = "login.html";
+                return;
+            }
+
+            const data = await response.json();
+
+            if (!response.ok || data.success === false) {
+                throw new Error(
+                    data.message || "Unable to load referrals."
+                );
+            }
+
+            const referrals =
+                data.referrals ||
+                data.data?.referrals ||
+                data.data ||
+                [];
+
+            const total =
+                data.totalReferrals ??
+                data.data?.totalReferrals ??
+                referrals.length;
+
+            const earnings =
+                data.referralEarnings ??
+                data.data?.referralEarnings ??
+                data.totalEarnings ??
+                0;
+
+            document.getElementById("totalReferrals")
+                .textContent = total;
+
+            document.getElementById("referralEarnings")
+                .textContent =
+                Number(earnings).toFixed(2);
+
+            displayReferrals(referrals);
+
+            loadReferralLink();
+
+        } catch (error) {
+
+            document.getElementById("referralsList").innerHTML =
+                `<div class="empty">
+                    Unable to load referrals.
+                </div>`;
+
+            document.getElementById("error").textContent =
+                error.message || "Something went wrong.";
+        }
+    }
+
+    async function loadReferralLink() {
+
+        try {
+
+            const userResponse = await fetch(
+                `${API_URL}/api/user/dashboard`,
+                {
+                    headers: {
+                        "Authorization": `Bearer ${token}`
+                    }
+                }
+            );
+
+            const userData = await userResponse.json();
+
+            const user =
+                userData.user ||
+                userData.data?.user ||
+                userData.data;
+
+            if (user && user.referralCode) {
+
+                const link =
+                    `${window.location.origin}/register.html?ref=${encodeURIComponent(user.referralCode)}`;
+
+                document.getElementById("referralLink")
+                    .value = link;
+            }
+
+        } catch (error) {
+            console.log("Referral link could not be loaded.");
+        }
+    }
+
+    function displayReferrals(referrals) {
+
+        const list =
+            document.getElementById("referralsList");
+
+        if (!Array.isArray(referrals) || referrals.length === 0) {
+
+            list.innerHTML =
+                `<div class="empty">
+                    You don't have any referrals yet.
+                </div>`;
+
+            return;
+        }
+
+        list.innerHTML = "";
+
+        referrals.forEach((referral) => {
+
+            const name =
+                referral.name ||
+                referral.fullName ||
+                "User";
+
+            const date =
+                referral.createdAt ||
+                referral.date ||
+                referral.joinedAt;
+
+            const earning =
+                referral.earning ||
+                referral.commission ||
+                referral.referralBonus ||
+                0;
+
+            const item =
+                document.createElement("div");
+
+            item.className = "referral";
+
+            item.innerHTML = `
+                <div class="person">
+                    <strong>${escapeHtml(name)}</strong>
+                    <small>
+                        ${date ? formatDate(date) : "Joined CheryEarn"}
+                    </small>
+                </div>
+
+                <div class="earning">
+                    + KSh ${Number(earning).toFixed(2)}
+                </div>
+            `;
+
+            list.appendChild(item);
+        });
+    }
+
+    function copyLink() {
+
+        const input =
+            document.getElementById("referralLink");
+
+        if (!input.value) {
+            alert("Referral link is still loading.");
+            return;
+        }
+
+        navigator.clipboard.writeText(input.value)
+            .then(() => {
+                alert("Referral link copied!");
+            })
+            .catch(() => {
+                input.select();
+                document.execCommand("copy");
+                alert("Referral link copied!");
+            });
+    }
+
+    function formatDate(date) {
+
+        const parsed = new Date(date);
+
+        if (isNaN(parsed.getTime())) {
+            return "Joined CheryEarn";
+        }
+
+        return parsed.toLocaleDateString("en-KE", {
+            day: "numeric",
+            month: "short",
+            year: "numeric"
+        });
+    }
+
+    function escapeHtml(value) {
+
+        const div = document.createElement("div");
+
+        div.textContent = value;
+
+        return div.innerHTML;
+    }
+
+    loadReferrals();
+
+</script>
+
+</body>
+</html>
