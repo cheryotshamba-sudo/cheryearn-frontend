@@ -1205,48 +1205,35 @@
                     referrals;
 
 
-                /* REFERRAL CODE */
+               /* REFERRAL CODE */
 
-                if (user.referralCode) {
+const referralCode =
+    user.referralCode ||
+    user.referral_code ||
+    JSON.parse(localStorage.getItem("user") || "{}").referralCode ||
+    JSON.parse(localStorage.getItem("user") || "{}").referral_code ||
+    "";
 
-                    document.getElementById(
-                        "referralLoading"
-                    ).style.display =
-                        "none";
+if (referralCode) {
 
+    document.getElementById(
+        "referralLoading"
+    ).style.display =
+        "none";
 
-                    document.getElementById(
-                        "referralContent"
-                    ).style.display =
-                        "flex";
+    document.getElementById(
+        "referralContent"
+    ).style.display =
+        "flex";
 
+    document.getElementById(
+        "referralCode"
+    ).textContent =
+        referralCode;
 
-                    document.getElementById(
-                        "referralCode"
-                    ).textContent =
-                        user.referralCode;
+} 
 
-                }
-
-            }
-
-        } catch (error) {
-
-            document.getElementById(
-                "referralLoading"
-            ).textContent =
-                "Unable to load account information.";
-
-
-            document.getElementById(
-                "pageError"
-            ).textContent =
-                error.message ||
-                "Something went wrong.";
-
-        }
-
-    }
+                
 
 
     /* COPY REFERRAL */
