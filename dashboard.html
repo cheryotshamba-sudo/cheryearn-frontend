@@ -1,123 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - CheryEarn</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #050d26;
+            color: #f8fafc;
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            padding-bottom: 85px;
+        }
+
+        /* HEADER */
+
+        .header {
+            background: #0d1738;
+            border-bottom: 1px solid #202b4d;
+            padding: 17px 18px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 23px;
+            font-weight: 800;
+            color: #f8fafc;
+        }
+
+        .logout {
+            background: transparent;
+            color: #f8fafc;
+            border: 1px solid #202b4d;
+            border-radius: 10px;
+            padding: 9px 14px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .logout:hover {
+            border-color: #2563eb;
+        }
+
+        /* MAIN */
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: auto;
+            padding: 22px 16px 25px;
+        }
+
+        /* WELCOME */
+
+        .welcome {
+            margin-bottom: 20px;
+        }
+
+        .welcome h2 {
+            font-size: 23px;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .welcome p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* BALANCE */
+
+        .balance-card {
+            background: #0d1738;
+            border: 1px solid #202b4d;
+            border-radius: 18px;
+            padding: 25px;
+            margin-bottom: 16px;
+        }
+
+        .balance-label {
+            color: #94a3b8;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .balance {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .primary-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 14px 24px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .primary-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* STATS */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .card {
+            background: #0d1738;
+            border: 1px solid #202b4d;
+            border-radius: 18px;
+            padding: 20px;
+        }
+
+        .stat-label {
+            display: block;
+            color: #94a3b8;
+            font-size: 13px;
+            margin-bottom: 9px;
+        }
+
+        .stat-value {
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        /* COLORS */
+
+        .success {
+            color: #4ade80;
+        }
+
+        .warning {
+            color: #facc15;
+        }
+
+        /* SECTIONS */
+
+        .section {
+            background: #0d1738;
+            border: 1px solid #202b4d;
+            border-radius: 18px;
+            padding: 20px;
+            margin-bottom: 16px;
+        }
+
+        .section h3 {
+            font-size: 17px;
+            margin-bottom: 14px;
+            font-weight: 700;
+        }
+
+        /* REFERRAL */
+
+        .referral-box {
+            background: #050d26;
+            border: 1px dashed #2563eb;
+            border-radius: 12px;
+            padding: 13px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .referral-code {
+            color: #60a5fa;
+            font-weight: 700;
+            word-break: break-all;
+            font-size: 14px;
+        }
+
+        .copy-btn {
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 9px;
+            padding: 9px 13px;
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+
+        .share-btn {
+            width: 100%;
+            margin-top: 12px;
+            padding: 13px;
+
+            background: #2563eb;
+            color: white;
+
+            border: none;
+            border-radius: 12px;
+
+            font-family: inherit;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        /* QUICK LINKS */
+
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .quick-link {
+            text-decoration: none;
+            text-align: center;
+
+            background: #050d26;
+            border: 1px solid #202b4d;
+
+            color: #f8fafc;
+
+            padding: 14px 5px;
+            border-radius: 12px;
+
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .quick-link:hover {
+            border-color: #2563eb;
+            color: #60a5fa;
+        }
+
+        /* STATUS */
+
+        .loading {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .error {
+            color: #f87171;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        /* BOTTOM NAV */
+
+        .bottom-nav {
+            background: #0d1738;
+            border-top: 1px solid #202b4d;
+
+            position: fixed;
+            bottom: 0;
+            left: 0;
+
+            width: 100%;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            padding: 10px 5px;
+
+            z-index: 100;
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: #94a3b8;
+
+            text-align: center;
+
+            font-size: 11px;
+            font-weight: 600;
+
+            padding: 6px 2px;
+        }
+
+        .bottom-nav a span {
+            display: block;
+            font-size: 19px;
+            margin-bottom: 3px;
+        }
+
+        .bottom-nav a.active {
+            color: #60a5fa;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 380px) {
+
+            .balance {
+                font-size: 28px;
+            }
+
+            .card,
+            .section,
+            .balance-card {
+                padding: 17px;
+            }
+
+            .quick-links {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        CheryEarn
+    </div>
+
+    <button class="logout" onclick="logout()">
+        Logout
+    </button>
+
+</header>
+
+
+<main class="container">
+
+    <!-- WELCOME -->
+
+    <div class="welcome">
+
+        <h2 id="welcomeName">
+            Welcome
+        </h2>
+
+        <p>
+            Your CheryEarn account overview
+        </p>
+
+    </div>
+
+
+    <!-- BALANCE -->
+
+    <div class="balance-card">
+
+        <div class="balance-label">
+            Available Balance
+        </div>
+
+        <div class="balance">
+            KSh <span id="balance">0.00</span>
+        </div>
+
+        <button
+            class="primary-btn"
+            onclick="withdraw()"
+        >
+            Withdraw
+        </button>
+
+    </div>
+
+
+    <!-- STATS -->
+
+    <div class="stats">
+
+        <div class="card">
+
+            <span class="stat-label">
+                Total Earnings
+            </span>
+
+            <strong
+                class="stat-value success"
+            >
+                KSh <span id="earnings">0.00</span>
+            </strong>
+
+        </div>
+
+
+        <div class="card">
+
+            <span class="stat-label">
+                Total Referrals
+            </span>
+
+            <strong
+                class="stat-value"
+                id="referrals"
+            >
+                0
+            </strong>
+
+        </div>
+
+    </div>
+
+
+    <!-- REFERRAL -->
+
+    <div class="section">
+
+        <h3>
+            Your Referral Code
+        </h3>
+
+        <div
+            id="referralLoading"
+            class="loading"
+        >
+            Loading referral code...
+        </div>
+
+
+        <div
+            id="referralContent"
+            class="referral-box"
+            style="display:none;"
+        >
+
+            <span
+                id="referralCode"
+                class="referral-code"
+            ></span>
+
+            <button
+                class="copy-btn"
+                onclick="copyReferral()"
+            >
+                Copy
+            </button>
+
+        </div>
+
+
+        <button
+            class="share-btn"
+            onclick="shareReferral()"
+        >
+            Share Referral Link
+        </button>
+
+    </div>
+
+
+    <!-- QUICK LINKS -->
+
+    <div class="section">
+
+        <h3>
+            Quick Links
+        </h3>
+
+        <div class="quick-links">
+
+            <a
+                href="referrals.html"
+                class="quick-link"
+            >
+                👥<br>
+                Referrals
+            </a>
+
+            <a
+                href="earnings.html"
+                class="quick-link"
+            >
+                💰<br>
+                Earnings
+            </a>
+
+            <a
+                href="withdraw.html"
+                class="quick-link"
+            >
+                💸<br>
+                Withdraw
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div
+        id="pageError"
+        class="error"
+    ></div>
+
+</main>
+
+
+<!-- BOTTOM NAV -->
+
+<nav class="bottom-nav">
+
+    <a
+        href="dashboard.html"
+        class="active"
+    >
+        <span>⌂</span>
+        Home
+    </a>
+
+    <a href="invest.html">
+        <span>📈</span>
+        Invest
+    </a>
+
+    <a href="referrals.html">
+        <span>👥</span>
+        Referrals
+    </a>
+
+    <a href="profile.html">
+        <span>👤</span>
+        Profile
+    </a>
+
+</nav>
+
+
+<script>
+
+    const API_URL =
+        "https://cheryearn-backend.onrender.com";
+
+    const token =
+        localStorage.getItem("token");
+
+
+    if (!token) {
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    async function loadDashboard() {
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/api/user/dashboard`,
+                    {
+                        method: "GET",
+
+                        headers: {
+                            "Authorization":
+                                `Bearer ${token}`
+                        }
+                    }
+                );
+
+
+            if (response.status === 401) {
+
                 logout();
                 return;
+
             }
 
-            const data = await response.json();
 
-            if (!response.ok || data.success === false) {
+            const data =
+                await response.json();
+
+
+            if (
+                !response.ok ||
+                data.success === false
+            ) {
+
                 throw new Error(
-                    data.message || "Unable to load dashboard."
+                    data.message ||
+                    "Unable to load dashboard."
                 );
+
             }
 
-            const user = data.user || data.data?.user || data.data;
+
+            const user =
+                data.user ||
+                data.data?.user ||
+                data.data;
+
 
             if (user) {
 
-                document.getElementById("welcomeName").textContent =
-                    `Welcome, ${user.name || "User"}`;
+                document.getElementById(
+                    "welcomeName"
+                ).textContent =
+                    `Welcome, ${
+                        user.name ||
+                        user.full_name ||
+                        "User"
+                    }`;
 
-                document.getElementById("balance").textContent =
-                    Number(user.balance || 0).toFixed(2);
 
-                document.getElementById("earnings").textContent =
+                document.getElementById(
+                    "balance"
+                ).textContent =
+                    Number(
+                        user.balance || 0
+                    ).toFixed(2);
+
+
+                document.getElementById(
+                    "earnings"
+                ).textContent =
                     Number(
                         user.totalEarnings ||
                         user.earnings ||
                         0
                     ).toFixed(2);
 
-                document.getElementById("referrals").textContent =
+
+                document.getElementById(
+                    "referrals"
+                ).textContent =
                     user.totalReferrals ||
                     user.referrals ||
                     0;
 
+
                 if (user.referralCode) {
 
-                    document.getElementById("referralLoading")
-                        .style.display = "none";
+                    document.getElementById(
+                        "referralLoading"
+                    ).style.display =
+                        "none";
 
-                    document.getElementById("referralContent")
-                        .style.display = "flex";
 
-                    document.getElementById("referralCode")
-                        .textContent = user.referralCode;
+                    document.getElementById(
+                        "referralContent"
+                    ).style.display =
+                        "flex";
+
+
+                    document.getElementById(
+                        "referralCode"
+                    ).textContent =
+                        user.referralCode;
+
                 }
+
             }
 
         } catch (error) {
 
-            document.getElementById("referralLoading")
-                .textContent = "Unable to load account information.";
+            document.getElementById(
+                "referralLoading"
+            ).textContent =
+                "Unable to load account information.";
 
-            document.getElementById("pageError")
-                .textContent = error.message || "Something went wrong.";
+
+            document.getElementById(
+                "pageError"
+            ).textContent =
+                error.message ||
+                "Something went wrong.";
+
         }
+
     }
+
 
     function copyReferral() {
 
         const code =
-            document.getElementById("referralCode").textContent;
+            document.getElementById(
+                "referralCode"
+            ).textContent;
+
 
         if (!code) return;
+
 
         const link =
             `${window.location.origin}/register.html?ref=${encodeURIComponent(code)}`;
 
+
         navigator.clipboard.writeText(link)
             .then(() => {
-                alert("Referral link copied!");
+
+                alert(
+                    "Referral link copied!"
+                );
+
             })
             .catch(() => {
+
                 alert(link);
+
             });
+
     }
+
 
     function shareReferral() {
 
         const code =
-            document.getElementById("referralCode").textContent;
+            document.getElementById(
+                "referralCode"
+            ).textContent;
+
 
         if (!code) {
-            alert("Referral code is still loading.");
+
+            alert(
+                "Referral code is still loading."
+            );
+
             return;
+
         }
+
 
         const link =
             `${window.location.origin}/register.html?ref=${encodeURIComponent(code)}`;
 
+
         const text =
             `Join me on CheryEarn and start earning through referrals. Register here: ${link}`;
+
 
         if (navigator.share) {
 
             navigator.share({
-                title: "Join CheryEarn",
-                text: text,
-                url: link
+
+                title:
+                    "Join CheryEarn",
+
+                text:
+                    text,
+
+                url:
+                    link
+
             });
 
         } else {
 
             navigator.clipboard.writeText(link)
                 .then(() => {
-                    alert("Referral link copied!");
+
+                    alert(
+                        "Referral link copied!"
+                    );
+
                 });
+
         }
+
     }
 
+
     function withdraw() {
-        window.location.href = "withdraw.html";
+
+        window.location.href =
+            "withdraw.html";
+
     }
+
 
     function logout() {
 
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
+        localStorage.removeItem(
+            "token"
+        );
 
-        window.location.href = "login.html";
+        localStorage.removeItem(
+            "user"
+        );
+
+        window.location.href =
+            "login.html";
+
     }
+
 
     loadDashboard();
 
