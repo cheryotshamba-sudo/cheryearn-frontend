@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - CheryEarn</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0b0b;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #00c853;
+        }
+
+        .logo p {
+            color: #999;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .card {
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 16px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.35);
+        }
+
+        .card h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 9px;
+            border: 1px solid #333;
+            background: #0d0d0d;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #00c853;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 9px;
+            background: #00c853;
+            color: #000;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .message {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .error {
+            display: block;
+            background: #3a1111;
+            color: #ff7777;
+        }
+
+        .success {
+            display: block;
+            background: #10351e;
+            color: #55e889;
+        }
+
+        .register {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .register a {
+            color: #00c853;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .forgot {
+            display: block;
+            text-align: right;
+            margin-top: -7px;
+            margin-bottom: 18px;
+        }
+
+        .forgot a {
+            color: #00c853;
+            font-size: 13px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <h1>CheryEarn</h1>
+        <p>Earn • Refer • Grow</p>
+    </div>
+
+    <div class="card">
+
+        <h2>Welcome Back</h2>
+        <p class="subtitle">Login to your CheryEarn account</p>
+
+        <form id="loginForm">
+
+            <div class="form-group">
+                <label for="identifier">Email or Phone</label>
+                <input
+                    type="text"
+                    id="identifier"
+                    name="identifier"
+                    placeholder="Enter email or phone"
+                    autocomplete="username"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    autocomplete="current-password"
+                    required
+                >
+            </div>
+
+            <div class="forgot">
+                <a href="forgot-password.html">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="login-btn" id="loginBtn">
+                Login
+            </button>
+
+            <div id="message" class="message"></div>
+
+        </form>
+
+        <div class="register">
+            Don't have an account?
+            <a href="register.html">Create Account</a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const API_URL = "https://cheryearn-backend.onrender.com";
+
+    const form = document.getElementById("loginForm");
+    const message = document.getElementById("message");
+    const loginBtn = document.getElementById("loginBtn");
+
+    form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        message.className = "message";
+        message.textContent = "";
+
+        const identifier = document
+            .getElementById("identifier")
+            .value
+            .trim();
+
+        const password = document
+            .getElementById("password")
+            .value;
+
+        if (!identifier || !password) {
+            message.className = "message error";
+            message.textContent = "Please enter your email/phone and password.";
+            return;
+        }
+
+        loginBtn.disabled = true;
+        loginBtn.textContent = "Logging in...";
+
+        try {
+            const response = await fetch(`${API_URL}/api/auth/login`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    identifier: identifier,
+                    password: password
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || data.success === false) {
+                throw new Error(data.message || "Invalid login details.");
+            }
+
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+            }
+
+            if (data.user) {
+                localStorage.setItem("user", JSON.stringify(data.user));
+            }
+
+            message.className = "message success";
+            message.textContent = data.message || "Login successful!";
+
+            setTimeout(() => {
+                window.location.href = "dashboard.html";
+            }, 1000);
+
+        } catch (error) {
+            message.className = "message error";
+            message.textContent =
+                error.message || "Unable to login. Please try again.";
+        }
+
+        loginBtn.disabled = false;
+        loginBtn.textContent = "Login";
+    });
+</script>
+
+</body>
+</html>
