@@ -321,11 +321,15 @@
         background: var(--earning-bg);
         border: 1px solid var(--border);
         border-radius: 12px;
-        padding: 11px 12px;
+        padding: 12px;
+    }
+
+    .member-top {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
         gap: 10px;
+        margin-bottom: 7px;
     }
 
     .member-left {
@@ -342,12 +346,9 @@
         text-overflow: ellipsis;
     }
 
-    .member-number {
+    .member-phone {
         color: var(--muted);
         font-size: 10px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
     }
 
     .member-right {
@@ -363,13 +364,36 @@
         border-radius: 7px;
         background: rgba(40,100,232,.15);
         color: var(--blue-light);
-        margin-bottom: 3px;
+        margin-right: 4px;
     }
 
     .member-status {
+        display: inline-block;
         color: #42df83;
         font-size: 9px;
-        font-weight: 500;
+        font-weight: 600;
+    }
+
+    .member-details {
+        border-top: 1px solid var(--border);
+        padding-top: 7px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+    }
+
+    .member-paid {
+        font-size: 10px;
+        color: var(--text);
+        font-weight: 600;
+    }
+
+    .member-date {
+        font-size: 9px;
+        color: var(--muted);
+        text-align: right;
     }
 
     .no-referrals {
@@ -566,7 +590,7 @@
             font-size: 12px;
         }
 
-        .member-number {
+        .member-phone {
             font-size: 9px;
         }
 
@@ -575,6 +599,14 @@
         }
 
         .member-status {
+            font-size: 8px;
+        }
+
+        .member-paid {
+            font-size: 9px;
+        }
+
+        .member-date {
             font-size: 8px;
         }
     }
@@ -1064,6 +1096,33 @@ function formatMoney(value) {
 
 
 /* =========================
+   DATE & TIME
+========================= */
+
+function formatReferralDateTime(value) {
+
+    if (!value) {
+        return "";
+    }
+
+    const date = new Date(value);
+
+    if (isNaN(date.getTime())) {
+        return "";
+    }
+
+    return date.toLocaleString("en-KE", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+        hour: "numeric",
+        minute: "2-digit",
+        hour12: true
+    });
+}
+
+
+/* =========================
    REFERRAL LINK
 ========================= */
 
@@ -1286,9 +1345,35 @@ function displayReferrals(data) {
             : [];
 
 
+    /*
+     * Keep Direct and Indirect information
+     * visible without showing CheryEarn IDs.
+     */
+    const directWithLevel =
+        direct.map(function(member) {
+
+            return {
+                ...member,
+                referralLevel: "Direct"
+            };
+
+        });
+
+
+    const indirectWithLevel =
+        indirect.map(function(member) {
+
+            return {
+                ...member,
+                referralLevel: "Indirect"
+            };
+
+        });
+
+
     const referrals = [
-        ...direct,
-        ...indirect
+        ...directWithLevel,
+        ...indirectWithLevel
     ];
 
 
@@ -1317,31 +1402,95 @@ function displayReferrals(data) {
             "CheryEarn Member";
 
 
-        const number =
-            member.cheryearnNumber ||
-            member.cheryearn_number ||
-            member.cheryearnId ||
-            member.cheryearn_id ||
+        /*
+         * PHONE NUMBER
+         *
+         * Supports several possible backend
+         * field names.
+         */
+        const phone =
+            member.phone ||
+            member.phoneNumber ||
+            member.phone_number ||
+            member.mobile ||
+            member.mobileNumber ||
+            member.mobile_number ||
             "";
 
 
+        /*
+         * Direct / Indirect
+         */
         const level =
+            member.referralLevel ||
             member.level ||
             "Direct";
 
 
+        /*
+         * Payment status
+         */
         const status =
             member.paymentStatus ||
             member.payment_status ||
+            member.status ||
             "Pending";
 
 
+        const statusLower =
+            String(status).toLowerCase();
+
+
         const statusText =
-            String(status).toLowerCase() === "completed" ||
-            String(status).toLowerCase() === "success" ||
-            String(status).toLowerCase() === "paid"
+            statusLower === "completed" ||
+            statusLower === "success" ||
+            statusLower === "successful" ||
+            statusLower === "paid"
                 ? "Paid"
-                : status;
+                : "Pending";
+
+
+        /*
+         * AMOUNT PAID
+         *
+         * Supports several possible backend
+         * field names.
+         */
+        const amount =
+            member.amountPaid ??
+            member.amount_paid ??
+            member.paidAmount ??
+            member.paid_amount ??
+            member.paymentAmount ??
+            member.payment_amount ??
+            member.amount ??
+            0;
+
+
+        /*
+         * PAYMENT DATE/TIME
+         *
+         * We check payment time first,
+         * then registration/join time.
+         */
+        const paymentDate =
+            member.paidAt ||
+            member.paid_at ||
+            member.paymentDate ||
+            member.payment_date ||
+            member.paymentTime ||
+            member.payment_time ||
+            member.completedAt ||
+            member.completed_at ||
+            member.createdAt ||
+            member.created_at ||
+            member.joinedAt ||
+            member.joined_at ||
+            "";
+
+
+        const formattedDateTime =
+            formatReferralDateTime(paymentDate);
 
 
         const item =
@@ -1353,27 +1502,72 @@ function displayReferrals(data) {
 
         item.innerHTML = `
 
-            <div class="member-left">
+            <div class="member-top">
 
-                <div class="member-name">
-                    ${escapeHtml(name)}
+                <div class="member-left">
+
+                    <div class="member-name">
+                        ${escapeHtml(name)}
+                    </div>
+
+                    ${
+                        phone
+                        ? `
+                            <div class="member-phone">
+                                ${escapeHtml(phone)}
+                            </div>
+                        `
+                        : ""
+                    }
+
                 </div>
 
-                <div class="member-number">
-                    ${escapeHtml(number)}
+
+                <div class="member-right">
+
+                    <span class="member-level">
+                        ${escapeHtml(level)}
+                    </span>
+
+                    <span
+                        class="member-status"
+                        style="${
+                            statusText === "Paid"
+                                ? ""
+                                : "color:#f2b84b;"
+                        }">
+                        ${escapeHtml(statusText)}
+                    </span>
+
                 </div>
 
             </div>
 
-            <div class="member-right">
 
-                <div class="member-level">
-                    ${escapeHtml(level)}
+            <div class="member-details">
+
+                <div class="member-paid">
+                    ${
+                        statusText === "Paid"
+                            ? escapeHtml(
+                                formatMoney(amount)
+                            ) + " paid"
+                            : "Payment pending"
+                    }
                 </div>
 
-                <div class="member-status">
-                    ${escapeHtml(statusText)}
-                </div>
+
+                ${
+                    formattedDateTime
+                    ? `
+                        <div class="member-date">
+                            ${escapeHtml(
+                                formattedDateTime
+                            )}
+                        </div>
+                    `
+                    : ""
+                }
 
             </div>
 
