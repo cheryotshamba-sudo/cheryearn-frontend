@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - CheryEarn</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0b0b;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 420px;
+        }
+
+        .logo {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .logo h1 {
+            font-size: 32px;
+            font-weight: 800;
+            color: #00c853;
+        }
+
+        .logo p {
+            color: #999;
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .card {
+            background: #151515;
+            border: 1px solid #292929;
+            border-radius: 16px;
+            padding: 25px 20px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+        }
+
+        .card h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #999;
+            font-size: 14px;
+            margin-bottom: 22px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 7px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border-radius: 9px;
+            border: 1px solid #333;
+            background: #0d0d0d;
+            color: #fff;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #00c853;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 9px;
+            background: #00c853;
+            color: #000;
+            font-size: 16px;
+            font-weight: 800;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .register-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .message {
+            display: none;
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .error {
+            display: block;
+            background: #3a1111;
+            color: #ff7777;
+        }
+
+        .success {
+            display: block;
+            background: #10351e;
+            color: #55e889;
+        }
+
+        .login {
+            text-align: center;
+            margin-top: 20px;
+            color: #999;
+            font-size: 14px;
+        }
+
+        .login a {
+            color: #00c853;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        .referral-info {
+            background: #101d15;
+            border: 1px solid #193b27;
+            border-radius: 9px;
+            padding: 11px;
+            margin-bottom: 18px;
+            font-size: 13px;
+            color: #9ee8b7;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="logo">
+        <h1>CheryEarn</h1>
+        <p>Earn • Refer • Grow</p>
+    </div>
+
+    <div class="card">
+
+        <h2>Create Account</h2>
+        <p class="subtitle">Join CheryEarn today</p>
+
+        <div id="referralInfo" class="referral-info" style="display:none;">
+            Referral code detected:
+            <strong id="referralCodeText"></strong>
+        </div>
+
+        <form id="registerForm">
+
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="Enter your full name"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    placeholder="07XXXXXXXX"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    placeholder="example@email.com"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Create a password"
+                    minlength="6"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    placeholder="Confirm your password"
+                    minlength="6"
+                    required
+                >
+            </div>
+
+            <button type="submit" class="register-btn" id="registerBtn">
+                Create Account
+            </button>
+
+            <div id="message" class="message"></div>
+
+        </form>
+
+        <div class="login">
+            Already have an account?
+            <a href="login.html">Login</a>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const API_URL = "https://cheryearn-backend.onrender.com";
+
+    const form = document.getElementById("registerForm");
+    const message = document.getElementById("message");
+    const registerBtn = document.getElementById("registerBtn");
+
+    // Get referral code from URL
+    const params = new URLSearchParams(window.location.search);
+    const referralCode = params.get("ref");
+
+    if (referralCode) {
+        document.getElementById("referralInfo").style.display = "block";
+        document.getElementById("referralCodeText").textContent = referralCode;
+    }
+
+    form.addEventListener("submit", async function(e) {
+        e.preventDefault();
+
+        message.className = "message";
+        message.textContent = "";
+
+        const name = document.getElementById("name").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+
+        if (password !== confirmPassword) {
+            message.className = "message error";
+            message.textContent = "Passwords do not match.";
+            return;
+        }
+
+        if (password.length < 6) {
+            message.className = "message error";
+            message.textContent = "Password must be at least 6 characters.";
+            return;
+        }
+
+        registerBtn.disabled = true;
+        registerBtn.textContent = "Creating Account...";
+
+        try {
+            const response = await fetch(`${API_URL}/api/auth/register`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name,
+                    phone: phone,
+                    email: email,
+                    password: password,
+                    referralCode: referralCode || null
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok || data.success === false) {
+                throw new Error(data.message || "Registration failed.");
+            }
+
+            message.className = "message success";
+            message.textContent = data.message || "Account created successfully!";
+
+            form.reset();
+
+            setTimeout(() => {
+                window.location.href = "login.html";
+            }, 1500);
+
+        } catch (error) {
+            message.className = "message error";
+            message.textContent = error.message || "Unable to create account. Please try again.";
+        }
+
+        registerBtn.disabled = false;
+        registerBtn.textContent = "Create Account";
+    });
+</script>
+
+</body>
+</html>
