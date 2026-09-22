@@ -265,6 +265,17 @@
             font-size: 14px;
         }
 
+        .level {
+            display: inline-block;
+            margin-top: 5px;
+            padding: 3px 7px;
+            border-radius: 5px;
+            background: #151f42;
+            color: #8f99b5;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
         .empty {
             padding: 30px 18px;
             text-align: center;
@@ -563,7 +574,9 @@
         localStorage.getItem("token");
 
 
-    /* AUTH CHECK */
+    // ===============================
+    // AUTH CHECK
+    // ===============================
 
     if (!token) {
 
@@ -573,7 +586,9 @@
     }
 
 
-    /* OPEN MENU */
+    // ===============================
+    // OPEN MENU
+    // ===============================
 
     function openMenu() {
 
@@ -588,7 +603,9 @@
     }
 
 
-    /* CLOSE MENU */
+    // ===============================
+    // CLOSE MENU
+    // ===============================
 
     function closeMenu() {
 
@@ -603,11 +620,45 @@
     }
 
 
-    /* LOAD REFERRALS */
+    // ===============================
+    // LOGOUT
+    // ===============================
+
+    function logout() {
+
+        localStorage.removeItem("token");
+
+        localStorage.removeItem("user");
+
+        localStorage.removeItem(
+            "cheryearnReferralLink"
+        );
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    // ===============================
+    // LOAD REFERRALS
+    // ===============================
 
     async function loadReferrals() {
 
+        const list =
+            document.getElementById(
+                "referralsList"
+            );
+
+        const errorElement =
+            document.getElementById("error");
+
+
         try {
+
+            errorElement.textContent = "";
+
 
             const response =
                 await fetch(
@@ -617,7 +668,10 @@
 
                         headers: {
                             "Authorization":
-                                `Bearer ${token}`
+                                `Bearer ${token}`,
+
+                            "Content-Type":
+                                "application/json"
                         }
                     }
                 );
@@ -654,58 +708,74 @@
             }
 
 
-            const referrals =
-                data.referrals ||
-                data.data?.referrals ||
-                data.data ||
-                [];
-
-
-            const total =
-                data.totalReferrals ??
-                data.data?.totalReferrals ??
-                referrals.length;
-
-
-            const earnings =
-                data.referralEarnings ??
-                data.data?.referralEarnings ??
-                data.totalEarnings ??
-                0;
-
+            // ===============================
+            // SUMMARY
+            // ===============================
 
             document
-                .getElementById("totalReferrals")
-                .textContent = total;
-
-
-            document
-                .getElementById("referralEarnings")
+                .getElementById(
+                    "totalReferrals"
+                )
                 .textContent =
-                Number(earnings).toFixed(2);
+                data.totalReferrals || 0;
 
+
+            document
+                .getElementById(
+                    "referralEarnings"
+                )
+                .textContent =
+                Number(
+                    data.referralEarnings || 0
+                ).toFixed(2);
+
+
+            // ===============================
+            // REFERRAL LINK
+            // ===============================
+
+            if (data.referralLink) {
+
+                document
+                    .getElementById(
+                        "referralLink"
+                    )
+                    .value =
+                    data.referralLink;
+
+                localStorage.setItem(
+                    "cheryearnReferralLink",
+                    data.referralLink
+                );
+
+            }
+
+
+            // ===============================
+            // DISPLAY REFERRALS
+            // ===============================
 
             displayReferrals(
-                referrals
+                data.referrals || []
             );
 
 
-            loadReferralLink();
-
         } catch (error) {
 
-            document
-                .getElementById("referralsList")
-                .innerHTML = `
-                    <div class="empty">
-                        Unable to load referrals.
-                    </div>
-                `;
+            console.error(
+                "Referral loading error:",
+                error
+            );
 
 
-            document
-                .getElementById("error")
-                .textContent =
+            list.innerHTML = `
+                <div class="empty">
+                    Unable to load referrals.
+                </div>
+            `;
+
+
+            errorElement.textContent =
                 error.message ||
                 "Something went wrong.";
 
@@ -714,75 +784,9 @@
     }
 
 
-    /* LOAD REFERRAL LINK */
-
-    async function loadReferralLink() {
-
-        try {
-
-            const userResponse =
-                await fetch(
-                    `${API_URL}/api/user/dashboard`,
-                    {
-                        headers: {
-                            "Authorization":
-                                `Bearer ${token}`
-                        }
-                    }
-                );
-
-
-            if (userResponse.status === 401) {
-
-                localStorage.removeItem("token");
-
-                localStorage.removeItem("user");
-
-                window.location.href =
-                    "login.html";
-
-                return;
-
-            }
-
-
-            const userData =
-                await userResponse.json();
-
-
-            const user =
-                userData.user ||
-                userData.data?.user ||
-                userData.data;
-
-
-            if (
-                user &&
-                user.referralCode
-            ) {
-
-                const link =
-                    `${window.location.origin}/register.html?ref=${encodeURIComponent(user.referralCode)}`;
-
-
-                document
-                    .getElementById("referralLink")
-                    .value = link;
-
-            }
-
-        } catch (error) {
-
-            console.log(
-                "Referral link could not be loaded."
-            );
-
-        }
-
-    }
-
-
-    /* DISPLAY REFERRALS */
+    // ===============================
+    // DISPLAY REFERRALS
+    // ===============================
 
     function displayReferrals(
         referrals
@@ -817,25 +821,214 @@
             (referral) => {
 
                 const name =
-                    referral.name ||
                     referral.fullName ||
                     referral.full_name ||
+                    referral.name ||
                     "User";
 
 
-                const date =
-                    referral.createdAt ||
-                    referral.created_at ||
-                    referral.date ||
-                    referral.joinedAt;
+                const cheryearnNumber =
+                    referral.cheryearnNumber ||
+                    referral.cheryearn_number ||
+                    "N/A";
+
+
+                const level =
+                    referral.level ||
+                    "Referral";
+
+
+                const status =
+                    referral.paymentStatus ||
+                    "NOT PAID";
 
 
                 const earning =
-                    referral.earning ??
-                    referral.commission ??
-                    referral.referralBonus ??
-                    referral.referral_bonus ??
-                    0;
+                    Number(
+                        referral.earning ??
+                        referral.commission ??
+                        0
+                    );
 
 
-               
+                const dateValue =
+                    referral.paymentTime ||
+                    referral.createdAt ||
+                    referral.created_at;
+
+
+                let dateText =
+                    "Date unavailable";
+
+
+                if (dateValue) {
+
+                    const date =
+                        new Date(dateValue);
+
+
+                    if (
+                        !isNaN(
+                            date.getTime()
+                        )
+                    ) {
+
+                        dateText =
+                            date.toLocaleDateString(
+                                "en-KE",
+                                {
+                                    day: "2-digit",
+                                    month: "short",
+                                    year: "numeric"
+                                }
+                            );
+
+                    }
+
+                }
+
+
+                const item =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                item.className =
+                    "referral";
+
+
+                item.innerHTML = `
+
+                    <div class="person">
+
+                        <strong>
+                            ${escapeHtml(name)}
+                        </strong>
+
+                        <small>
+                            ${escapeHtml(cheryearnNumber)}
+                            • ${escapeHtml(status)}
+                        </small>
+
+                        <span class="level">
+                            ${escapeHtml(level)}
+                        </span>
+
+                        <small style="
+                            display:block;
+                            margin-top:5px;
+                        ">
+                            Joined ${escapeHtml(dateText)}
+                        </small>
+
+                    </div>
+
+                    <div class="earning">
+                        KSh ${earning.toFixed(2)}
+                    </div>
+
+                `;
+
+
+                list.appendChild(item);
+
+            }
+        );
+
+    }
+
+
+    // ===============================
+    // SAFE HTML
+    // ===============================
+
+    function escapeHtml(value) {
+
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+
+    }
+
+
+    // ===============================
+    // COPY REFERRAL LINK
+    // ===============================
+
+    async function copyLink() {
+
+        const input =
+            document.getElementById(
+                "referralLink"
+            );
+
+
+        if (
+            !input.value ||
+            input.value === "Loading..."
+        ) {
+
+            return;
+
+        }
+
+
+        try {
+
+            await navigator.clipboard.writeText(
+                input.value
+            );
+
+
+            const button =
+                document.querySelector(
+                    ".copy-btn"
+                );
+
+
+            const originalText =
+                button.textContent;
+
+
+            button.textContent =
+                "Copied!";
+
+
+            setTimeout(
+                () => {
+
+                    button.textContent =
+                        originalText;
+
+                },
+                1500
+            );
+
+
+        } catch (error) {
+
+            input.select();
+
+            document.execCommand(
+                "copy"
+            );
+
+        }
+
+    }
+
+
+    // ===============================
+    // START
+    // ===============================
+
+    loadReferrals();
+
+</script>
+
+</body>
+</html>
