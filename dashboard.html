@@ -46,8 +46,6 @@
             z-index: 100;
         }
 
-        /* THREE DOTS */
-
         .menu-btn {
             background: transparent;
             border: none;
@@ -212,6 +210,7 @@
             padding: 22px 16px 25px;
         }
 
+
         /* WELCOME */
 
         .welcome {
@@ -268,17 +267,13 @@
         }
 
 
-        /* NEW EARNINGS PART */
+        /* EARNINGS */
 
         .earnings-section {
             background: #0d1738;
-
             border: 1px solid #202b4d;
-
             border-radius: 18px;
-
             padding: 20px;
-
             margin-bottom: 16px;
         }
 
@@ -286,7 +281,6 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-
             margin-bottom: 15px;
         }
 
@@ -302,33 +296,25 @@
 
         .earnings-grid {
             display: grid;
-
             grid-template-columns: 1fr 1fr;
-
             gap: 10px;
         }
 
         .earning-box {
             background: #050d26;
-
             border: 1px solid #202b4d;
-
             border-radius: 13px;
-
             padding: 16px;
         }
 
         .earning-label {
             color: #94a3b8;
-
             font-size: 12px;
-
             margin-bottom: 7px;
         }
 
         .earning-value {
             font-size: 19px;
-
             font-weight: 800;
         }
 
@@ -342,9 +328,7 @@
 
         .earning-status {
             margin-top: 8px;
-
             font-size: 11px;
-
             color: #94a3b8;
         }
 
@@ -376,9 +360,6 @@
             font-size: 20px;
             font-weight: 700;
         }
-
-
-        /* COLORS */
 
         .success {
             color: #4ade80;
@@ -663,7 +644,7 @@
     <a
         href="#"
         class="menu-item"
-        onclick="logout()"
+        onclick="logout(); return false;"
     >
         <span class="menu-icon">↪</span>
         Logout
@@ -745,7 +726,7 @@
     </div>
 
 
-    <!-- NEW EARNINGS SECTION -->
+    <!-- EARNINGS -->
 
     <div class="earnings-section">
 
@@ -763,7 +744,6 @@
 
 
         <div class="earnings-grid">
-
 
             <div class="earning-box">
 
@@ -921,6 +901,7 @@
             ></span>
 
             <button
+                type="button"
                 class="copy-btn"
                 onclick="copyReferral()"
             >
@@ -931,6 +912,7 @@
 
 
         <button
+            type="button"
             class="share-btn"
             onclick="shareReferral()"
         >
@@ -999,17 +981,23 @@
         Home
     </a>
 
-    <a href="invest.html">
+    <a
+        href="invest.html"
+    >
         <span>📈</span>
         Invest
     </a>
 
-    <a href="referrals.html">
+    <a
+        href="referrals.html"
+    >
         <span>👥</span>
         Referrals
     </a>
 
-    <a href="profile.html">
+    <a
+        href="profile.html"
+    >
         <span>👤</span>
         Profile
     </a>
@@ -1026,6 +1014,10 @@
         localStorage.getItem("token");
 
 
+    // ===============================
+    // AUTH CHECK
+    // ===============================
+
     if (!token) {
 
         window.location.href =
@@ -1034,7 +1026,9 @@
     }
 
 
-    /* THREE DOT MENU */
+    // ===============================
+    // THREE DOT MENU
+    // ===============================
 
     function openMenu() {
 
@@ -1062,7 +1056,9 @@
     }
 
 
-    /* LOAD DASHBOARD */
+    // ===============================
+    // LOAD DASHBOARD
+    // ===============================
 
     async function loadDashboard() {
 
@@ -1110,174 +1106,283 @@
             const user =
                 data.user ||
                 data.data?.user ||
-                data.data;
+                data.data ||
+                {};
 
 
-            if (user) {
+            // ===============================
+            // NAME
+            // ===============================
 
-                /* NAME */
+            document.getElementById(
+                "welcomeName"
+            ).textContent =
+                `Welcome, ${
+                    user.name ||
+                    user.full_name ||
+                    "User"
+                }`;
+
+
+            // ===============================
+            // BALANCE
+            // ===============================
+
+            const balance =
+                Number(
+                    user.balance || 0
+                ).toFixed(2);
+
+
+            document.getElementById(
+                "balance"
+            ).textContent =
+                balance;
+
+
+            // ===============================
+            // EARNINGS
+            // ===============================
+
+            const earnings =
+                Number(
+                    user.totalEarnings ||
+                    user.total_earnings ||
+                    user.earnings ||
+                    0
+                ).toFixed(2);
+
+
+            document.getElementById(
+                "earnings"
+            ).textContent =
+                earnings;
+
+
+            document.getElementById(
+                "earnings2"
+            ).textContent =
+                earnings;
+
+
+            document.getElementById(
+                "completed"
+            ).textContent =
+                earnings;
+
+
+            // ===============================
+            // PENDING
+            // ===============================
+
+            const pending =
+                Number(
+                    user.pendingEarnings ||
+                    user.pending_earnings ||
+                    user.pending ||
+                    0
+                ).toFixed(2);
+
+
+            document.getElementById(
+                "pending"
+            ).textContent =
+                pending;
+
+
+            // ===============================
+            // REFERRALS
+            // ===============================
+
+            const referrals =
+                user.totalReferrals ||
+                user.total_referrals ||
+                user.referrals ||
+                0;
+
+
+            document.getElementById(
+                "referrals"
+            ).textContent =
+                referrals;
+
+
+            document.getElementById(
+                "earningsReferrals"
+            ).textContent =
+                referrals;
+
+
+            // ===============================
+            // REFERRAL CODE
+            // ===============================
+
+            let storedUser = {};
+
+            try {
+
+                storedUser =
+                    JSON.parse(
+                        localStorage.getItem("user") ||
+                        "{}"
+                    );
+
+            } catch (error) {
+
+                storedUser = {};
+
+            }
+
+
+            const referralCode =
+                user.referralCode ||
+                user.referral_code ||
+                storedUser.referralCode ||
+                storedUser.referral_code ||
+                "";
+
+
+            if (referralCode) {
 
                 document.getElementById(
-                    "welcomeName"
-                ).textContent =
-                    `Welcome, ${
-                        user.name ||
-                        user.full_name ||
-                        "User"
-                    }`;
-
-
-                /* BALANCE */
-
-                const balance =
-                    Number(
-                        user.balance || 0
-                    ).toFixed(2);
+                    "referralLoading"
+                ).style.display =
+                    "none";
 
 
                 document.getElementById(
-                    "balance"
-                ).textContent =
-                    balance;
-
-
-                /* EARNINGS */
-
-                const earnings =
-                    Number(
-                        user.totalEarnings ||
-                        user.earnings ||
-                        0
-                    ).toFixed(2);
+                    "referralContent"
+                ).style.display =
+                    "flex";
 
 
                 document.getElementById(
-                    "earnings"
+                    "referralCode"
                 ).textContent =
-                    earnings;
+                    referralCode;
 
+            } else {
 
                 document.getElementById(
-                    "earnings2"
+                    "referralLoading"
                 ).textContent =
-                    earnings;
+                    "Referral code not available yet.";
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Dashboard error:",
+                error
+            );
 
 
-                document.getElementById(
-                    "completed"
-                ).textContent =
-                    earnings;
+            document.getElementById(
+                "pageError"
+            ).textContent =
+                error.message ||
+                "Something went wrong.";
+
+        }
+
+    }
 
 
-                /* PENDING */
+    // ===============================
+    // COPY REFERRAL
+    // ===============================
 
-                const pending =
-                    Number(
-                        user.pendingEarnings ||
-                        user.pending ||
-                        0
-                    ).toFixed(2);
-
-
-                document.getElementById(
-                    "pending"
-                ).textContent =
-                    pending;
-
-
-                /* REFERRALS */
-
-                const referrals =
-                    user.totalReferrals ||
-                    user.referrals ||
-                    0;
-
-
-                document.getElementById(
-                    "referrals"
-                ).textContent =
-                    referrals;
-
-
-                document.getElementById(
-                    "earningsReferrals"
-                ).textContent =
-                    referrals;
-
-
-               /* REFERRAL CODE */
-
-const referralCode =
-    user.referralCode ||
-    user.referral_code ||
-    JSON.parse(localStorage.getItem("user") || "{}").referralCode ||
-    JSON.parse(localStorage.getItem("user") || "{}").referral_code ||
-    "";
-
-if (referralCode) {
-
-    document.getElementById(
-        "referralLoading"
-    ).style.display =
-        "none";
-
-    document.getElementById(
-        "referralContent"
-    ).style.display =
-        "flex";
-
-    document.getElementById(
-        "referralCode"
-    ).textContent =
-        referralCode;
-
-} 
-
-                
-
-
-    /* COPY REFERRAL */
-
-    function copyReferral() {
+    async function copyReferral() {
 
         const code =
             document.getElementById(
                 "referralCode"
-            ).textContent;
+            ).textContent.trim();
 
 
-        if (!code) return;
+        if (!code) {
+
+            alert(
+                "Referral code is still loading."
+            );
+
+            return;
+
+        }
 
 
         const link =
             `${window.location.origin}/register.html?ref=${encodeURIComponent(code)}`;
 
 
-        navigator.clipboard.writeText(link)
-            .then(() => {
+        try {
+
+            await navigator.clipboard.writeText(
+                link
+            );
+
+            alert(
+                "Referral link copied!"
+            );
+
+        } catch (error) {
+
+            const textarea =
+                document.createElement("textarea");
+
+            textarea.value =
+                link;
+
+            textarea.style.position =
+                "fixed";
+
+            textarea.style.opacity =
+                "0";
+
+            document.body.appendChild(
+                textarea
+            );
+
+            textarea.select();
+
+            try {
+
+                document.execCommand(
+                    "copy"
+                );
 
                 alert(
                     "Referral link copied!"
                 );
 
-            })
-            .catch(() => {
+            } catch (copyError) {
 
-                alert(link);
+                alert(
+                    link
+                );
 
-            });
+            }
+
+            document.body.removeChild(
+                textarea
+            );
+
+        }
 
     }
 
 
-    /* SHARE REFERRAL */
+    // ===============================
+    // SHARE REFERRAL
+    // ===============================
 
-    function shareReferral() {
+    async function shareReferral() {
 
         const code =
             document.getElementById(
                 "referralCode"
-            ).textContent;
+            ).textContent.trim();
 
 
         if (!code) {
@@ -1299,38 +1404,68 @@ if (referralCode) {
             `Join me on CheryEarn and start earning through referrals. Register here: ${link}`;
 
 
-        if (navigator.share) {
+        if (
+            navigator.share &&
+            typeof navigator.share === "function"
+        ) {
 
-            navigator.share({
+            try {
 
-                title:
-                    "Join CheryEarn",
+                await navigator.share({
 
-                text:
-                    text,
+                    title:
+                        "Join CheryEarn",
 
-                url:
-                    link
+                    text:
+                        text,
 
-            });
-
-        } else {
-
-            navigator.clipboard.writeText(link)
-                .then(() => {
-
-                    alert(
-                        "Referral link copied!"
-                    );
+                    url:
+                        link
 
                 });
+
+                return;
+
+            } catch (error) {
+
+                if (
+                    error &&
+                    error.name === "AbortError"
+                ) {
+
+                    return;
+
+                }
+
+            }
+
+        }
+
+
+        try {
+
+            await navigator.clipboard.writeText(
+                link
+            );
+
+            alert(
+                "Referral link copied!"
+            );
+
+        } catch (error) {
+
+            alert(
+                link
+            );
 
         }
 
     }
 
 
-    /* WITHDRAW */
+    // ===============================
+    // WITHDRAW
+    // ===============================
 
     function withdraw() {
 
@@ -1340,7 +1475,9 @@ if (referralCode) {
     }
 
 
-    /* LOGOUT */
+    // ===============================
+    // LOGOUT
+    // ===============================
 
     function logout() {
 
@@ -1358,7 +1495,9 @@ if (referralCode) {
     }
 
 
-    /* START */
+    // ===============================
+    // START
+    // ===============================
 
     loadDashboard();
 
