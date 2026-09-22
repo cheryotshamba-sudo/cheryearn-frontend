@@ -53,8 +53,6 @@
             margin: 0 auto;
         }
 
-        /* ================= HEADER ================= */
-
         .header {
             height: 88px;
             background: var(--header-bg);
@@ -119,8 +117,6 @@
             cursor: pointer;
         }
 
-        /* ================= DROPDOWN ================= */
-
         .menu-wrapper {
             position: relative;
         }
@@ -160,8 +156,6 @@
             background: rgba(40,100,232,.12);
         }
 
-        /* ================= MAIN ================= */
-
         .content {
             padding: 24px 20px 20px;
         }
@@ -178,8 +172,6 @@
             font-size: 14px;
             margin-bottom: 22px;
         }
-
-        /* ================= BALANCE ================= */
 
         .balance-card {
             background: var(--card-bg);
@@ -214,8 +206,6 @@
             cursor: pointer;
         }
 
-        /* ================= STATS ================= */
-
         .stats {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -245,8 +235,6 @@
         .green {
             color: #42df83;
         }
-
-        /* ================= REFERRAL ================= */
 
         .referral-section {
             background: var(--card-bg);
@@ -315,8 +303,6 @@
             margin-bottom: 17px;
         }
 
-        /* ================= EARNINGS ================= */
-
         .earnings-title {
             font-size: 16px;
             font-weight: 600;
@@ -348,8 +334,6 @@
             font-weight: 600;
         }
 
-        /* ================= SUPPORT ================= */
-
         .support-button {
             position: fixed;
             right: 17px;
@@ -368,8 +352,6 @@
             z-index: 900;
             box-shadow: 0 6px 18px rgba(0,0,0,.35);
         }
-
-        /* ================= BOTTOM NAV ================= */
 
         .bottom-nav {
             position: fixed;
@@ -408,8 +390,6 @@
             color: var(--blue-light);
         }
 
-        /* ================= TOAST ================= */
-
         .toast {
             position: fixed;
             left: 50%;
@@ -427,8 +407,6 @@
         .toast.show {
             display: block;
         }
-
-        /* ================= SMALL PHONES ================= */
 
         @media (max-width: 390px) {
 
@@ -546,7 +524,6 @@
 
 <div class="page">
 
-    <!-- HEADER -->
     <header class="header">
 
         <div class="header-left">
@@ -588,7 +565,6 @@
     </header>
 
 
-    <!-- MAIN -->
     <main class="content">
 
         <h1 class="welcome-title" id="welcomeTitle">
@@ -600,7 +576,6 @@
         </p>
 
 
-        <!-- AVAILABLE BALANCE -->
         <section class="balance-card">
 
             <div class="balance-label">
@@ -611,15 +586,15 @@
                 KSh 0.00
             </div>
 
-            <button class="withdraw-btn"
-                    onclick="goTo('withdraw.html')">
+            <button
+                class="withdraw-btn"
+                onclick="goTo('withdraw.html')">
                 Withdraw
             </button>
 
         </section>
 
 
-        <!-- TOTAL EARNINGS / REFERRALS -->
         <div class="stats">
 
             <div class="stat-card">
@@ -628,8 +603,9 @@
                     Total Earnings
                 </div>
 
-                <div class="stat-value green"
-                     id="totalEarnings">
+                <div
+                    class="stat-value green"
+                    id="totalEarnings">
                     KSh 0.00
                 </div>
 
@@ -642,8 +618,9 @@
                     Total Referrals
                 </div>
 
-                <div class="stat-value"
-                     id="totalReferrals">
+                <div
+                    class="stat-value"
+                    id="totalReferrals">
                     0
                 </div>
 
@@ -652,7 +629,6 @@
         </div>
 
 
-        <!-- REFERRAL -->
         <section class="referral-section">
 
             <div class="referral-title">
@@ -666,21 +642,24 @@
 
             <div class="referral-box">
 
-                <div class="referral-link"
-                     id="referralLink">
+                <div
+                    class="referral-link"
+                    id="referralLink">
                     Loading referral link...
                 </div>
 
-                <button class="copy-btn"
-                        onclick="copyReferralLink()">
+                <button
+                    class="copy-btn"
+                    onclick="copyReferralLink()">
                     Copy
                 </button>
 
             </div>
 
 
-            <button class="share-btn"
-                    onclick="shareReferralLink()">
+            <button
+                class="share-btn"
+                onclick="shareReferralLink()">
                 Share Referral Link
             </button>
 
@@ -697,8 +676,9 @@
                         Direct Earnings
                     </div>
 
-                    <div class="earning-value"
-                         id="directEarnings">
+                    <div
+                        class="earning-value"
+                        id="directEarnings">
                         KSh 0.00
                     </div>
 
@@ -711,8 +691,9 @@
                         Indirect Earnings
                     </div>
 
-                    <div class="earning-value"
-                         id="indirectEarnings">
+                    <div
+                        class="earning-value"
+                        id="indirectEarnings">
                         KSh 0.00
                     </div>
 
@@ -727,38 +708,52 @@
 </div>
 
 
-<!-- SUPPORT -->
-<button class="support-button"
-        onclick="openSupport()">
+<button
+    class="support-button"
+    onclick="openSupport()">
     ☎
 </button>
 
 
-<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
 
-    <button class="nav-btn active"
-            onclick="goTo('dashboard.html')">
+    <button
+        class="nav-btn active"
+        onclick="goTo('dashboard.html')">
+
         <span class="nav-icon">⌂</span>
         Home
+
     </button>
 
-    <button class="nav-btn"
-            onclick="goTo('invest.html')">
+
+    <button
+        class="nav-btn"
+        onclick="goTo('invest.html')">
+
         <span class="nav-icon">📈</span>
         Invest
+
     </button>
 
-    <button class="nav-btn"
-            onclick="goTo('referrals.html')">
+
+    <button
+        class="nav-btn"
+        onclick="goTo('referrals.html')">
+
         <span class="nav-icon">👥</span>
         Referrals
+
     </button>
 
-    <button class="nav-btn"
-            onclick="goTo('profile.html')">
+
+    <button
+        class="nav-btn"
+        onclick="goTo('profile.html')">
+
         <span class="nav-icon">👤</span>
         Profile
+
     </button>
 
 </nav>
@@ -768,6 +763,14 @@
 
 
 <script>
+
+    /* =========================
+       BACKEND
+    ========================= */
+
+    const API_URL =
+        "https://cheryearn-backend.onrender.com";
+
 
     /* =========================
        THEME
@@ -881,7 +884,8 @@
         const toast =
             document.getElementById("toast");
 
-        toast.textContent = message;
+        toast.textContent =
+            message;
 
         toast.classList.add("show");
 
@@ -909,6 +913,7 @@
         ) {
 
             showToast("Referral link not available");
+
             return;
         }
 
@@ -942,6 +947,7 @@
         ) {
 
             showToast("Referral link not available");
+
             return;
         }
 
@@ -987,7 +993,9 @@
 
         } else {
 
-            showToast("Support is available on WhatsApp");
+            showToast(
+                "Support is available on WhatsApp"
+            );
 
         }
     }
@@ -1003,18 +1011,18 @@
             Number(value || 0);
 
         return "KSh " +
-            amount.toLocaleString("en-KE", {
-
-                minimumFractionDigits: 2,
-
-                maximumFractionDigits: 2
-
-            });
+            amount.toLocaleString(
+                "en-KE",
+                {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2
+                }
+            );
     }
 
 
     /* =========================
-       CREATE OLD CHERYEARN LINK
+       CREATE ORIGINAL LINK
     ========================= */
 
     function buildReferralLink(user) {
@@ -1033,10 +1041,6 @@
             user.uniqueName ||
             "";
 
-        /*
-         * If cheryearn_id is not available,
-         * create it from cheryearn_number.
-         */
 
         if (
             !cheryearnId &&
@@ -1048,7 +1052,6 @@
                 "CheryEarn" +
                 String(user.cheryearn_number)
                     .padStart(3, "0");
-
         }
 
 
@@ -1071,16 +1074,21 @@
 
 
     /* =========================
-       LOAD DASHBOARD DATA
+       APPLY DASHBOARD DATA
     ========================= */
 
     function applyDashboardData(data) {
 
-        if (!data) return;
+        if (!data) {
+            return;
+        }
+
 
         const user =
             data.user ||
             data.profile ||
+            data.data?.user ||
+            data.data ||
             data;
 
 
@@ -1089,6 +1097,7 @@
             user.username ||
             user.name ||
             user.fullName ||
+            user.full_name ||
             user.firstName ||
             "Cheryot";
 
@@ -1153,6 +1162,7 @@
 
         const direct =
             data.directReferrals ||
+            data.data?.directReferrals ||
             (
                 data.referrals &&
                 data.referrals.direct
@@ -1163,6 +1173,7 @@
 
         const indirect =
             data.indirectReferrals ||
+            data.data?.indirectReferrals ||
             (
                 data.referrals &&
                 data.referrals.indirect
@@ -1173,6 +1184,7 @@
 
         const total =
             data.totalReferrals ??
+            data.data?.totalReferrals ??
             user.totalReferrals ??
             direct.length + indirect.length;
 
@@ -1191,17 +1203,11 @@
             user.referralLink ||
             user.referralCodeLink ||
             data.referralLink ||
+            data.data?.referralLink ||
             data.referralUrl ||
             data.referral_url ||
             "";
 
-
-        /*
-         * IMPORTANT:
-         * If the backend/localStorage does not
-         * contain referralLink, rebuild the
-         * original working CheryEarn link.
-         */
 
         if (!referralLink) {
 
@@ -1219,17 +1225,101 @@
                 referralLink;
 
         }
-
     }
 
 
     /* =========================
-       INITIAL DATA
+       FETCH DASHBOARD FROM BACKEND
+       ========================= */
+
+    window.fetchDashboardData =
+        async function() {
+
+            const token =
+                localStorage.getItem("token");
+
+
+            if (!token) {
+
+                window.location.href =
+                    "login.html";
+
+                return null;
+            }
+
+
+            const response =
+                await fetch(
+                    `${API_URL}/api/user/dashboard`,
+                    {
+                        method: "GET",
+
+                        headers: {
+                            "Authorization":
+                                `Bearer ${token}`,
+
+                            "Content-Type":
+                                "application/json"
+                        }
+                    }
+                );
+
+
+            if (response.status === 401) {
+
+                localStorage.removeItem("token");
+                localStorage.removeItem("authToken");
+                localStorage.removeItem("user");
+                localStorage.removeItem("dashboardData");
+
+                window.location.href =
+                    "login.html";
+
+                return null;
+            }
+
+
+            const data =
+                await response.json();
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    data.message ||
+                    "Unable to load dashboard."
+                );
+            }
+
+
+            console.log(
+                "DASHBOARD RESPONSE:",
+                data
+            );
+
+
+            localStorage.setItem(
+                "dashboardData",
+                JSON.stringify(data)
+            );
+
+
+            return data;
+        };
+
+
+    /* =========================
+       LOAD DASHBOARD
     ========================= */
 
     async function loadDashboard() {
 
         try {
+
+            /*
+             * First load the saved information
+             * so the page can display immediately.
+             */
 
             const savedData =
                 localStorage.getItem(
@@ -1247,11 +1337,18 @@
 
                 } catch (error) {
 
-                    console.error(error);
+                    console.error(
+                        "Saved dashboard data error:",
+                        error
+                    );
 
                 }
             }
 
+
+            /*
+             * Load saved user information too.
+             */
 
             const savedUser =
                 localStorage.getItem("user");
@@ -1270,28 +1367,30 @@
 
                 } catch (error) {
 
-                    console.error(error);
+                    console.error(
+                        "Saved user error:",
+                        error
+                    );
 
                 }
             }
 
 
-            if (
-                typeof window.fetchDashboardData ===
-                "function"
-            ) {
+            /*
+             * IMPORTANT:
+             * Always fetch the latest dashboard
+             * information from the backend.
+             */
 
-                const response =
-                    await window.fetchDashboardData();
+            const response =
+                await window.fetchDashboardData();
 
 
-                if (response) {
+            if (response) {
 
-                    applyDashboardData(
-                        response
-                    );
-
-                }
+                applyDashboardData(
+                    response
+                );
 
             }
 
@@ -1300,6 +1399,10 @@
             console.error(
                 "Dashboard error:",
                 error
+            );
+
+            showToast(
+                "Unable to load dashboard data"
             );
         }
     }
