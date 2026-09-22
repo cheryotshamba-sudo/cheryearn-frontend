@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Login - CheryEarn</title>
 
     <style>
@@ -34,7 +35,7 @@
         }
 
         .logo h1 {
-            font-size: 32px;
+            font-size: 34px;
             font-weight: 800;
             color: #00c853;
         }
@@ -119,13 +120,13 @@
             text-align: center;
         }
 
-        .error {
+        .message.error {
             display: block;
             background: #3a1111;
             color: #ff7777;
         }
 
-        .success {
+        .message.success {
             display: block;
             background: #10351e;
             color: #55e889;
@@ -171,12 +172,18 @@
     <div class="card">
 
         <h2>Welcome Back</h2>
-        <p class="subtitle">Login to your CheryEarn account</p>
+
+        <p class="subtitle">
+            Login to your CheryEarn account
+        </p>
 
         <form id="loginForm">
 
             <div class="form-group">
-                <label for="identifier">Email or Phone</label>
+                <label for="identifier">
+                    Email or Phone
+                </label>
+
                 <input
                     type="text"
                     id="identifier"
@@ -188,7 +195,10 @@
             </div>
 
             <div class="form-group">
-                <label for="password">Password</label>
+                <label for="password">
+                    Password
+                </label>
+
                 <input
                     type="password"
                     id="password"
@@ -200,98 +210,166 @@
             </div>
 
             <div class="forgot">
-                <a href="forgot-password.html">Forgot Password?</a>
+                <a href="forgot-password.html">
+                    Forgot Password?
+                </a>
             </div>
 
-            <button type="submit" class="login-btn" id="loginBtn">
+            <button
+                type="submit"
+                class="login-btn"
+                id="loginBtn"
+            >
                 Login
             </button>
 
-            <div id="message" class="message"></div>
+            <div
+                id="message"
+                class="message"
+            ></div>
 
         </form>
 
         <div class="register">
             Don't have an account?
-            <a href="register.html">Create Account</a>
+            <a href="register.html">
+                Create Account
+            </a>
         </div>
 
     </div>
+
 </div>
 
 <script>
-    const API_URL = "https://cheryearn-backend.onrender.com";
 
-    const form = document.getElementById("loginForm");
-    const message = document.getElementById("message");
-    const loginBtn = document.getElementById("loginBtn");
+const API_URL = "https://cheryearn-backend.onrender.com";
 
-    form.addEventListener("submit", async function(e) {
-        e.preventDefault();
+const form = document.getElementById("loginForm");
+const message = document.getElementById("message");
+const loginBtn = document.getElementById("loginBtn");
 
-        message.className = "message";
-        message.textContent = "";
+form.addEventListener("submit", async function(event) {
 
-        const identifier = document
-            .getElementById("identifier")
-            .value
-            .trim();
+    event.preventDefault();
 
-        const password = document
-            .getElementById("password")
-            .value;
+    message.className = "message";
+    message.textContent = "";
 
-        if (!identifier || !password) {
-            message.className = "message error";
-            message.textContent = "Please enter your email/phone and password.";
-            return;
-        }
+    const identifier =
+        document.getElementById("identifier").value.trim();
 
-        loginBtn.disabled = true;
-        loginBtn.textContent = "Logging in...";
+    const password =
+        document.getElementById("password").value;
 
-        try {
-            const response = await fetch(`${API_URL}/api/auth/login`, {
+    if (!identifier || !password) {
+
+        message.className = "message error";
+
+        message.textContent =
+            "Please enter your email/phone and password.";
+
+        return;
+    }
+
+    loginBtn.disabled = true;
+    loginBtn.textContent = "Logging in...";
+
+    try {
+
+        const response = await fetch(
+            `${API_URL}/api/auth/login`,
+            {
                 method: "POST",
+
                 headers: {
                     "Content-Type": "application/json"
                 },
+
                 body: JSON.stringify({
                     identifier: identifier,
                     password: password
                 })
-            });
-
-            const data = await response.json();
-
-            if (!response.ok || data.success === false) {
-                throw new Error(data.message || "Invalid login details.");
             }
+        );
 
-            if (data.token) {
-                localStorage.setItem("token", data.token);
-            }
+        let data;
 
-            if (data.user) {
-                localStorage.setItem("user", JSON.stringify(data.user));
-            }
-
-            message.className = "message success";
-            message.textContent = data.message || "Login successful!";
-
-            setTimeout(() => {
-                window.location.href = "dashboard.html";
-            }, 1000);
-
-        } catch (error) {
-            message.className = "message error";
-            message.textContent =
-                error.message || "Unable to login. Please try again.";
+        try {
+            data = await response.json();
+        } catch {
+            throw new Error(
+                "Server returned an invalid response."
+            );
         }
+
+        if (!response.ok || data.success === false) {
+
+            throw new Error(
+                data.message ||
+                "Invalid email/phone or password."
+            );
+        }
+
+        if (!data.token) {
+
+            throw new Error(
+                "Login succeeded but no authentication token was received."
+            );
+        }
+
+        // Save authentication token
+        localStorage.setItem(
+            "token",
+            data.token
+        );
+
+        // Save user information
+        if (data.user) {
+
+            localStorage.setItem(
+                "user",
+                JSON.stringify(data.user)
+            );
+        }
+
+        message.className =
+            "message success";
+
+        message.textContent =
+            data.message ||
+            "Login successful!";
+
+        // Redirect to dashboard
+        setTimeout(function() {
+
+            window.location.href =
+                "dashboard.html";
+
+        }, 800);
+
+    } catch (error) {
+
+        console.error(
+            "Login error:",
+            error
+        );
+
+        message.className =
+            "message error";
+
+        message.textContent =
+            error.message ||
+            "Unable to login. Please try again.";
+
+    } finally {
 
         loginBtn.disabled = false;
         loginBtn.textContent = "Login";
-    });
+    }
+
+});
+
 </script>
 
 </body>
