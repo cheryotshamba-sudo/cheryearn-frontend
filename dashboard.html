@@ -140,20 +140,26 @@
             background: #0d193d;
             border: 1px solid #21335f;
             border-radius: 30px;
-            padding: 42px;
+
+            /* REDUCED FROM 42px */
+            padding: 22px 30px;
+
             margin-bottom: 28px;
         }
 
         .balance-label {
             color: #9aa8c5;
             font-size: 21px;
-            margin-bottom: 8px;
+            margin-bottom: 4px;
         }
 
         .balance-value {
             font-size: 55px;
             font-weight: 700;
-            margin-bottom: 30px;
+
+            /* REDUCED SPACE */
+            margin-bottom: 15px;
+
             letter-spacing: -1px;
         }
 
@@ -162,9 +168,9 @@
             border: none;
             color: #ffffff;
             border-radius: 18px;
-            padding: 18px 42px;
+            padding: 14px 36px;
             font-family: "Poppins", sans-serif;
-            font-size: 21px;
+            font-size: 20px;
             font-weight: 600;
             cursor: pointer;
         }
@@ -419,7 +425,8 @@
             }
 
             .balance-card {
-                padding: 41px;
+                /* REDUCED FROM 41px */
+                padding: 22px 27px;
                 border-radius: 29px;
             }
 
@@ -429,6 +436,11 @@
 
             .balance-value {
                 font-size: 54px;
+                margin-bottom: 14px;
+            }
+
+            .withdraw-btn {
+                padding: 14px 34px;
             }
 
             .stat-card {
@@ -499,16 +511,17 @@
             }
 
             .balance-card {
-                padding: 27px;
+                padding: 20px;
             }
 
             .balance-value {
                 font-size: 43px;
+                margin-bottom: 12px;
             }
 
             .withdraw-btn {
                 font-size: 17px;
-                padding: 15px 30px;
+                padding: 13px 30px;
             }
 
             .stat-card {
@@ -959,11 +972,6 @@
 
     function openSupport() {
 
-        /*
-         * Replace this only if your existing
-         * support WhatsApp number is different.
-         */
-
         const number = "";
 
         if (number) {
@@ -1201,12 +1209,6 @@
                 }
             }
 
-
-            /*
-             * Uses your existing dashboard
-             * fetching function if your current
-             * authentication code provides it.
-             */
 
             if (
                 typeof window.fetchDashboardData ===
