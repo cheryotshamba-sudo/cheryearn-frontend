@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Support - CheryEarn</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0b0b;
+            color: #fff;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px 0 25px;
+            border-bottom: 1px solid #252525;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            color: #00c853;
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .header h1 {
+            font-size: 25px;
+            margin-top: 12px;
+        }
+
+        .header p {
+            color: #888;
+            font-size: 14px;
+            margin-top: 7px;
+        }
+
+        .card {
+            background: #151515;
+            border: 1px solid #252525;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+
+        .card h2 {
+            color: #00c853;
+            font-size: 19px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #c7c7c7;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        .support-item {
+            display: block;
+            background: #101010;
+            border: 1px solid #292929;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 10px;
+            text-decoration: none;
+        }
+
+        .support-item strong {
+            display: block;
+            color: #fff;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .support-item span {
+            color: #999;
+            font-size: 13px;
+        }
+
+        .faq {
+            border-top: 1px solid #292929;
+            padding: 14px 0;
+        }
+
+        .faq:first-of-type {
+            border-top: none;
+        }
+
+        .faq h3 {
+            font-size: 15px;
+            margin-bottom: 6px;
+        }
+
+        .faq p {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .back {
+            display: block;
+            text-align: center;
+            margin: 25px 0 10px;
+            color: #00c853;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        footer {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div class="logo">CheryEarn</div>
+
+        <h1>Support Center</h1>
+
+        <p>
+            Need help? We're here to assist you.
+        </p>
+    </div>
+
+
+    <div class="card">
+
+        <h2>How Can We Help?</h2>
+
+        <p>
+            If you have a question about your account, referrals,
+            earnings, payments or withdrawals, use the available
+            support channels below.
+        </p>
+
+        <a href="#" class="support-item" id="whatsappLink">
+            <strong>💬 WhatsApp Support</strong>
+            <span>Chat with CheryEarn support</span>
+        </a>
+
+        <a href="mailto:support@cheryearn.com" class="support-item">
+            <strong>✉️ Email Support</strong>
+            <span>Send us an email</span>
+        </a>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>Frequently Asked Questions</h2>
+
+        <div class="faq">
+            <h3>How do I create an account?</h3>
+
+            <p>
+                Tap Register, provide your required information,
+                and complete the registration process.
+            </p>
+        </div>
+
+        <div class="faq">
+            <h3>Where can I find my referral link?</h3>
+
+            <p>
+                Your referral code and referral link are available
+                from your CheryEarn dashboard.
+            </p>
+        </div>
+
+        <div class="faq">
+            <h3>How can I check my earnings?</h3>
+
+            <p>
+                Open the Earnings section from your dashboard to
+                view your available balance and earning history.
+            </p>
+        </div>
+
+        <div class="faq">
+            <h3>How do I request a withdrawal?</h3>
+
+            <p>
+                Open the Withdraw section, enter the required
+                amount and M-Pesa number, then submit your request.
+            </p>
+        </div>
+
+        <div class="faq">
+            <h3>What if my withdrawal is delayed?</h3>
+
+            <p>
+                Check your withdrawal history first. If the issue
+                continues, contact support with your transaction
+                details.
+            </p>
+        </div>
+
+        <div class="faq">
+            <h3>I forgot my password. What should I do?</h3>
+
+            <p>
+                Use the Forgot Password option on the login page
+                to request a password reset.
+            </p>
+        </div>
+
+    </div>
+
+
+    <a href="index.html" class="back">
+        ← Back to CheryEarn
+    </a>
+
+
+    <footer>
+        © 2026 CheryEarn. All rights reserved.
+    </footer>
+
+</div>
+
+
+<script>
+
+    /*
+       Add your official CheryEarn WhatsApp number below.
+       Use international format without the + sign.
+
+       Example:
+       const supportNumber = "254712345678";
+    */
+
+    const supportNumber = "";
+
+    const whatsappLink =
+        document.getElementById("whatsappLink");
+
+    if (supportNumber) {
+
+        whatsappLink.href =
+            "https://wa.me/" + supportNumber;
+
+        whatsappLink.target = "_blank";
+
+    } else {
+
+        whatsappLink.addEventListener("click", function(event) {
+
+            event.preventDefault();
+
+            alert(
+                "CheryEarn WhatsApp support number has not been configured yet."
+            );
+
+        });
+
+    }
+
+</script>
+
+</body>
+</html>
