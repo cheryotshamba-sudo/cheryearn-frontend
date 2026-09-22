@@ -229,6 +229,40 @@
         }
 
 
+        /* MEMBER INFO */
+
+        .member-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .member-box {
+            background: #0d1738;
+            border: 1px solid #202b4d;
+            border-radius: 14px;
+            padding: 15px;
+        }
+
+        .member-label {
+            display: block;
+            color: #94a3b8;
+            font-size: 11px;
+            margin-bottom: 7px;
+        }
+
+        .member-value {
+            font-size: 15px;
+            font-weight: 800;
+            word-break: break-word;
+        }
+
+        .member-number {
+            color: #60a5fa;
+        }
+
+
         /* BALANCE */
 
         .balance-card {
@@ -389,6 +423,12 @@
 
         /* REFERRAL */
 
+        .referral-title {
+            color: #94a3b8;
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
         .referral-box {
             background: #050d26;
             border: 1px dashed #2563eb;
@@ -402,11 +442,12 @@
             gap: 10px;
         }
 
-        .referral-code {
+        .referral-link {
             color: #60a5fa;
             font-weight: 700;
             word-break: break-all;
-            font-size: 14px;
+            font-size: 13px;
+            line-height: 1.4;
         }
 
         .copy-btn {
@@ -546,6 +587,10 @@
 
             .earning-value {
                 font-size: 17px;
+            }
+
+            .member-value {
+                font-size: 13px;
             }
 
         }
@@ -700,6 +745,44 @@
         <p>
             Your CheryEarn account overview
         </p>
+
+    </div>
+
+
+    <!-- MEMBER INFORMATION -->
+
+    <div class="member-info">
+
+        <div class="member-box">
+
+            <span class="member-label">
+                CheryEarn Number
+            </span>
+
+            <div
+                id="cheryearnNumber"
+                class="member-value member-number"
+            >
+                Loading...
+            </div>
+
+        </div>
+
+
+        <div class="member-box">
+
+            <span class="member-label">
+                Username
+            </span>
+
+            <div
+                id="username"
+                class="member-value"
+            >
+                Loading...
+            </div>
+
+        </div>
 
     </div>
 
@@ -878,46 +961,55 @@
     <div class="section">
 
         <h3>
-            Your Referral Code
+            Your Referral Link
         </h3>
 
         <div
             id="referralLoading"
             class="loading"
         >
-            Loading referral code...
+            Creating your referral link...
         </div>
 
 
         <div
             id="referralContent"
-            class="referral-box"
             style="display:none;"
         >
 
-            <span
-                id="referralCode"
-                class="referral-code"
-            ></span>
+            <div class="referral-title">
+                Share this link with people you want to invite:
+            </div>
+
+
+            <div class="referral-box">
+
+                <span
+                    id="referralLink"
+                    class="referral-link"
+                ></span>
+
+
+                <button
+                    type="button"
+                    class="copy-btn"
+                    onclick="copyReferral()"
+                >
+                    Copy
+                </button>
+
+            </div>
+
 
             <button
                 type="button"
-                class="copy-btn"
-                onclick="copyReferral()"
+                class="share-btn"
+                onclick="shareReferral()"
             >
-                Copy
+                Share Referral Link
             </button>
 
         </div>
-
-
-        <button
-            type="button"
-            class="share-btn"
-            onclick="shareReferral()"
-        >
-            Share Referral Link
-        </button>
 
     </div>
 
@@ -1057,6 +1149,53 @@
 
 
     // ===============================
+    // MAKE SAFE NAME FOR URL
+    // ===============================
+
+    function makeSafeName(name) {
+
+        return String(name || "user")
+            .trim()
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, "-")
+            .replace(/^-+|-+$/g, "")
+            .substring(0, 40);
+
+    }
+
+
+    // ===============================
+    // CREATE REFERRAL LINK
+    // ===============================
+
+    function createReferralLink(user) {
+
+        if (!user.cheryearn_number) {
+            return "";
+        }
+
+        const number =
+            `CheryEarn${String(
+                user.cheryearn_number
+            ).padStart(3, "0")}`;
+
+        const safeName =
+            makeSafeName(
+                user.full_name ||
+                user.name ||
+                "user"
+            );
+
+        return `${window.location.origin}/register.html?ref=${encodeURIComponent(
+            user.referral_code || ""
+        )}&member=${encodeURIComponent(
+            `${number}-${safeName}`
+        )}`;
+
+    }
+
+
+    // ===============================
     // LOAD DASHBOARD
     // ===============================
 
@@ -1111,6 +1250,16 @@
 
 
             // ===============================
+            // SAVE USER DATA
+            // ===============================
+
+            localStorage.setItem(
+                "user",
+                JSON.stringify(user)
+            );
+
+
+            // ===============================
             // NAME
             // ===============================
 
@@ -1118,10 +1267,43 @@
                 "welcomeName"
             ).textContent =
                 `Welcome, ${
-                    user.name ||
                     user.full_name ||
+                    user.name ||
                     "User"
                 }`;
+
+
+            // ===============================
+            // CHERYEARN NUMBER
+            // ===============================
+
+            const cheryearnId =
+                user.cheryearn_id ||
+                (
+                    user.cheryearn_number
+                        ? `CheryEarn${String(
+                            user.cheryearn_number
+                        ).padStart(3, "0")}`
+                        : ""
+                );
+
+
+            document.getElementById(
+                "cheryearnNumber"
+            ).textContent =
+                cheryearnId ||
+                "Not available";
+
+
+            // ===============================
+            // USERNAME
+            // ===============================
+
+            document.getElementById(
+                "username"
+            ).textContent =
+                user.username ||
+                "Not available";
 
 
             // ===============================
@@ -1214,35 +1396,14 @@
 
 
             // ===============================
-            // REFERRAL CODE
+            // REFERRAL LINK
             // ===============================
 
-            let storedUser = {};
-
-            try {
-
-                storedUser =
-                    JSON.parse(
-                        localStorage.getItem("user") ||
-                        "{}"
-                    );
-
-            } catch (error) {
-
-                storedUser = {};
-
-            }
+            const referralLink =
+                createReferralLink(user);
 
 
-            const referralCode =
-                user.referralCode ||
-                user.referral_code ||
-                storedUser.referralCode ||
-                storedUser.referral_code ||
-                "";
-
-
-            if (referralCode) {
+            if (referralLink) {
 
                 document.getElementById(
                     "referralLoading"
@@ -1253,20 +1414,26 @@
                 document.getElementById(
                     "referralContent"
                 ).style.display =
-                    "flex";
+                    "block";
 
 
                 document.getElementById(
-                    "referralCode"
+                    "referralLink"
                 ).textContent =
-                    referralCode;
+                    referralLink;
+
+
+                localStorage.setItem(
+                    "cheryearn_referral_link",
+                    referralLink
+                );
 
             } else {
 
                 document.getElementById(
                     "referralLoading"
                 ).textContent =
-                    "Referral code not available yet.";
+                    "Referral link not available yet.";
 
             }
 
@@ -1290,30 +1457,50 @@
 
 
     // ===============================
+    // GET REFERRAL LINK
+    // ===============================
+
+    function getReferralLink() {
+
+        const displayedLink =
+            document.getElementById(
+                "referralLink"
+            ).textContent.trim();
+
+
+        if (displayedLink) {
+            return displayedLink;
+        }
+
+
+        return (
+            localStorage.getItem(
+                "cheryearn_referral_link"
+            ) || ""
+        );
+
+    }
+
+
+    // ===============================
     // COPY REFERRAL
     // ===============================
 
     async function copyReferral() {
 
-        const code =
-            document.getElementById(
-                "referralCode"
-            ).textContent.trim();
+        const link =
+            getReferralLink();
 
 
-        if (!code) {
+        if (!link) {
 
             alert(
-                "Referral code is still loading."
+                "Referral link is still loading."
             );
 
             return;
 
         }
-
-
-        const link =
-            `${window.location.origin}/register.html?ref=${encodeURIComponent(code)}`;
 
 
         try {
@@ -1346,6 +1533,7 @@
 
             textarea.select();
 
+
             try {
 
                 document.execCommand(
@@ -1364,6 +1552,7 @@
 
             }
 
+
             document.body.removeChild(
                 textarea
             );
@@ -1379,25 +1568,19 @@
 
     async function shareReferral() {
 
-        const code =
-            document.getElementById(
-                "referralCode"
-            ).textContent.trim();
+        const link =
+            getReferralLink();
 
 
-        if (!code) {
+        if (!link) {
 
             alert(
-                "Referral code is still loading."
+                "Referral link is still loading."
             );
 
             return;
 
         }
-
-
-        const link =
-            `${window.location.origin}/register.html?ref=${encodeURIComponent(code)}`;
 
 
         const text =
@@ -1487,6 +1670,10 @@
 
         localStorage.removeItem(
             "user"
+        );
+
+        localStorage.removeItem(
+            "cheryearn_referral_link"
         );
 
         window.location.href =
