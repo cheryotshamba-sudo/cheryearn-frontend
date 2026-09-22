@@ -113,10 +113,27 @@
             color: #66738e;
         }
 
-        .referral-info {
+        .referral-box {
+            display: none;
+            margin-bottom: 16px;
+            padding: 13px;
+            border: 1px solid rgba(67, 216, 120, 0.35);
+            border-radius: 10px;
+            background: rgba(67, 216, 120, 0.08);
+            text-align: center;
+        }
+
+        .referral-label {
             color: var(--muted);
             font-size: 12px;
-            margin-top: 6px;
+            margin-bottom: 5px;
+        }
+
+        .referral-member {
+            color: var(--green);
+            font-size: 14px;
+            font-weight: 700;
+            word-break: break-word;
         }
 
         button {
@@ -215,6 +232,28 @@
         </div>
 
 
+        <!-- ==========================================
+             AUTOMATIC REFERRER
+        =========================================== -->
+
+        <div
+            id="referralBox"
+            class="referral-box"
+        >
+
+            <div class="referral-label">
+                Referred by
+            </div>
+
+            <div
+                id="referralMember"
+                class="referral-member"
+            >
+            </div>
+
+        </div>
+
+
         <form id="registerForm">
 
 
@@ -305,31 +344,12 @@
             </div>
 
 
-            <div class="form-group">
-
-                <label for="referralCode">
-                    Referral Code
-                </label>
-
-                <input
-                    type="text"
-                    id="referralCode"
-                    placeholder="Optional"
-                    autocomplete="off"
-                >
-
-                <div class="referral-info">
-                    Enter a referral code if someone invited you.
-                </div>
-
-            </div>
-
-
             <button
                 type="submit"
                 id="registerBtn"
+                disabled
             >
-                Create Account
+                Verify Referral...
             </button>
 
 
@@ -394,8 +414,20 @@
         );
 
 
+    const referralBox =
+        document.getElementById(
+            "referralBox"
+        );
+
+
+    const referralMember =
+        document.getElementById(
+            "referralMember"
+        );
+
+
     // ==================================================
-    // READ REFERRAL CODE FROM URL
+    // READ MEMBER FROM URL
     // ==================================================
 
     const params =
@@ -404,18 +436,150 @@
         );
 
 
-    const referralFromUrl =
-        params.get("ref");
+    const member =
+        params.get("member");
 
 
-    if (referralFromUrl) {
+    // ==================================================
+    // INTERNAL REFERRAL CODE
+    // ==================================================
 
-        document.getElementById(
-            "referralCode"
-        ).value =
-            referralFromUrl.toUpperCase();
+    let referralCode =
+        null;
+
+
+    // ==================================================
+    // RESOLVE REFERRAL
+    // ==================================================
+
+    async function resolveReferral() {
+
+        if (!member) {
+
+            showMessage(
+                "Please use a valid CheryEarn referral link to register.",
+                "error"
+            );
+
+            registerBtn.disabled =
+                true;
+
+            registerBtn.textContent =
+                "Referral Required";
+
+            return;
+
+        }
+
+
+        try {
+
+            const response =
+                await fetch(
+                    `${API_URL}/api/referral/resolve/${encodeURIComponent(member)}`
+                );
+
+
+            const data =
+                await response.json();
+
+
+            console.log(
+                "REFERRAL RESPONSE:",
+                data
+            );
+
+
+            if (
+                !response.ok ||
+                !data.success
+            ) {
+
+                showMessage(
+                    "This referral link is invalid.",
+                    "error"
+                );
+
+                registerBtn.disabled =
+                    true;
+
+                registerBtn.textContent =
+                    "Invalid Referral";
+
+                return;
+
+            }
+
+
+            // ==========================================
+            // SAVE INTERNAL REFERRAL CODE
+            // ==========================================
+
+            referralCode =
+                data.referralCode;
+
+
+            // ==========================================
+            // DISPLAY REFERRER
+            // ==========================================
+
+            referralMember.textContent =
+                data.member ||
+                member;
+
+
+            referralBox.style.display =
+                "block";
+
+
+            // ==========================================
+            // ENABLE REGISTRATION
+            // ==========================================
+
+            registerBtn.disabled =
+                false;
+
+            registerBtn.textContent =
+                "Create Account";
+
+
+            message.className =
+                "message";
+
+            message.textContent =
+                "";
+
+
+        } catch (error) {
+
+            console.error(
+                "Referral resolution error:",
+                error
+            );
+
+
+            showMessage(
+                "Unable to verify referral link. Please try again.",
+                "error"
+            );
+
+
+            registerBtn.disabled =
+                true;
+
+            registerBtn.textContent =
+                "Referral Verification Failed";
+
+        }
 
     }
+
+
+    // ==================================================
+    // START REFERRAL VERIFICATION
+    // ==================================================
+
+    resolveReferral();
 
 
     // ==================================================
@@ -431,7 +595,6 @@
 
             message.className =
                 "message";
-
 
             message.textContent =
                 "";
@@ -472,14 +635,6 @@
                 document
                     .getElementById("confirmPassword")
                     .value;
-
-
-            const referralCode =
-                document
-                    .getElementById("referralCode")
-                    .value
-                    .trim()
-                    .toUpperCase();
 
 
             // ==========================================
@@ -532,9 +687,20 @@
             }
 
 
+            if (!referralCode) {
+
+                showMessage(
+                    "Valid referral verification is required.",
+                    "error"
+                );
+
+                return;
+
+            }
+
+
             registerBtn.disabled =
                 true;
-
 
             registerBtn.textContent =
                 "Creating Account...";
@@ -577,8 +743,7 @@
                                         password,
 
                                     referral_code:
-                                        referralCode ||
-                                        null
+                                        referralCode
 
                                 })
 
@@ -615,10 +780,8 @@
                     registerBtn.disabled =
                         false;
 
-
                     registerBtn.textContent =
                         "Create Account";
-
 
                     return;
 
@@ -647,10 +810,8 @@
                     registerBtn.disabled =
                         false;
 
-
                     registerBtn.textContent =
                         "Create Account";
-
 
                     return;
 
@@ -740,7 +901,6 @@
 
                 registerBtn.disabled =
                     false;
-
 
                 registerBtn.textContent =
                     "Create Account";
