@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CheryEarn - Earn By Referring</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b0b0b;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 20px;
+            border-bottom: 1px solid #222;
+            background: #0b0b0b;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: #00c853;
+        }
+
+        .login-top {
+            color: #00c853;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .hero {
+            padding: 55px 20px 35px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 span {
+            color: #00c853;
+        }
+
+        .hero p {
+            color: #aaa;
+            font-size: 16px;
+            line-height: 1.6;
+            max-width: 500px;
+            margin: 0 auto 28px;
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .register {
+            background: #00c853;
+            color: #000;
+        }
+
+        .login {
+            background: #181818;
+            color: #fff;
+            border: 1px solid #333;
+        }
+
+        .features {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 23px;
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            background: #151515;
+            border: 1px solid #252525;
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 12px;
+        }
+
+        .feature h3 {
+            color: #00c853;
+            font-size: 17px;
+            margin-bottom: 7px;
+        }
+
+        .feature p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        .how {
+            padding: 25px 20px 35px;
+            max-width: 600px;
+            margin: auto;
+        }
+
+        .how h2 {
+            text-align: center;
+            font-size: 23px;
+            margin-bottom: 20px;
+        }
+
+        .step {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .number {
+            min-width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: #00c853;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+        .step h3 {
+            font-size: 16px;
+            margin-bottom: 4px;
+        }
+
+        .step p {
+            color: #999;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .bottom-cta {
+            padding: 10px 20px 45px;
+            text-align: center;
+        }
+
+        .bottom-cta h2 {
+            font-size: 24px;
+            margin-bottom: 18px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 13px;
+        }
+
+        @media (min-width: 600px) {
+            .hero {
+                padding-top: 75px;
+            }
+
+            .hero h1 {
+                font-size: 46px;
+            }
+
+            .buttons {
+                flex-direction: row;
+                max-width: 500px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">CheryEarn</div>
+
+    <a href="login.html" class="login-top">
+        Login
+    </a>
+</header>
+
+<section class="hero">
+
+    <h1>
+        Earn More With <span>CheryEarn</span>
+    </h1>
+
+    <p>
+        Join CheryEarn, invite others, and earn rewards
+        through our referral platform.
+    </p>
+
+    <div class="buttons">
+
+        <a href="register.html" class="btn register">
+            Create Account
+        </a>
+
+        <a href="login.html" class="btn login">
+            Login
+        </a>
+
+    </div>
+
+</section>
+
+<section class="features">
+
+    <h2>Why CheryEarn?</h2>
+
+    <div class="feature">
+        <h3>💰 Earn Rewards</h3>
+        <p>
+            Earn rewards when people join through
+            your referral link.
+        </p>
+    </div>
+
+    <div class="feature">
+        <h3>👥 Grow Your Network</h3>
+        <p>
+            Invite friends and grow your referral
+            network from your dashboard.
+        </p>
+    </div>
+
+    <div class="feature">
+        <h3>📊 Track Your Earnings</h3>
+        <p>
+            Monitor your referrals, earnings and
+            available balance in one place.
+        </p>
+    </div>
+
+    <div class="feature">
+        <h3>📱 M-Pesa Withdrawals</h3>
+        <p>
+            Request withdrawals directly from your
+            CheryEarn account.
+        </p>
+    </div>
+
+</section>
+
+<section class="how">
+
+    <h2>How It Works</h2>
+
+    <div class="step">
+        <div class="number">1</div>
+
+        <div>
+            <h3>Create Your Account</h3>
+            <p>
+                Register your CheryEarn account in a few steps.
+            </p>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="number">2</div>
+
+        <div>
+            <h3>Get Your Referral Link</h3>
+            <p>
+                Your personal referral code and link will
+                be available on your dashboard.
+            </p>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="number">3</div>
+
+        <div>
+            <h3>Invite People</h3>
+            <p>
+                Share your referral link with people you know.
+            </p>
+        </div>
+    </div>
+
+    <div class="step">
+        <div class="number">4</div>
+
+        <div>
+            <h3>Track Your Rewards</h3>
+            <p>
+                View your referrals and earnings from your account.
+            </p>
+        </div>
+    </div>
+
+</section>
+
+<section class="bottom-cta">
+
+    <h2>Ready to Get Started?</h2>
+
+    <div class="buttons">
+
+        <a href="register.html" class="btn register">
+            Join CheryEarn
+        </a>
+
+    </div>
+
+</section>
+
+<footer>
+    © 2026 CheryEarn. All rights reserved.
+</footer>
+
+</body>
+</html>
