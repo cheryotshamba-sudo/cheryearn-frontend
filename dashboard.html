@@ -569,7 +569,6 @@
 
         </div>
 
-        <!-- LIGHT / DARK + LOGOUT -->
         <div class="header-actions">
 
             <button
@@ -686,7 +685,6 @@
             </button>
 
 
-            <!-- DIRECT / INDIRECT EARNINGS -->
             <div class="earnings-title">
                 Referral Earnings
             </div>
@@ -813,7 +811,6 @@
     }
 
 
-    /* Apply saved theme immediately */
     applyTheme();
 
 
@@ -1017,6 +1014,63 @@
 
 
     /* =========================
+       CREATE OLD CHERYEARN LINK
+    ========================= */
+
+    function buildReferralLink(user) {
+
+        if (!user) {
+            return "";
+        }
+
+        let cheryearnId =
+            user.cheryearn_id ||
+            user.cheryearnId ||
+            "";
+
+        let username =
+            user.username ||
+            user.uniqueName ||
+            "";
+
+        /*
+         * If cheryearn_id is not available,
+         * create it from cheryearn_number.
+         */
+
+        if (
+            !cheryearnId &&
+            user.cheryearn_number !== undefined &&
+            user.cheryearn_number !== null
+        ) {
+
+            cheryearnId =
+                "CheryEarn" +
+                String(user.cheryearn_number)
+                    .padStart(3, "0");
+
+        }
+
+
+        if (
+            !cheryearnId ||
+            !username
+        ) {
+
+            return "";
+        }
+
+
+        return (
+            "https://cheryearn1.onrender.com/register.html?member=" +
+            encodeURIComponent(
+                cheryearnId + "-" + username
+            )
+        );
+    }
+
+
+    /* =========================
        LOAD DASHBOARD DATA
     ========================= */
 
@@ -1129,13 +1183,32 @@
             total;
 
 
-        const referralLink =
+        /* =========================
+           REFERRAL LINK
+        ========================= */
+
+        let referralLink =
             user.referralLink ||
             user.referralCodeLink ||
             data.referralLink ||
             data.referralUrl ||
             data.referral_url ||
             "";
+
+
+        /*
+         * IMPORTANT:
+         * If the backend/localStorage does not
+         * contain referralLink, rebuild the
+         * original working CheryEarn link.
+         */
+
+        if (!referralLink) {
+
+            referralLink =
+                buildReferralLink(user);
+
+        }
 
 
         if (referralLink) {
@@ -1146,6 +1219,7 @@
                 referralLink;
 
         }
+
     }
 
 
