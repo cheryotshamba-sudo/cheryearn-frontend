@@ -1,14 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html><html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>CheryEarn Dashboard</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-<style>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"><title>CheryEarn Dashboard</title><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"><style>
 * {
     box-sizing: border-box;
     margin: 0;
@@ -60,23 +53,19 @@ button {
     padding-bottom: 95px;
 }
 
+/* HEADER */
+
 .header {
     height: 88px;
     background: var(--header-bg);
     border-bottom: 1px solid var(--border);
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding: 0 20px;
     position: sticky;
     top: 0;
     z-index: 100;
-}
-
-/* MENU IS NOW ON THE LEFT */
-.header-left {
-    display: flex;
-    align-items: center;
 }
 
 .logo {
@@ -89,10 +78,18 @@ button {
     color: var(--blue-light);
 }
 
+/* LEFT MENU */
+
+.menu-wrapper {
+    position: absolute;
+    left: 20px;
+}
+
 .header-right {
+    position: absolute;
+    right: 20px;
     display: flex;
     align-items: center;
-    gap: 12px;
 }
 
 .icon-btn {
@@ -103,14 +100,7 @@ button {
     color: var(--text);
     border-radius: 12px;
     cursor: pointer;
-    font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.menu-wrapper {
-    position: relative;
+    font-size: 20px;
 }
 
 .menu {
@@ -118,7 +108,7 @@ button {
     position: absolute;
     left: 0;
     top: 48px;
-    width: 190px;
+    width: 210px;
     background: var(--card-bg);
     border: 1px solid var(--border);
     border-radius: 14px;
@@ -140,6 +130,7 @@ button {
     padding: 12px;
     border-radius: 9px;
     cursor: pointer;
+    font-size: 13px;
 }
 
 .menu button:hover {
@@ -149,6 +140,8 @@ button {
 .menu .logout {
     color: var(--red);
 }
+
+/* MAIN */
 
 .main {
     padding: 20px;
@@ -478,6 +471,14 @@ button {
         padding: 0 14px;
     }
 
+    .menu-wrapper {
+        left: 14px;
+    }
+
+    .header-right {
+        right: 14px;
+    }
+
     .main {
         padding: 15px;
     }
@@ -519,237 +520,209 @@ button {
         right: 14px;
     }
 }
-</style>
-</head>
+</style></head><body><div class="container"><header class="header"><!-- THREE DASHES ON THE UPPER LEFT -->
+<div class="menu-wrapper">
 
-<body>
+    <button class="icon-btn" onclick="toggleMenu()">
+        ☰
+    </button>
 
-<div class="container">
+    <div class="menu" id="menu">
 
-    <header class="header">
+        <button onclick="goTo('watch-earn.html')">
+            🎥 Watch & Earn
+        </button>
 
-        <!-- THREE DASHES ON UPPER LEFT -->
-        <div class="header-left">
+        <button onclick="goTo('spin.html')">
+            🎡 Spin & Win
+        </button>
 
-            <div class="menu-wrapper">
+        <button onclick="scrollToReferrals()">
+            👥 Referrals
+        </button>
 
-                <button class="icon-btn" onclick="toggleMenu()" aria-label="Open menu">
-                    ☰
-                </button>
+        <button onclick="goTo('earnings.html')">
+            💰 Earnings
+        </button>
 
-                <div class="menu" id="menu">
+        <button onclick="goTo('invest.html')">
+            📈 Investment
+        </button>
 
-                    <button onclick="goTo('dashboard.html')">
-                        🏠 Dashboard
-                    </button>
+        <button onclick="goTo('rewards.html')">
+            🏆 Rewards
+        </button>
 
-                    <button onclick="scrollToReferrals()">
-                        👥 Referrals
-                    </button>
+        <button onclick="goTo('profile.html')">
+            👤 Profile
+        </button>
 
-                    <button onclick="goTo('earnings.html')">
-                        💰 Earnings
-                    </button>
+        <button onclick="goTo('settings.html')">
+            ⚙️ Settings
+        </button>
 
-                    <button onclick="goTo('profile.html')">
-                        👤 Profile
-                    </button>
+        <button class="logout" onclick="logout()">
+            🚪 Logout
+        </button>
 
-                    <button class="logout" onclick="logout()">
-                        🚪 Logout
-                    </button>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="logo">
-            Chery<span>Earn</span>
-        </div>
-
-
-        <div class="header-right">
-
-            <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">
-                ☀️
-            </button>
-
-        </div>
-
-    </header>
-
-
-    <main class="main">
-
-        <div class="welcome">
-            <h1 id="welcomeText">Welcome, Cheryot</h1>
-            <p>Your CheryEarn account overview</p>
-        </div>
-
-
-        <div class="balance-card">
-
-            <div class="balance-label">
-                Available Balance
-            </div>
-
-            <div class="balance-row">
-
-                <div class="balance" id="balance">
-                    KSh 0.00
-                </div>
-
-                <button class="withdraw-btn" onclick="goTo('withdraw.html')">
-                    Withdraw
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <div class="stats">
-
-            <div class="stat-card">
-
-                <div class="stat-label">
-                    Total Earnings
-                </div>
-
-                <div class="stat-value" id="totalEarnings">
-                    KSh 0.00
-                </div>
-
-            </div>
-
-            <div class="stat-card">
-
-                <div class="stat-label">
-                    Total Referrals
-                </div>
-
-                <div class="stat-value" id="totalReferrals">
-                    0
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <section class="section" id="referralsSection">
-
-            <div class="section-title">
-                Your Referral Link
-            </div>
-
-            <div class="section-subtitle">
-                Share your unique referral link and earn when people join through you.
-            </div>
-
-            <div class="referral-box">
-
-                <div class="referral-link" id="referralLink">
-                    Loading referral link...
-                </div>
-
-                <button class="copy-btn" onclick="copyReferralLink()">
-                    Copy
-                </button>
-
-            </div>
-
-            <button class="share-btn" onclick="shareReferralLink()">
-                Share Referral Link
-            </button>
-
-
-            <div class="referrals-heading">
-                <h3>Your Referrals</h3>
-            </div>
-
-            <div class="table-wrap">
-
-                <table class="referral-table">
-
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Customer</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Level</th>
-                        </tr>
-                    </thead>
-
-                    <tbody id="referralTableBody">
-
-                        <tr>
-                            <td colspan="5" class="loading">
-                                Loading referrals...
-                            </td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
-    </main>
+    </div>
 
 </div>
 
+<!-- CENTER LOGO -->
+<div class="logo">
+    Chery<span>Earn</span>
+</div>
 
-<button class="support-btn" onclick="openSupport()">
+<!-- THEME BUTTON ON UPPER RIGHT -->
+<div class="header-right">
+
+    <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">
+        ☀️
+    </button>
+
+</div>
+
+</header><main class="main"><div class="welcome">
+    <h1 id="welcomeText">Welcome, Cheryot</h1>
+    <p>Your CheryEarn account overview</p>
+</div>
+
+<div class="balance-card">
+
+    <div class="balance-label">
+        Available Balance
+    </div>
+
+    <div class="balance-row">
+
+        <div class="balance" id="balance">
+            KSh 0.00
+        </div>
+
+        <button class="withdraw-btn" onclick="goTo('withdraw.html')">
+            Withdraw
+        </button>
+
+    </div>
+
+</div>
+
+<div class="stats">
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Total Earnings
+        </div>
+
+        <div class="stat-value" id="totalEarnings">
+            KSh 0.00
+        </div>
+
+    </div>
+
+    <div class="stat-card">
+
+        <div class="stat-label">
+            Total Referrals
+        </div>
+
+        <div class="stat-value" id="totalReferrals">
+            0
+        </div>
+
+    </div>
+
+</div>
+
+<section class="section" id="referralsSection">
+
+    <div class="section-title">
+        Your Referral Link
+    </div>
+
+    <div class="section-subtitle">
+        Share your unique referral link and earn when people join through you.
+    </div>
+
+    <div class="referral-box">
+
+        <div class="referral-link" id="referralLink">
+            Loading referral link...
+        </div>
+
+        <button class="copy-btn" onclick="copyReferralLink()">
+            Copy
+        </button>
+
+    </div>
+
+    <button class="share-btn" onclick="shareReferralLink()">
+        Share Referral Link
+    </button>
+
+    <div class="referrals-heading">
+        <h3>Your Referrals</h3>
+    </div>
+
+    <div class="table-wrap">
+
+        <table class="referral-table">
+
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Customer</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th>Level</th>
+                </tr>
+            </thead>
+
+            <tbody id="referralTableBody">
+
+                <tr>
+                    <td colspan="5" class="loading">
+                        Loading referrals...
+                    </td>
+                </tr>
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+</main></div><button class="support-btn" onclick="openSupport()">
     💬
+</button><nav class="bottom-nav"><button class="active" onclick="goTo('dashboard.html')">
+    <span class="nav-icon">⌂</span>
+    Home
 </button>
 
+<button onclick="goTo('invest.html')">
+    <span class="nav-icon">📈</span>
+    Invest
+</button>
 
-<nav class="bottom-nav">
+<button onclick="scrollToReferrals()">
+    <span class="nav-icon">👥</span>
+    Referrals
+</button>
 
-    <button class="active" onclick="goTo('dashboard.html')">
-        <span class="nav-icon">⌂</span>
-        Home
-    </button>
+<button onclick="goTo('profile.html')">
+    <span class="nav-icon">👤</span>
+    Profile
+</button>
 
-    <button onclick="goTo('invest.html')">
-        <span class="nav-icon">📈</span>
-        Invest
-    </button>
-
-    <button onclick="scrollToReferrals()">
-        <span class="nav-icon">👥</span>
-        Referrals
-    </button>
-
-    <button onclick="goTo('profile.html')">
-        <span class="nav-icon">👤</span>
-        Profile
-    </button>
-
-</nav>
-
-
-<div class="toast" id="toast"></div>
-
-
-<script>
-
+</nav><div class="toast" id="toast"></div><script>
 const API_URL = "https://cheryearn-backend.onrender.com";
 
 let currentReferralLink = "";
 let toastTimer;
-
-
-/* =========================================================
-   THEME
-========================================================= */
 
 function applyTheme() {
 
@@ -764,10 +737,10 @@ function applyTheme() {
     }
 }
 
-
 function toggleTheme() {
 
-    const isLight = document.body.classList.contains("light");
+    const isLight =
+        document.body.classList.contains("light");
 
     localStorage.setItem(
         "theme",
@@ -777,18 +750,12 @@ function toggleTheme() {
     applyTheme();
 }
 
-
-/* =========================================================
-   MENU
-========================================================= */
-
 function toggleMenu() {
 
     document
         .getElementById("menu")
         .classList.toggle("show");
 }
-
 
 document.addEventListener("click", function(event) {
 
@@ -799,22 +766,16 @@ document.addEventListener("click", function(event) {
         menuWrapper &&
         !menuWrapper.contains(event.target)
     ) {
+
         document
             .getElementById("menu")
             .classList.remove("show");
     }
-
 });
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
 
 function goTo(page) {
     window.location.href = page;
 }
-
 
 function scrollToReferrals() {
 
@@ -830,11 +791,6 @@ function scrollToReferrals() {
         .classList.remove("show");
 }
 
-
-/* =========================================================
-   LOGOUT
-========================================================= */
-
 function logout() {
 
     localStorage.removeItem("token");
@@ -844,11 +800,6 @@ function logout() {
 
     window.location.href = "login.html";
 }
-
-
-/* =========================================================
-   TOAST
-========================================================= */
 
 function showToast(message) {
 
@@ -865,11 +816,6 @@ function showToast(message) {
     }, 2500);
 }
 
-
-/* =========================================================
-   MONEY
-========================================================= */
-
 function formatMoney(value) {
 
     const number = Number(value);
@@ -883,11 +829,6 @@ function formatMoney(value) {
         maximumFractionDigits: 2
     });
 }
-
-
-/* =========================================================
-   DATE
-========================================================= */
 
 function formatReferralDate(value) {
 
@@ -908,11 +849,6 @@ function formatReferralDate(value) {
     });
 }
 
-
-/* =========================================================
-   ESCAPE HTML
-========================================================= */
-
 function escapeHtml(value) {
 
     return String(value ?? "")
@@ -922,11 +858,6 @@ function escapeHtml(value) {
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
 }
-
-
-/* =========================================================
-   STATUS
-========================================================= */
 
 function normalizeStatus(value) {
 
@@ -957,11 +888,6 @@ function normalizeStatus(value) {
     return "PENDING";
 }
 
-
-/* =========================================================
-   REFERRAL PHONE
-========================================================= */
-
 function getReferralPhone(member) {
 
     return (
@@ -974,11 +900,6 @@ function getReferralPhone(member) {
         "—"
     );
 }
-
-
-/* =========================================================
-   REFERRAL AMOUNT
-========================================================= */
 
 function getReferralAmount(member) {
 
@@ -993,11 +914,6 @@ function getReferralAmount(member) {
         0
     );
 }
-
-
-/* =========================================================
-   REFERRAL DATE
-========================================================= */
 
 function getReferralDate(member) {
 
@@ -1018,11 +934,6 @@ function getReferralDate(member) {
     );
 }
 
-
-/* =========================================================
-   REFERRAL STATUS
-========================================================= */
-
 function getReferralStatus(member) {
 
     return normalizeStatus(
@@ -1031,11 +942,6 @@ function getReferralStatus(member) {
         member.status
     );
 }
-
-
-/* =========================================================
-   REFERRAL LEVEL
-========================================================= */
 
 function getReferralLevel(member, defaultLevel) {
 
@@ -1059,11 +965,6 @@ function getReferralLevel(member, defaultLevel) {
 
     return "Direct";
 }
-
-
-/* =========================================================
-   REFERRAL LINK
-========================================================= */
 
 function getReferralLink(data) {
 
@@ -1098,7 +999,6 @@ function getReferralLink(data) {
         return existing.trim();
     }
 
-
     const user =
         data?.user || {};
 
@@ -1114,7 +1014,6 @@ function getReferralLink(data) {
         data?.memberId ||
         data?.member_id;
 
-
     let username =
         user.username ||
         user.uniqueName ||
@@ -1122,7 +1021,6 @@ function getReferralLink(data) {
         data?.username ||
         data?.uniqueName ||
         data?.unique_name;
-
 
     if (cheryEarnId !== undefined && cheryEarnId !== null) {
 
@@ -1144,7 +1042,6 @@ function getReferralLink(data) {
         }
     }
 
-
     if (!cheryEarnId) {
         cheryEarnId = "CheryEarn001";
     }
@@ -1153,21 +1050,14 @@ function getReferralLink(data) {
         username = "member";
     }
 
-
     const memberCode =
         cheryEarnId + "-" + username;
-
 
     return (
         "https://cheryearn1.onrender.com/register.html?member=" +
         encodeURIComponent(memberCode)
     );
 }
-
-
-/* =========================================================
-   DISPLAY REFERRALS
-========================================================= */
 
 function displayReferrals(data) {
 
@@ -1188,7 +1078,6 @@ function displayReferrals(data) {
                 ? data.data.indirectReferrals
                 : [];
 
-
     const referrals = [
 
         ...direct.map(member => ({
@@ -1203,7 +1092,6 @@ function displayReferrals(data) {
 
     ];
 
-
     if (!referrals.length) {
 
         tbody.innerHTML = `
@@ -1216,7 +1104,6 @@ function displayReferrals(data) {
 
         return;
     }
-
 
     tbody.innerHTML = referrals.map(item => {
 
@@ -1242,7 +1129,6 @@ function displayReferrals(data) {
                 item.level
             );
 
-
         const statusClass =
             status === "COMPLETED"
                 ? "completed"
@@ -1250,10 +1136,8 @@ function displayReferrals(data) {
                     ? "failed"
                     : "pending";
 
-
         const levelClass =
             level.toLowerCase();
-
 
         return `
             <tr>
@@ -1288,23 +1172,16 @@ function displayReferrals(data) {
     }).join("");
 }
 
-
-/* =========================================================
-   APPLY DASHBOARD DATA
-========================================================= */
-
 function applyDashboardData(data) {
 
     if (!data) {
         return;
     }
 
-
     const user =
         data.user ||
         data.data?.user ||
         {};
-
 
     const fullName =
         user.fullName ||
@@ -1314,7 +1191,6 @@ function applyDashboardData(data) {
         data.full_name ||
         data.name;
 
-
     if (fullName) {
 
         document.getElementById(
@@ -1323,13 +1199,11 @@ function applyDashboardData(data) {
             "Welcome, " + fullName;
     }
 
-
     const balance =
         user.balance ??
         data.balance ??
         data.data?.balance ??
         0;
-
 
     const earnings =
         user.totalEarnings ??
@@ -1339,14 +1213,12 @@ function applyDashboardData(data) {
         data.earnings ??
         0;
 
-
     const direct =
         Array.isArray(data.directReferrals)
             ? data.directReferrals
             : Array.isArray(data.data?.directReferrals)
                 ? data.data.directReferrals
                 : [];
-
 
     const indirect =
         Array.isArray(data.indirectReferrals)
@@ -1355,7 +1227,6 @@ function applyDashboardData(data) {
                 ? data.data.indirectReferrals
                 : [];
 
-
     const totalReferrals =
         data.totalReferrals ??
         data.total_referrals ??
@@ -1363,27 +1234,22 @@ function applyDashboardData(data) {
         data.data?.total_referrals ??
         (direct.length + indirect.length);
 
-
     document.getElementById(
         "balance"
     ).textContent =
         formatMoney(balance);
-
 
     document.getElementById(
         "totalEarnings"
     ).textContent =
         formatMoney(earnings);
 
-
     document.getElementById(
         "totalReferrals"
     ).textContent =
         totalReferrals;
 
-
     displayReferrals(data);
-
 
     const link =
         getReferralLink(data);
@@ -1403,11 +1269,6 @@ function applyDashboardData(data) {
     }
 }
 
-
-/* =========================================================
-   LOAD REFERRAL LINK FROM BACKEND
-========================================================= */
-
 async function loadReferralLink() {
 
     const token =
@@ -1416,7 +1277,6 @@ async function loadReferralLink() {
     if (!token) {
         return;
     }
-
 
     try {
 
@@ -1436,19 +1296,15 @@ async function loadReferralLink() {
                 }
             );
 
-
         if (!response.ok) {
             return;
         }
 
-
         const data =
             await response.json();
 
-
         const link =
             getReferralLink(data);
-
 
         if (link) {
 
@@ -1473,16 +1329,10 @@ async function loadReferralLink() {
     }
 }
 
-
-/* =========================================================
-   FETCH DASHBOARD
-========================================================= */
-
 async function fetchDashboardData() {
 
     const token =
         localStorage.getItem("token");
-
 
     if (!token) {
 
@@ -1491,7 +1341,6 @@ async function fetchDashboardData() {
 
         return;
     }
-
 
     try {
 
@@ -1511,7 +1360,6 @@ async function fetchDashboardData() {
                 }
             );
 
-
         if (response.status === 401) {
 
             localStorage.removeItem("token");
@@ -1522,7 +1370,6 @@ async function fetchDashboardData() {
             return;
         }
 
-
         if (!response.ok) {
 
             throw new Error(
@@ -1530,16 +1377,13 @@ async function fetchDashboardData() {
             );
         }
 
-
         const data =
             await response.json();
-
 
         localStorage.setItem(
             "dashboardData",
             JSON.stringify(data)
         );
-
 
         applyDashboardData(data);
 
@@ -1550,12 +1394,10 @@ async function fetchDashboardData() {
             error
         );
 
-
         const cached =
             localStorage.getItem(
                 "dashboardData"
             );
-
 
         if (cached) {
 
@@ -1579,11 +1421,6 @@ async function fetchDashboardData() {
     }
 }
 
-
-/* =========================================================
-   COPY REFERRAL LINK
-========================================================= */
-
 async function copyReferralLink() {
 
     const link =
@@ -1591,7 +1428,6 @@ async function copyReferralLink() {
         document.getElementById(
             "referralLink"
         ).textContent;
-
 
     if (
         !link ||
@@ -1604,7 +1440,6 @@ async function copyReferralLink() {
 
         return;
     }
-
 
     try {
 
@@ -1637,11 +1472,6 @@ async function copyReferralLink() {
     }
 }
 
-
-/* =========================================================
-   SHARE REFERRAL LINK
-========================================================= */
-
 async function shareReferralLink() {
 
     const link =
@@ -1649,7 +1479,6 @@ async function shareReferralLink() {
         document.getElementById(
             "referralLink"
         ).textContent;
-
 
     if (
         !link ||
@@ -1663,7 +1492,6 @@ async function shareReferralLink() {
         return;
     }
 
-
     const shareData = {
 
         title: "Join CheryEarn",
@@ -1674,10 +1502,7 @@ async function shareReferralLink() {
         url: link
     };
 
-
-    if (
-        navigator.share
-    ) {
+    if (navigator.share) {
 
         try {
 
@@ -1699,18 +1524,12 @@ async function shareReferralLink() {
         return;
     }
 
-
     await copyReferralLink();
 
     showToast(
         "Link copied. You can now share it."
     );
 }
-
-
-/* =========================================================
-   SUPPORT
-========================================================= */
 
 function openSupport() {
 
@@ -1719,23 +1538,16 @@ function openSupport() {
     );
 }
 
-
-/* =========================================================
-   START
-========================================================= */
-
 document.addEventListener(
     "DOMContentLoaded",
     async function() {
 
         applyTheme();
 
-
         const cachedLink =
             localStorage.getItem(
                 "cheryearnReferralLink"
             );
-
 
         if (cachedLink) {
 
@@ -1748,12 +1560,10 @@ document.addEventListener(
                 cachedLink;
         }
 
-
         const cachedDashboard =
             localStorage.getItem(
                 "dashboardData"
             );
-
 
         if (cachedDashboard) {
 
@@ -1771,15 +1581,12 @@ document.addEventListener(
             }
         }
 
-
         await fetchDashboardData();
 
         await loadReferralLink();
 
     }
 );
-
-</script>
-
-</body>
-</html>L
+</script></body>
+</html>
+```The menu now has no Support, Daily Bonus, or Tasks & Offers. The WhatsApp button remains the support/contact option.
