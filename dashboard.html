@@ -60,8 +60,6 @@ button {
     padding-bottom: 95px;
 }
 
-/* ================= HEADER ================= */
-
 .header {
     height: 88px;
     background: var(--header-bg);
@@ -101,8 +99,6 @@ button {
     cursor: pointer;
     font-size: 18px;
 }
-
-/* ================= MENU ================= */
 
 .menu-wrapper {
     position: relative;
@@ -145,8 +141,6 @@ button {
     color: var(--red);
 }
 
-/* ================= MAIN ================= */
-
 .main {
     padding: 20px;
 }
@@ -165,8 +159,6 @@ button {
     font-size: 13px;
     margin-top: 4px;
 }
-
-/* ================= BALANCE ================= */
 
 .balance-card {
     background: linear-gradient(135deg, #2864e8, #1747b8);
@@ -204,8 +196,6 @@ button {
     cursor: pointer;
 }
 
-/* ================= STATS ================= */
-
 .stats {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -231,8 +221,6 @@ button {
     margin-top: 5px;
 }
 
-/* ================= SECTION ================= */
-
 .section {
     background: var(--card-bg);
     border: 1px solid var(--border);
@@ -253,8 +241,6 @@ button {
     line-height: 1.5;
     margin-bottom: 14px;
 }
-
-/* ================= REFERRAL LINK ================= */
 
 .referral-box {
     display: flex;
@@ -299,8 +285,6 @@ button {
     font-weight: 600;
     cursor: pointer;
 }
-
-/* ================= REFERRAL TABLE ================= */
 
 .referrals-heading {
     display: flex;
@@ -400,8 +384,6 @@ button {
     padding: 25px 10px !important;
 }
 
-/* ================= SUPPORT ================= */
-
 .support-btn {
     position: fixed;
     right: 18px;
@@ -417,8 +399,6 @@ button {
     box-shadow: 0 8px 25px rgba(0,0,0,.25);
     z-index: 90;
 }
-
-/* ================= BOTTOM NAV ================= */
 
 .bottom-nav {
     position: fixed;
@@ -454,8 +434,6 @@ button {
     margin-bottom: 3px;
 }
 
-/* ================= TOAST ================= */
-
 .toast {
     position: fixed;
     left: 50%;
@@ -477,16 +455,12 @@ button {
     transform: translate(-50%, 0);
 }
 
-/* ================= LOADING ================= */
-
 .loading {
     text-align: center;
     color: var(--muted);
     padding: 25px 10px;
     font-size: 12px;
 }
-
-/* ================= MOBILE ================= */
 
 @media (max-width: 390px) {
 
@@ -543,7 +517,6 @@ button {
 
 <div class="container">
 
-    <!-- HEADER -->
     <header class="header">
 
         <div class="logo">
@@ -595,14 +568,12 @@ button {
 
     <main class="main">
 
-        <!-- WELCOME -->
         <div class="welcome">
             <h1 id="welcomeText">Welcome, Cheryot</h1>
             <p>Your CheryEarn account overview</p>
         </div>
 
 
-        <!-- BALANCE -->
         <div class="balance-card">
 
             <div class="balance-label">
@@ -624,7 +595,6 @@ button {
         </div>
 
 
-        <!-- STATS -->
         <div class="stats">
 
             <div class="stat-card">
@@ -654,7 +624,6 @@ button {
         </div>
 
 
-        <!-- REFERRAL SECTION -->
         <section class="section" id="referralsSection">
 
             <div class="section-title">
@@ -682,7 +651,6 @@ button {
             </button>
 
 
-            <!-- REFERRALS -->
             <div class="referrals-heading">
                 <h3>Your Referrals</h3>
             </div>
@@ -722,13 +690,11 @@ button {
 </div>
 
 
-<!-- SUPPORT -->
 <button class="support-btn" onclick="openSupport()">
     💬
 </button>
 
 
-<!-- BOTTOM NAV -->
 <nav class="bottom-nav">
 
     <button class="active" onclick="goTo('dashboard.html')">
@@ -754,15 +720,10 @@ button {
 </nav>
 
 
-<!-- TOAST -->
 <div class="toast" id="toast"></div>
 
 
 <script>
-
-/* =========================================================
-   CONFIG
-========================================================= */
 
 const API_URL = "https://cheryearn-backend.onrender.com";
 
