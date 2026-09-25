@@ -73,6 +73,12 @@ button {
     z-index: 100;
 }
 
+/* MENU IS NOW ON THE LEFT */
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
 .logo {
     font-size: 22px;
     font-weight: 700;
@@ -98,6 +104,9 @@ button {
     border-radius: 12px;
     cursor: pointer;
     font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .menu-wrapper {
@@ -107,7 +116,7 @@ button {
 .menu {
     display: none;
     position: absolute;
-    right: 0;
+    left: 0;
     top: 48px;
     width: 190px;
     background: var(--card-bg);
@@ -519,20 +528,13 @@ button {
 
     <header class="header">
 
-        <div class="logo">
-            Chery<span>Earn</span>
-        </div>
-
-        <div class="header-right">
-
-            <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">
-                ☀️
-            </button>
+        <!-- THREE DASHES ON UPPER LEFT -->
+        <div class="header-left">
 
             <div class="menu-wrapper">
 
-                <button class="icon-btn" onclick="toggleMenu()">
-                    ⋮
+                <button class="icon-btn" onclick="toggleMenu()" aria-label="Open menu">
+                    ☰
                 </button>
 
                 <div class="menu" id="menu">
@@ -560,6 +562,20 @@ button {
                 </div>
 
             </div>
+
+        </div>
+
+
+        <div class="logo">
+            Chery<span>Earn</span>
+        </div>
+
+
+        <div class="header-right">
+
+            <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">
+                ☀️
+            </button>
 
         </div>
 
@@ -1766,4 +1782,4 @@ document.addEventListener(
 </script>
 
 </body>
-</html>
+</html>L
